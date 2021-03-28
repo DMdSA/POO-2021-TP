@@ -4,6 +4,7 @@ public class Jogador {
     private int idade;
     private float altura;
     private float peso;
+    //private int ID; //para garantir a unicidade do jogador
     
     /**
      * Construtores
@@ -66,4 +67,13 @@ public class Jogador {
     void setPeso (float peso) {
         this.peso = peso;
     }
+    
+    /**
+     * Equals
+     */
+    
+    
+    /**
+     * Clone
+     */
 }
