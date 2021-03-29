@@ -69,4 +69,58 @@ public class JogadorFutebol extends Jogador {
         this.campo = figo.getCampo();
         this.historico = figo.getHistorico();
     }
+    
+    /**
+     * Getters
+     */
+    
+    //should we set getters from supercalss?!?
+    public Posicao getPosicao (){
+        return this.posicao;
+    }
+    
+    public int getNumero (){
+        return this.numero;
+    }
+    
+    public double getOverall () {
+        return this.overall;
+    }
+    
+    public double getVelocidade () {
+        return this.velocidade;
+    }
+    
+    public double getResistencia () {
+        return this.resistencia;
+    }
+    
+    public double getDestreza (){
+        return this.destreza;
+    }
+    
+    public double getRemate () {
+        return this.remate;
+    }
+    
+    public double getCabeca () {
+        return this.cabeca;
+    }
+    
+    public double getPasse () {
+        return this.passe;
+    }
+    
+    public double getHumor (){
+        return this.humor;
+    }
+    
+    public double getCampo (){
+        return this.campo;
+    }
+    
+    public List<String> getHistorico () {
+        return this.historico; //should we clone?
+    }
+    
 }
