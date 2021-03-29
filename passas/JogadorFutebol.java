@@ -2,7 +2,7 @@ import java.util.List;
 public class JogadorFutebol extends Jogador {
     
     public enum Posicao {
-        GK,
+        GR,
         D,
         M,
         A
@@ -123,4 +123,54 @@ public class JogadorFutebol extends Jogador {
         return this.historico; //should we clone?
     }
     
+    /**
+     * Setters
+     */
+    public void setNumero (int numero) {
+        this.numero = numero;
+    }
+    
+    public void setOverall (double overall) {
+        this.overall = overall;
+    }
+    
+    public void setVelocidade (double velocidade) {
+        this.velocidade = velocidade;
+    }
+    
+    public void setResistencia (double resistencia) {
+        this.resistencia = resistencia;
+    }
+    
+    public void setDestreza (double destreza) {
+        this.destreza = destreza;
+    }
+    
+    public void setRemate (double remate) {
+        this.remate = remate;
+    }
+    
+    public void setCabeca (double cabeca) {
+        this.cabeca = cabeca;
+    }
+    
+    public void setPasse (double passe) {
+        this.passe = passe;
+    }
+    
+    public void setHumor (double humor) {
+        this.humor = humor;
+    }
+    
+    public void setCampo (double campo) {
+        this.campo = campo;
+    }
+    
+    public void setHistorico (List<String> historico) {
+        this.historico = historico;
+    }
+    
+    public void setHistorico_clube (String clube) {
+        this.historico.add(clube);
+    }
 }
