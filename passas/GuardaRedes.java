@@ -1,4 +1,3 @@
-
 /**
  * Subclasse da classe JogadorFutebol.
  * Herda todas as caracteristicas de um jogador de futebol, e acrescenta-lhe a elasticidade como caracteristica deste.
@@ -19,9 +18,29 @@ public class GuardaRedes extends JogadorFutebol
         this.elasticidade = 0;
     }
     
-    public GuardaRedes (double elasticidade)
+    public GuardaRedes (GuardaRedes marche) {
+        super (marche);
+        this.elasticidade = marche.getElasticidade();
+    }
+    public GuardaRedes (String nome, int idade, float altura, float peso, Posicao posicao, int numero, double overall, double velocidade, double resistencia, double destreza, 
+    double remate, double cabeca, double passe, double humor, double campo, String clube, double elasticidade) 
     {
+        super (nome, idade, altura, peso, posicao, numero, overall, velocidade, resistencia, destreza, remate, cabeca, passe, humor, campo, clube);
         this.elasticidade = elasticidade;
     }
     
+
+    /**
+     * Getter
+     */
+    public double getElasticidade () {
+        return this.elasticidade;
+    }
+    
+    /**
+     * Setter
+     */
+    public void setElasticidade (double elasticidade) {
+        this.elasticidade = elasticidade;
+    }
 }
