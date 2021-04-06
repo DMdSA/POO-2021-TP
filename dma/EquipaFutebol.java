@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class EquipaFutebol extends Equipa{
 
 
-private List<JogadorFutebol> listaJogadores;
+private ArrayList<JogadorFutebol> listaJogadores;
 private double overall;
 private Cor corPrimaria;
 private Cor corSecundaria;
@@ -19,7 +19,20 @@ private Cor corSecundaria;
 
 //Construtores,
 
-public EquipaFutebol(String nome, int titulares, int suplentes, List<JogadorFutebol> listaJogadores){
+public EquipaFutebol(String nome){
+
+	this.setNome(nome);
+	this.setTitulares(0);
+	this.setSuplentes(0);
+	this.listaJogadores = new ArrayList<JogadorFutebol>();
+	this.overall = 0;
+	this.corPrimaria = Cor.NONE;
+	this.corSecundaria = Cor.NONE;
+}
+
+
+
+public EquipaFutebol(String nome, int titulares, int suplentes, ArrayList<JogadorFutebol> listaJogadores){
 
 	this.setNome(nome);
 	this.setTitulares(titulares);
@@ -27,13 +40,13 @@ public EquipaFutebol(String nome, int titulares, int suplentes, List<JogadorFute
 	this.listaJogadores = new ArrayList<JogadorFutebol>(titulares + suplentes);
 	for(JogadorFutebol jf : listaJogadores) this.listaJogadores.add(jf);
 	this.overall = 0;
-	this.corPrimaria = Cor.PRETO;
-	this.corSecundaria = Cor.BRANCO;
+	this.corPrimaria = Cor.NONE;
+	this.corSecundaria = Cor.NONE;
 }
 
 
 
-public EquipaFutebol(String nome, int titulares, int suplentes, List<JogadorFutebol> listaJogadores, double overall, Cor primaria, Cor secundaria){
+public EquipaFutebol(String nome, int titulares, int suplentes, ArrayList<JogadorFutebol> listaJogadores, double overall, Cor primaria, Cor secundaria){
 
 	this.setNome(nome);
 	this.setTitulares(titulares);
@@ -44,6 +57,8 @@ public EquipaFutebol(String nome, int titulares, int suplentes, List<JogadorFute
 	this.corPrimaria = primaria;
 	this.corSecundaria = secundaria;
 }
+
+
 
 public EquipaFutebol(EquipaFutebol ef){
 
@@ -160,14 +175,5 @@ public void removeTitular(JogadorFutebol jf){
 	else System.out.println("Esse jogador nao se encontrava nesta equipa");
 
 }
-
-
-
-
-
-
-
-
-
 
 }
