@@ -139,7 +139,22 @@ public String toString(){
 
 
 
-public void adicionaTitular(JogadorFutebol jf){
+//clone,
+public EquipaFutebol clone(){
+
+	return new EquipaFutebol(this);
+}
+
+
+
+
+
+
+
+
+
+
+public void adicionaTitular(JogadorFutebol jf){							//Confirmar que funciona, só para lembrar que é preciso fazer distinção entre titulares/suplentes
 
 	//verificar,
 	if(this.getTitulares() == 11){										//errado, porque neste array estarão N titulares + M suplentes
@@ -158,7 +173,7 @@ public void adicionaTitular(JogadorFutebol jf){
 	
 
 	this.listaJogadores.add(jf);
-	if(this.getTitulares() >= 1)												//Deixar, como base, sempre o mínimo de jogadores, mesmo que possa não os ter guardados
+	if(this.getTitulares() >= 1)
 		this.setTitulares(this.getTitulares() + 1);
 }
 
@@ -168,7 +183,7 @@ public void removeTitular(JogadorFutebol jf){
 
 	if(this.listaJogadores.removeIf(j -> j.equals(jf))) {
 		System.out.println("Jogador removido com sucesso");
-		if(this.getTitulares() >= 1)											//Deixar, como base, sempre o mínimo de jogadoes, mesmo que possa não os ter guardados
+		if(this.getTitulares() >= 1)
 			this.setTitulares(this.getTitulares() - 1);
 	}
 
