@@ -34,9 +34,7 @@ public EquipaFutebol(String nome){
 
 public EquipaFutebol(String nome, int titulares, int suplentes, ArrayList<JogadorFutebol> listaJogadores){
 
-	this.setNome(nome);
-	this.setTitulares(titulares);
-	this.setSuplentes(suplentes);
+	super(nome, titulares, suplentes);
 	this.listaJogadores = new ArrayList<JogadorFutebol>(titulares + suplentes);
 	for(JogadorFutebol jf : listaJogadores) this.listaJogadores.add(jf);
 	this.overall = 0;
@@ -48,9 +46,7 @@ public EquipaFutebol(String nome, int titulares, int suplentes, ArrayList<Jogado
 
 public EquipaFutebol(String nome, int titulares, int suplentes, ArrayList<JogadorFutebol> listaJogadores, double overall, Cor primaria, Cor secundaria){
 
-	this.setNome(nome);
-	this.setTitulares(titulares);
-	this.setSuplentes(suplentes);
+	super(nome, titulares, suplentes);
 	this.listaJogadores = new ArrayList<JogadorFutebol>(titulares + suplentes);
 	for(JogadorFutebol jf : listaJogadores) this.listaJogadores.add(jf);
 	this.overall = overall;
@@ -62,9 +58,7 @@ public EquipaFutebol(String nome, int titulares, int suplentes, ArrayList<Jogado
 
 public EquipaFutebol(EquipaFutebol ef){
 
-	this.setNome(ef.getNome());
-	this.setTitulares(ef.getTitulares());
-	this.setSuplentes(ef.getSuplentes());
+	super(ef);
 	this.listaJogadores = new ArrayList<>(ef.getListaJogadores());
 	this.overall = ef.getOverall();
 	this.corPrimaria = ef.getCorPrimaria();
