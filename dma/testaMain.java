@@ -34,32 +34,7 @@ public class testaMain {
     	// testaJogador ^/----------------------------------------------------------------------------------------------------------
 
 
-		System.out.print("\n\n#Que nome queres dar ao teu jogador?: ");
-		String nome = lerInput.nextLine();
-		System.out.print("\n\n#Que posicao queres dar ao teu jogador?: ");
-		String posicao = lerInput.nextLine();
-
-        PosicaoCampo pc = PosicaoCampo.transforma_Posicao(posicao);
-
-        JogadorFutebol jf1;
-    	if(pc == PosicaoCampo.GR){
-    	    jf1 = new GuardaRedes(nome, pc);
-    	    ((GuardaRedes) jf1).setElasticidade(20);
-    	}
-    	else {
-            jf1 = new JogadorFutebol(nome, pc);
-        }
-
-        jf1.setNumero(7);
-        jf1.setOverall(12.5);
-        jf1.setVelocidade(3);
-        jf1.setImpulsao(5);
-        jf1.setResistencia(10);
-        jf1.setDestreza(2);
-        jf1.setJogoCabeca(1);
-        jf1.setRemate(12);
-        jf1.setPasse(5);
-        jf1.setHumor(2);
+		JogadorFutebol jf1 = GameQuestions.criaJogador();
         List<String> clubes1 = new ArrayList<String>();
         clubes1.add("Braga"); clubes1.add("Porto"); clubes1.add("Sporting");
         jf1.setHistorico(clubes1);
@@ -67,6 +42,9 @@ public class testaMain {
         System.out.println("\n#Jogador " + jf1.getNome() + " criado!:\n" + jf1.toString());
 
 
+            String nome;
+            String posicao;
+            PosicaoCampo pc;
 
 
        	System.out.print("\n\n#Que nome queres dar ao teu jogador?: ");
@@ -134,11 +112,27 @@ public class testaMain {
 
 
         System.out.printf("\n#Foram criados 3 jogadores, 1_\"%s\", 2_\"%s\", 3_\"%s\"\n", jf1.getNome(), jf2.getNome(), jf3.getNome());
-       
-        System.out.println("\n#Os jogadores 2 e 3 sao iguais? [" + jf2.equals(jf3) + "]\n");
-
-
         System.out.println(jf2.toString() + "\n\n" + jf3.toString());
+
+
+
+        //Parte da EQUIPAFUTEBOL
+
+        System.out.print("\n\n#Que nome queres dar a tua equipa?: ");
+        nome = lerInput.nextLine();
+
+        EquipaFutebol e1 = new EquipaFutebol(nome);
+        System.out.println(e1.adicionaTitular(jf1));
+        System.out.println(e1.adicionaTitular(jf2));
+        System.out.println(e1.adicionaSuplente(jf3));
+
+
+        System.out.println("\n#Esta equipa pode comecar a jogar? [" + e1.isReady() + "]\n");
+        System.out.println("\n#Consegui substituir? [" + e1.substitui(jf1, jf3) + "]");
+        System.out.println("\n" + e1.toString());
+
+
+        System.out.println(e1.toString());
 
 
     }
