@@ -73,7 +73,7 @@ public class GuardaRedes extends JogadorFutebol{
     public String toString(){
 
         final StringBuffer finalString = new StringBuffer("\tJogador \"" + this.getNome() + "\" = {\n");
-        finalString.append("\t\tPosicao: " + this.printPosicao(this.getPosicaoCampo()) + ";\n");
+        finalString.append("\t\tPosicao: " + PosicaoCampo.printPosicao(this.getPosicaoCampo()) + ";\n");
         finalString.append("\t\tIdade: " + this.getIdade() + ";\n");
         finalString.append("\t\tPeso: " + this.getPeso() + ";\n");
         finalString.append("\t\tAltura: " + this.getAltura() + ";\n");

@@ -220,22 +220,22 @@ public class JogadorFutebol extends Jogador {
      */
     public String toString(){
 
-        final StringBuffer finalString = new StringBuffer("\tJogador \"" + this.getNome() + "\" = {\n");
-        finalString.append("\t\tPosicao: " + this.printPosicao(this.getPosicaoCampo()) + ";\n");
-        finalString.append("\t\tIdade: " + this.getIdade() + ";\n");
-        finalString.append("\t\tPeso: " + this.getPeso() + ";\n");
-        finalString.append("\t\tAltura: " + this.getAltura() + ";\n");
-        finalString.append("\t\tNumero: " + this.getNumero() + ";\n");
-        finalString.append("\t\tOverall: " + this.getOverall() + ";\n");
-        finalString.append("\t\tVelocidade: " + this.getVelocidade() + ";\n");
-        finalString.append("\t\tImpulsao: " + this.getImpulsao() + ";\n");
-        finalString.append("\t\tResistencia: " + this.getResistencia() + ";\n");
-        finalString.append("\t\tDestreza: " + this.getDestreza() + ";\n");
-        finalString.append("\t\tJogo Cabeca: " + this.getJogoCabeca() + ";\n");
-        finalString.append("\t\tRemate: " + this.getRemate() + ";\n");
-        finalString.append("\t\tCapacidade Passe: " + this.getPasse() + ";\n");
-        finalString.append("\t\tHumor: " + this.getHumor() + ";\n");
-        finalString.append("\t\tHistorico equipas: " + this.historico.toString() + ";\n}\n");
+        final StringBuffer finalString = new StringBuffer("\t\tJogador \"" + this.getNome() + "\" = {\n");
+        finalString.append("\t\t\tPosicao: " + PosicaoCampo.printPosicao(this.getPosicaoCampo()) + ";\n");
+        finalString.append("\t\t\tIdade: " + this.getIdade() + " anos;\n");
+        finalString.append("\t\t\tPeso: " + this.getPeso() + " Kg;\n");
+        finalString.append("\t\t\tAltura: " + this.getAltura() + " cm;\n");
+        finalString.append("\t\t\tNumero: " + this.getNumero() + ";\n");
+        finalString.append("\t\t\tOverall: " + this.getOverall() + ";\n");
+        finalString.append("\t\t\tVelocidade: " + this.getVelocidade() + ";\n");
+        finalString.append("\t\t\tImpulsao: " + this.getImpulsao() + ";\n");
+        finalString.append("\t\t\tResistencia: " + this.getResistencia() + ";\n");
+        finalString.append("\t\t\tDestreza: " + this.getDestreza() + ";\n");
+        finalString.append("\t\t\tJogo Cabeca: " + this.getJogoCabeca() + ";\n");
+        finalString.append("\t\t\tRemate: " + this.getRemate() + ";\n");
+        finalString.append("\t\t\tCapacidade Passe: " + this.getPasse() + ";\n");
+        finalString.append("\t\t\tHumor: " + this.getHumor() + ";\n");
+        finalString.append("\t\t\tHistorico equipas: " + this.historico.toString() + ";\n\t\t}\n");
 
         return finalString.toString();
     }

@@ -3,6 +3,7 @@ public enum PosicaoCampo {
     D,
     M,
     A,
+    L,
     NONE;
 
     private String textFormat;
@@ -12,6 +13,7 @@ public enum PosicaoCampo {
     	D.textFormat = "Defesa";
     	M.textFormat = "Medio";
     	A.textFormat = "Atacante";
+        L.textFormat = "Lateral";
     	NONE.textFormat = "error_ not a football position";
     }
 
@@ -37,6 +39,9 @@ public enum PosicaoCampo {
 
             case A:
                 return A.textFormat;
+
+            case L:
+                return L.textFormat;
         
             default: return NONE.textFormat;
         }
@@ -56,19 +61,34 @@ public enum PosicaoCampo {
             case "Guarda-Redes":
             case "GR":
             case "GuardaRedes":
+            case "gr":
+            case "Gr":
+            case "guarda redes":
                 return PosicaoCampo.GR;
 
             case "Atacante":
             case "A":
+            case "atacante":
+            case "a":
                 return PosicaoCampo.A;
 
             case "Medio":
             case "M":
+            case "medio":
+            case "m":
                 return PosicaoCampo.M;
 
             case "Defesa":
+            case "defesa":
+            case "d":
             case "D":
                 return PosicaoCampo.D;
+
+            case "Lateral":
+            case "lateral":
+            case "l":
+            case "L":
+                return PosicaoCampo.L;
 
             default:
                 return PosicaoCampo.NONE;
