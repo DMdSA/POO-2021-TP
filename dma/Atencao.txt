@@ -1,0 +1,36 @@
+* Ficheiros ENUM até agora:
+	+ Co;
+	+ PosicaoCampo;
+	- O stor disse que não gostava muito de usar ENUMs, mas para já it is what it is.
+
+* Verificar condições de adicionar/remover titulares|suplentes|substituidos.
+
+* Verificar condições para uma equipa estar pronta a jogar (isReady function).
+
+* Faltam funções que determinem os overall de cada jogador (+) overall de uma equipa!!...
+
+* Falta criar Jogadores/Equipas já pre-definidos, para agilizar testes!
+
+* Ter cuidado com a quantidade de variáveis "extra" que adicionamos: 
+	"Tambem devera suportar o carregamento de um estado em modo texto, que a equipa docente posteriormente fornecera."
+
+--------------------------------------------------------------------------------------------
+* Verificar Requisitos p/nota mínima:
+	
+	+ Criar jogadores; |x|
+
+	+ Criar equipas; |x|
+	
+	+ Associar os jogadores a uma equipa; |x|
+	
+	+ Consultar jogadores e equipas; |x|
+	
+	+ Calcular valores habilidade para jogador e equipa; | |	(dependem uma da outra)
+	
+	+ Mudar jogador de equipa; | |
+	
+	+ Registar histórico de equipas por onde passou. | |		(depende da anterior)
+--------------------------------------------------------------------------------------------
+
+
+* Construir um diagrama de classes e pensar na estrutura para entrega 1ª fase (1 Maio) /!\
