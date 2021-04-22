@@ -1,3 +1,4 @@
+
 public enum PosicaoCampo {
     GR,
     D,
@@ -49,9 +50,9 @@ public enum PosicaoCampo {
 
 
     /**
-     * Transforma uma string num tipo ENUM de PosicaoCampo
+     * Transforma uma string num tipo ENUM de jogadoresfutebol.PosicaoCampo
      * @param s String que deverá ser transformada
-     * @return PosicaoCampo relacionada com a string recebida
+     * @return jogadoresfutebol.PosicaoCampo relacionada com a string recebida
      */
 
     public static PosicaoCampo transforma_Posicao(String s){
@@ -60,7 +61,7 @@ public enum PosicaoCampo {
 
             case "Guarda-Redes":
             case "GR":
-            case "GuardaRedes":
+            case "jogadoresfutebol.GuardaRedes":
             case "gr":
             case "Gr":
             case "guarda redes":

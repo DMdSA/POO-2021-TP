@@ -48,6 +48,20 @@ public class EquipaFutebol extends Equipa {
 	}
 
 
+	public EquipaFutebol(String nome, Cor p, Cor s) {
+
+		super(nome);
+		this.substituicoes = 3;
+		this.jogadoresTitulares = new ArrayList<JogadorFutebol>();
+		this.jogadoresSuplentes = new ArrayList<JogadorFutebol>();
+		this.jogadoresSubstituidos = new ArrayList<JogadorFutebol>();
+		this.overall = 0;
+		this.corPrimaria = p;
+		this.corSecundaria = s;
+	}
+
+
+
 	public EquipaFutebol(String nome, int titulares, int suplentes, int substituicoes, List<JogadorFutebol> jTitulares, List<JogadorFutebol> jSuplentes, List<JogadorFutebol> jSubstituidos) {
 
 		super(nome, titulares, suplentes);
@@ -388,6 +402,18 @@ public class EquipaFutebol extends Equipa {
 
 
 
+
+//getHabilidade
+
+	public double getHabilidade(){
+
+		double habilidade = 0;
+
+		for(JogadorFutebol jf : this.jogadoresTitulares)
+			habilidade += jf.getHabilidade();
+
+		return habilidade;
+	}
 
 
 }

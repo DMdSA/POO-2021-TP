@@ -23,7 +23,6 @@ public class JogadorFutebol extends Jogador {
         super();
         this.posicao = PosicaoCampo.NONE;
         this.numero = 0;
-        this.overall = 0.0;
         this.velocidade=0.0;
         this.impulsao = 0;
         this.resistencia = 0.0;
@@ -33,14 +32,16 @@ public class JogadorFutebol extends Jogador {
         this.passe = 0.0;
         this.humor = 0.0;
         this.historico = new ArrayList<String>();
+        
+        this.setOverall(this.getHabilidade());
     }
 
 
      public JogadorFutebol (String nome, PosicaoCampo pc) {
+        
         super(nome);
         this.posicao = pc;
         this.numero = 0;
-        this.overall = 0.0;
         this.velocidade=0.0;
         this.impulsao = 0;
         this.resistencia = 0.0;
@@ -50,10 +51,15 @@ public class JogadorFutebol extends Jogador {
         this.passe = 0.0;
         this.humor = 0.0;
         this.historico = new ArrayList<String>();
+       
+        this.setOverall(this.getHabilidade());
     }
 
-    
-    public JogadorFutebol (String nome, int idade, float altura, float peso, PosicaoCampo posicao, int numero, double overall, double velocidade, double impulsao, double resistencia, double destreza, double remate, double jogoCabeca, double passe, double humor, List<String> historico) {
+    //Com Overall + historico
+    public JogadorFutebol (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, 
+                             double overall, double velocidade, double impulsao, double resistencia, double destreza, double remate,
+                                   double jogoCabeca, double passe, double humor, List<String> historico) {
+       
         super (nome, idade, altura, peso);
         this.posicao = posicao;
         this.numero = numero;
@@ -71,10 +77,82 @@ public class JogadorFutebol extends Jogador {
             this.historico.add(clube);
     }
     
+    //Com Overall - historico
+    public JogadorFutebol (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, double overall,
+                              double velocidade, double impulsao, double resistencia, double destreza, double remate, double jogoCabeca, 
+                                double passe, double humor) {
+        
+
+        super (nome, idade, altura, peso);
+        this.posicao = posicao;
+        this.numero = numero;
+        this.overall = overall;
+        this.velocidade = velocidade;
+        this.impulsao = impulsao;
+        this.resistencia = resistencia;
+        this.destreza = destreza;
+        this.remate = remate;
+        this.jogoCabeca = jogoCabeca;
+        this.passe = passe;
+        this.humor = humor;
+        this.historico = new ArrayList<String>();
+    }
+
+
+    //Sem overall + historico
+    public JogadorFutebol (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, 
+                             double velocidade, double impulsao, double resistencia, double destreza, double remate, double jogoCabeca, 
+                                double passe, double humor, List<String> historico) {
+        
+        super (nome, idade, altura, peso);
+        this.posicao = posicao;
+        this.numero = numero;
+        this.velocidade = velocidade;
+        this.impulsao = impulsao;
+        this.resistencia = resistencia;
+        this.destreza = destreza;
+        this.remate = remate;
+        this.jogoCabeca = jogoCabeca;
+        this.passe = passe;
+        this.humor = humor;
+        this.historico = new ArrayList<String>();
+        for(String clube : historico)
+            this.historico.add(clube);
+        
+
+        this.setOverall(this.getHabilidade());
+    }
+
+
+
+    //Sem overall - historico
+    public JogadorFutebol (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, 
+                             double velocidade, double impulsao, double resistencia, double destreza, double remate, double jogoCabeca, 
+                                double passe, double humor) {
+        
+        super (nome, idade, altura, peso);
+        this.posicao = posicao;
+        this.numero = numero;
+        this.velocidade = velocidade;
+        this.impulsao = impulsao;
+        this.resistencia = resistencia;
+        this.destreza = destreza;
+        this.remate = remate;
+        this.jogoCabeca = jogoCabeca;
+        this.passe = passe;
+        this.humor = humor;
+        this.historico = new ArrayList<String>();        
+
+        this.setOverall(this.getHabilidade());
+    }
+
+
+
     public JogadorFutebol (JogadorFutebol jf) { //figo just for fun and my entertainment
         super(jf);
         this.posicao = jf.getPosicaoCampo();
         this.numero = jf.getNumero();
+        this.overall = jf.getOverall();
         this.velocidade = jf.getVelocidade();
         this.impulsao = jf.getImpulsao();
         this.resistencia = jf.getResistencia();
@@ -251,8 +329,24 @@ public class JogadorFutebol extends Jogador {
 
 
 
+    public double fatorIdade(){                                 //Meramente ilustrativo
+
+        int age = getIdade();
+
+        if(age >= 17 && age <= 21) return 5;
+        if(age >= 22 && age <= 25) return 3;
+        if(age >= 26) return 1;
+        return 0;
+    }
 
 
+    public double getHabilidade(){
+    
+        double habilidade = 0;
+        habilidade += this.fatorIdade() + 1 + 1 + 1 + 1 + 1 + 1 + 1 + this.getHumor()*2;
+        //Ilustrativo, defini 1 para todas as habilidades "comuns"
+        return habilidade;
+    }
 
 
 }
