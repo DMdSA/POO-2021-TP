@@ -1,139 +1,78 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class testaMain {
 
     public static void main(String[] args){
 
     	
-    	Scanner lerInput = new Scanner(System.in);
+        List<String> historico1 = new ArrayList<>();
+        historico1.add("Braga");
+        JogadorFutebol j1 = new Avancado("Diogo", 20, 175, 75.3, PosicaoCampo.A, 7, 12.2, 5.5, 2.2, 8, 3, 5, 1, 7, historico1, 11);
+        System.out.println("\n#> Foi criado o jogador -> " + j1.getNome());
+        
+        List<String> historico2 = new ArrayList<>();
+        historico2.add("Braga"); historico2.add("Porto");
+        JogadorFutebol j2 = new Avancado("Joao", 28, 165, 76.3, PosicaoCampo.A, 6, 2.2, 15.5, 2.22, 4, 8,8, 2.1, 0, historico2, 10);
+        System.out.println("\n#> Foi criado o jogador -> " + j2.getNome());
+        
+        List<String> historico3 = new ArrayList<>();
+        historico3.add("Benfica"); historico3.add("Porto");
+        JogadorFutebol j3 = new Avancado("Renato", 19, 168, 68.1, PosicaoCampo.GR, 3, 12.2, 5.5, 4.02, 3, 4,0, 6.1, 6, historico3, 5);
+        System.out.println("\n#> Foi criado o jogador -> " + j3.getNome());
+        
+        List<String> historico4 = new ArrayList<>();
+        historico4.add("Sporting"); historico4.add("Tadim"); historico4.add("Vilaverdense");
+        JogadorFutebol j4 = new Lateral("Afonso", 20, 184, 72.0, PosicaoCampo.L, 9, 2.2, 11.1, 2.99, 13, 3,8, 2.1, 1, historico4, 13);
+        System.out.println("\n#> Foi criado o jogador -> " + j4.getNome());
+        
+        List<String> historico5 = new ArrayList<>();
+        historico5.add("Braga"); historico5.add("Sporting"); historico5.add("Rio Ave");
+        JogadorFutebol j5 = new Lateral("Pedro", 26, 180, 67.42, PosicaoCampo.L, 4, 28.2, 1.1666, 6.9, 0, 13, 6, 2.8, 0, historico5, 6);
+        System.out.println("\n#> Foi criado o jogador -> " + j5.getNome());
+        
+        JogadorFutebol j6 = new Lateral("Jorge", 20, 184, 72.0, PosicaoCampo.L, 9, 2.2, 11.1, 2.99, 13, 3,8, 2.1, 0, 13);
+        System.out.println("\n#> Foi criado o jogador -> " + j6.getNome());
+        
+        List<String> historico7 = new ArrayList<>();
+        historico7.add("Braga");
+        JogadorFutebol j7 = new Avancado("Ze", 20, 175, 75.3, PosicaoCampo.M, 7, 12.2, 5.5, 2.2, 8, 3, 5, 1, 7, historico7, 11);
+        System.out.println("\n#> Foi criado o jogador -> " + j7.getNome());
+        
+        List<String> historico8 = new ArrayList<>();
+        historico8.add("Braga"); historico8.add("Porto");
+        JogadorFutebol j8 = new Avancado("Mateus", 28, 165, 76.3, PosicaoCampo.M, 6, 2.2, 15.5, 2.22, 4, 8,8, 2.1, 0, historico8, 10);
+        System.out.println("\n#> Foi criado o jogador -> " + j8.getNome());
+        
+        List<String> historico9 = new ArrayList<>();
+        historico9.add("Benfica"); historico9.add("Porto");
+        JogadorFutebol j9 = new Avancado("Henrique", 19, 168, 68.1, PosicaoCampo.M, 3, 12.2, 5.5, 4.02, 3, 4,0, 6.1, 6, historico9, 5);
+        System.out.println("\n#> Foi criado o jogador -> " + j9.getNome());
+        
+        
+        List<String> historico10 = new ArrayList<>();
+        historico10.add("Sporting"); historico10.add("Tadim"); historico10.add("Vilaverdense");
+        JogadorFutebol j10 = new Lateral ("Passas", 20, 184, 72.0, PosicaoCampo.D, 9, 2.2, 11.1, 2.99, 13, 3,8, 2.1, 1, historico10, 13);
+        System.out.println("\n#> Foi criado o jogador -> " + j10.getNome());
+        
+        List<String> historico11 = new ArrayList<>();
+        historico11.add("Braga"); historico11.add("Sporting"); historico11.add("Rio Ave");
+        JogadorFutebol j11 = new Lateral ("Rebelo", 26, 180, 67.42, PosicaoCampo.D, 4, 28.2, 1.1666, 6.9, 0, 13, 6, 2.8, 0, historico11, 6);
+        System.out.println("\n#> Foi criado o jogador -> " + j11.getNome());
+        
+        JogadorFutebol j12 = new Lateral("Joel", 20, 184, 72.0, PosicaoCampo.D, 9, 2.2, 11.1, 2.99, 13, 3,8, 2.1, 0, 13);
+        System.out.println("\n#> Foi criado o jogador -> " + j12.getNome());
+        
+
+        EquipaFutebol ef1 = new EquipaFutebol("TamoFudjido", Cor.VERMELHO, Cor.ROSA);
+        System.out.println("\n#> Foi criada a equipa -> " + ef1.getNome());
+
+		ef1.adicionaTitular(j1);ef1.adicionaTitular(j2);ef1.adicionaTitular(j3);ef1.adicionaTitular(j4);ef1.adicionaTitular(j5);ef1.adicionaTitular(j6);
+        ef1.adicionaTitular(j7);ef1.adicionaTitular(j8);ef1.adicionaTitular(j9);ef1.adicionaTitular(j10);ef1.adicionaTitular(j11);ef1.adicionaTitular(j12);
 
 
-    /*
-    	System.out.println("\n\n#Vamos comecar!!");
-
-    	System.out.print("#Que nome queres dar ao teu jogador?: ");
-    	String nome = lerInput.nextLine();
-
-    	Jogador jogador1 = new Jogador(nome);
-
-    	System.out.println("\n" + jogador1.toString());
-    	
-    	System.out.println("\nDefinir idade=19, altura=1.75, peso=70\n");
-    	jogador1.setIdade(19);
-    	jogador1.setAltura(1.75);
-    	jogador1.setPeso(70);
-
-    	Jogador copia1 = jogador1.clone();
-    	System.out.println("\n# O jogador 1 e igual a copia criada? [" + jogador1.equals(copia1) + "]\n");
-
-    	System.out.println("Jogador copia: " + copia1.toString() + "\n\n");
-	*/
-
-    	// testaJogador ^/----------------------------------------------------------------------------------------------------------
-
-
-		JogadorFutebol jf1 = GameQuestions.criaJogador();
-        List<String> clubes1 = new ArrayList<String>();
-        clubes1.add("Braga"); clubes1.add("Porto"); clubes1.add("Sporting");
-        jf1.setHistorico(clubes1);
-
-        System.out.println("\n#Jogador " + jf1.getNome() + " criado!:\n" + jf1.toString());
-
-
-            String nome;
-            String posicao;
-            PosicaoCampo pc;
-
-
-       	System.out.print("\n\n#Que nome queres dar ao teu jogador?: ");
-		nome = lerInput.nextLine();
-		System.out.print("\n\n#Que posicao queres dar ao teu jogador?: ");
-		posicao = lerInput.nextLine();
-		pc = PosicaoCampo.transforma_Posicao(posicao);
-
-    	JogadorFutebol jf2;
-    	if(pc == PosicaoCampo.GR){
-    	    jf2 = new GuardaRedes(nome, pc);
-    	    ((GuardaRedes) jf2).setElasticidade(20);
-    	}
-    	else {
-            jf2 = new JogadorFutebol(nome, pc);
-        }
-
-        jf2.setNumero(7);
-        jf2.setOverall(12.5);
-        jf2.setVelocidade(3);
-        jf2.setImpulsao(5);
-        jf2.setResistencia(10);
-        jf2.setDestreza(2);
-        jf2.setJogoCabeca(1);
-        jf2.setRemate(12);
-        jf2.setPasse(5);
-        jf2.setHumor(2);
-        List<String> clubes2 = new ArrayList<String>();
-        clubes2.add("Rio Ave"); clubes2.add("Sporting"); clubes2.add("Guimaraes"); clubes2.add("Santa Clara");
-        jf2.setHistorico(clubes2);
-
-
-
-
-
-		System.out.print("\n\n#Que nome queres dar ao teu jogador?: ");
-		nome = lerInput.nextLine();
-		System.out.print("\n\n#Que posicao queres dar ao teu jogador?: ");
-		posicao = lerInput.nextLine();
-		pc = PosicaoCampo.transforma_Posicao(posicao);
-
-    	JogadorFutebol jf3;
-    	if(pc == PosicaoCampo.GR){
-    	    jf3 = new GuardaRedes(nome, pc);
-    	    ((GuardaRedes) jf3).setElasticidade(20);
-    	}
-    	else {
-            jf3 = new JogadorFutebol(nome, pc);
-        }
-
-       	jf3.setNumero(7);
-        jf3.setOverall(12.5);
-        jf3.setVelocidade(3);
-        jf3.setImpulsao(5);
-        jf3.setResistencia(10);
-        jf3.setDestreza(2);
-        jf3.setJogoCabeca(1);
-        jf3.setRemate(12);
-        jf3.setPasse(5);
-        jf3.setHumor(2);
-        List<String> clubes3 = new ArrayList<String>();
-        clubes3.add("Rio Ave"); clubes3.add("Sporting"); clubes3.add("Guimaraes"); clubes3.add("Santa Clara");
-        jf3.setHistorico(clubes3);
-
-
-
-        System.out.printf("\n#Foram criados 3 jogadores, 1_\"%s\", 2_\"%s\", 3_\"%s\"\n", jf1.getNome(), jf2.getNome(), jf3.getNome());
-        System.out.println(jf2.toString() + "\n\n" + jf3.toString());
-
-
-
-        //Parte da EQUIPAFUTEBOL
-
-        System.out.print("\n\n#Que nome queres dar a tua equipa?: ");
-        nome = lerInput.nextLine();
-
-        EquipaFutebol e1 = new EquipaFutebol(nome);
-        System.out.println(e1.adicionaTitular(jf1));
-        System.out.println(e1.adicionaTitular(jf2));
-        System.out.println(e1.adicionaSuplente(jf3));
-
-
-        System.out.println("\n#Esta equipa pode comecar a jogar? [" + e1.isReady() + "]\n");
-        System.out.println("\n#Consegui substituir? [" + e1.substitui(jf1, jf3) + "]");
-        System.out.println("\n" + e1.toString());
-
-
-        System.out.println(e1.toString());
-
+        System.out.println("\n#>Equipa preenchida: \n\n" + ef1.toString());
+        System.out.println("\n#>Esta equipa esta pronta para jogar? " + ef1.isReady());
 
     }
 }
