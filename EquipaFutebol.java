@@ -18,6 +18,7 @@ public class EquipaFutebol extends Equipa {
 	private double overall;
 	private Cor corPrimaria;
 	private Cor corSecundaria;
+	private int golos;
 
 
 //Construtores,
@@ -33,6 +34,7 @@ public class EquipaFutebol extends Equipa {
 		this.overall = 0;
 		this.corPrimaria = Cor.NONE;
 		this.corSecundaria = Cor.NONE;
+		this.golos = 0;
 	}
 
 	public EquipaFutebol(String nome) {
@@ -45,6 +47,7 @@ public class EquipaFutebol extends Equipa {
 		this.overall = 0;
 		this.corPrimaria = Cor.NONE;
 		this.corSecundaria = Cor.NONE;
+		this.golos = 0;
 	}
 
 
@@ -58,6 +61,7 @@ public class EquipaFutebol extends Equipa {
 		this.overall = 0;
 		this.corPrimaria = p;
 		this.corSecundaria = s;
+		this.golos = 0;
 	}
 
 
@@ -83,6 +87,7 @@ public class EquipaFutebol extends Equipa {
 		this.overall = 0;
 		this.corPrimaria = Cor.NONE;
 		this.corSecundaria = Cor.NONE;
+		this.golos = 0;
 	}
 
 
@@ -106,6 +111,7 @@ public class EquipaFutebol extends Equipa {
 		this.overall = overall;
 		this.corPrimaria = primaria;
 		this.corSecundaria = secundaria;
+		this.golos = 0;
 	}
 
 
@@ -129,6 +135,7 @@ public class EquipaFutebol extends Equipa {
 		this.overall = ef.getOverall();
 		this.corPrimaria = ef.getCorPrimaria();
 		this.corSecundaria = ef.getCorSecundaria();
+		this.golos = ef.getGolos();
 	}
 
 
@@ -169,6 +176,8 @@ public class EquipaFutebol extends Equipa {
 		return this.corSecundaria;
 	}
 
+	public int getGolos(){ return this.golos;}
+
 
 //Setters,
 
@@ -206,6 +215,8 @@ public class EquipaFutebol extends Equipa {
 		this.corSecundaria = c;
 	}
 
+	public void setGolos(int golos){ this.golos = golos;}
+
 
 //equals,
 
@@ -223,7 +234,8 @@ public class EquipaFutebol extends Equipa {
 				this.jogadoresSubstituidos.equals(that.jogadoresSubstituidos) &&
 				this.overall == that.overall &&
 				this.corPrimaria == that.corPrimaria &&
-				this.corSecundaria == that.corSecundaria;
+				this.corSecundaria == that.corSecundaria &&
+				this.golos == that.golos;
 	}
 
 
@@ -247,7 +259,7 @@ public class EquipaFutebol extends Equipa {
 		for (JogadorFutebol jf : this.jogadoresSubstituidos)
 			finalstring.append(jf.toString());
 
-		finalstring.append("\n");
+		finalstring.append("\tGolos: " + this.golos + "\n");
 
 		return finalstring.toString();
 	}
@@ -414,6 +426,14 @@ public class EquipaFutebol extends Equipa {
 
 		return habilidade;
 	}
+
+
+//addGolo
+	public void addGolo(){
+		this.golos++;
+	}
+
+
 
 
 }

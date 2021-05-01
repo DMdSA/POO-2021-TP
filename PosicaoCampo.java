@@ -61,7 +61,7 @@ public enum PosicaoCampo {
 
             case "Guarda-Redes":
             case "GR":
-            case "GuardaRedes":
+            case "jogadoresfutebol.GuardaRedes":
             case "gr":
             case "Gr":
             case "guarda redes":
