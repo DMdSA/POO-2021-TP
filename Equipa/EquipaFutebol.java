@@ -1,13 +1,8 @@
-package Equipa;
-
-import Jogadores.GuardaRedes;
-import Jogadores.JogadorFutebol;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Equipa.EquipaFutebol Class
+ * EquipaFutebol Class
  *
  * @author dma_, passas, petty01
  * @version 1.0
@@ -19,10 +14,10 @@ public class EquipaFutebol extends Equipa {
 	private int substituicoes;
 	private List<JogadorFutebol> jogadoresTitulares;
 	private List<JogadorFutebol> jogadoresSuplentes;
-	private List<JogadorFutebol> jogadoresSubstituidos;
 	private double overall;
 	private Cor corPrimaria;
 	private Cor corSecundaria;
+	private int golos;
 
 
 //Construtores,
@@ -34,10 +29,10 @@ public class EquipaFutebol extends Equipa {
 		this.substituicoes = 3;																	//Confirmar regras!
 		this.jogadoresTitulares = new ArrayList<JogadorFutebol>();
 		this.jogadoresSuplentes = new ArrayList<JogadorFutebol>();
-		this.jogadoresSubstituidos = new ArrayList<JogadorFutebol>();
 		this.overall = 0;
 		this.corPrimaria = Cor.NONE;
 		this.corSecundaria = Cor.NONE;
+		this.golos = 0;
 	}
 
 	public EquipaFutebol(String nome) {
@@ -46,10 +41,10 @@ public class EquipaFutebol extends Equipa {
 		this.substituicoes = 3;
 		this.jogadoresTitulares = new ArrayList<JogadorFutebol>();
 		this.jogadoresSuplentes = new ArrayList<JogadorFutebol>();
-		this.jogadoresSubstituidos = new ArrayList<JogadorFutebol>();
 		this.overall = 0;
 		this.corPrimaria = Cor.NONE;
 		this.corSecundaria = Cor.NONE;
+		this.golos = 0;
 	}
 
 
@@ -59,15 +54,15 @@ public class EquipaFutebol extends Equipa {
 		this.substituicoes = 3;
 		this.jogadoresTitulares = new ArrayList<JogadorFutebol>();
 		this.jogadoresSuplentes = new ArrayList<JogadorFutebol>();
-		this.jogadoresSubstituidos = new ArrayList<JogadorFutebol>();
 		this.overall = 0;
 		this.corPrimaria = p;
 		this.corSecundaria = s;
+		this.golos = 0;
 	}
 
 
 
-	public EquipaFutebol(String nome, int titulares, int suplentes, int substituicoes, List<JogadorFutebol> jTitulares, List<JogadorFutebol> jSuplentes, List<JogadorFutebol> jSubstituidos) {
+	public EquipaFutebol(String nome, int titulares, int suplentes, int substituicoes, List<JogadorFutebol> jTitulares, List<JogadorFutebol> jSuplentes) {
 
 		super(nome, titulares, suplentes);
 		this.substituicoes = substituicoes;
@@ -80,18 +75,15 @@ public class EquipaFutebol extends Equipa {
 		this.jogadoresSuplentes = new ArrayList<JogadorFutebol>();
 		for (JogadorFutebol jf : jSuplentes)
 			this.jogadoresSuplentes.add(jf);
-
-		this.jogadoresSubstituidos = new ArrayList<JogadorFutebol>();
-		for (JogadorFutebol jf : jSubstituidos)
-			this.jogadoresSubstituidos.add(jf);
 
 		this.overall = 0;
 		this.corPrimaria = Cor.NONE;
 		this.corSecundaria = Cor.NONE;
+		this.golos = 0;
 	}
 
 
-	public EquipaFutebol(String nome, int titulares, int suplentes, int substituicoes, List<JogadorFutebol> jTitulares, List<JogadorFutebol> jSuplentes, List<JogadorFutebol> jSubstituidos, double overall, Cor primaria, Cor secundaria) {
+	public EquipaFutebol(String nome, int titulares, int suplentes, int substituicoes, List<JogadorFutebol> jTitulares, List<JogadorFutebol> jSuplentes, double overall, Cor primaria, Cor secundaria) {
 
 		super(nome, titulares, suplentes);
 		this.substituicoes = substituicoes;
@@ -104,13 +96,10 @@ public class EquipaFutebol extends Equipa {
 		for (JogadorFutebol jf : jSuplentes)
 			this.jogadoresSuplentes.add(jf);
 
-		this.jogadoresSubstituidos = new ArrayList<JogadorFutebol>();
-		for (JogadorFutebol jf : jSubstituidos)
-			this.jogadoresSubstituidos.add(jf);
-
 		this.overall = overall;
 		this.corPrimaria = primaria;
 		this.corSecundaria = secundaria;
+		this.golos = 0;
 	}
 
 
@@ -127,14 +116,22 @@ public class EquipaFutebol extends Equipa {
 		for (JogadorFutebol jf : ef.getJogadoresSuplentes())
 			this.jogadoresSuplentes.add(jf.clone());
 
-		this.jogadoresSubstituidos = new ArrayList<>();
-		for (JogadorFutebol jf : ef.getJogadoresSubstituidos())
-			this.jogadoresSubstituidos.add(jf.clone());
-
 		this.overall = ef.getOverall();
 		this.corPrimaria = ef.getCorPrimaria();
 		this.corSecundaria = ef.getCorSecundaria();
+		this.golos = ef.getGolos();
 	}
+
+
+
+	public static EquipaFutebol parse(String input){
+
+		String[] parametro = input.split(",");
+		return new EquipaFutebol(parametro[0]);
+	}
+
+
+
 
 
 //Getters,
@@ -154,11 +151,6 @@ public class EquipaFutebol extends Equipa {
 	}
 
 
-	public List<JogadorFutebol> getJogadoresSubstituidos() {
-
-		return new ArrayList<JogadorFutebol>(this.jogadoresSubstituidos);
-	}
-
 
 	public double getOverall() {
 		return this.overall;
@@ -173,6 +165,8 @@ public class EquipaFutebol extends Equipa {
 	public Cor getCorSecundaria() {
 		return this.corSecundaria;
 	}
+
+	public int getGolos(){ return this.golos;}
 
 
 //Setters,
@@ -191,12 +185,6 @@ public class EquipaFutebol extends Equipa {
 	}
 
 
-	public void setJogadoresSubstituidos(List<JogadorFutebol> jSubstituidos) {
-
-		this.jogadoresSubstituidos = new ArrayList<JogadorFutebol>(jSubstituidos);
-	}
-
-
 	public void serOverall(double overall) {
 		this.overall = overall;
 	}
@@ -210,6 +198,8 @@ public class EquipaFutebol extends Equipa {
 	public void setCorSecundaria(Cor c) {
 		this.corSecundaria = c;
 	}
+
+	public void setGolos(int golos){ this.golos = golos;}
 
 
 //equals,
@@ -225,10 +215,10 @@ public class EquipaFutebol extends Equipa {
 				this.substituicoes == that.substituicoes &&
 				this.jogadoresTitulares.equals(that.jogadoresTitulares) &&
 				this.jogadoresSuplentes.equals(that.jogadoresSuplentes) &&
-				this.jogadoresSubstituidos.equals(that.jogadoresSubstituidos) &&
 				this.overall == that.overall &&
 				this.corPrimaria == that.corPrimaria &&
-				this.corSecundaria == that.corSecundaria;
+				this.corSecundaria == that.corSecundaria &&
+				this.golos == that.golos;
 	}
 
 
@@ -236,7 +226,7 @@ public class EquipaFutebol extends Equipa {
 
 	public String toString() {
 
-		StringBuilder finalstring = new StringBuilder("Equipa.Equipa Futebol [" + this.getNome() + "]:\n");
+		StringBuilder finalstring = new StringBuilder("Equipa Futebol [" + this.getNome() + "]:\n");
 
 		finalstring.append("\tNumero Titulares: " + this.getTitulares() + ", Numero Suplentes: " + this.getSuplentes() + ", Numero substituicoes: " + this.getSubstituicoes() + "\n");
 
@@ -248,11 +238,7 @@ public class EquipaFutebol extends Equipa {
 		for (JogadorFutebol jf : this.jogadoresSuplentes)
 			finalstring.append(jf.toString());
 
-		finalstring.append("\tSubstituidos:\n");
-		for (JogadorFutebol jf : this.jogadoresSubstituidos)
-			finalstring.append(jf.toString());
-
-		finalstring.append("\n");
+		finalstring.append("\tGolos: " + this.golos + "\n");
 
 		return finalstring.toString();
 	}
@@ -357,35 +343,6 @@ public class EquipaFutebol extends Equipa {
 	}
 
 
-//Adiciona Substituido
-
-	public boolean adicionaSubstituido(JogadorFutebol j){
-
-		if(this.jogadoresSubstituidos.contains(j)) 
-			return false;
-
-		this.jogadoresSubstituidos.add(j);
-		return true;
-	}
-
-
-
-//Remove Substituido
-
-	public boolean removeSubstituido(JogadorFutebol j){
-
-		if(this.jogadoresSubstituidos.isEmpty()) return false;
-
-		if(this.jogadoresSubstituidos.contains(j)){
-			this.jogadoresSubstituidos.remove(j);
-			return true;
-		}
-		
-		return false;
-	}
-
-
-
 //Substituicao
 
 	public boolean substitui(JogadorFutebol jCampo, JogadorFutebol jBanco){
@@ -394,11 +351,13 @@ public class EquipaFutebol extends Equipa {
 
 		if(this.jogadoresTitulares.contains(jCampo) && this.jogadoresSuplentes.contains(jBanco) && substituicoes > 0){
 
+			this.removeTitular(jCampo);
+
 			this.adicionaTitular(jBanco);
 			this.removeSuplente(jBanco);
-			this.adicionaSubstituido(jCampo);
+			this.adicionaSuplente(jCampo);
+
 			this.substituicoes--;
-			this.removeTitular(jCampo);
 			return true;
 		}
 
@@ -419,6 +378,23 @@ public class EquipaFutebol extends Equipa {
 
 		return habilidade;
 	}
+
+
+//addGolo
+	public void addGolo(){
+		this.golos++;
+	}
+
+
+	public JogadorFutebol getJogador(int numero){
+
+		for(JogadorFutebol jf : this.jogadoresTitulares){
+			if(jf.getNumero() == numero) return jf;
+		}
+		return null;			//Aqui devem-se tratar exceptions iguess, visto q em poo "n existe null"
+	}
+
+
 
 
 }

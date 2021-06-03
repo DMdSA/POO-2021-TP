@@ -1,5 +1,3 @@
-package Equipa;
-
 public class Equipa {
 
     private String nome;
@@ -88,7 +86,7 @@ public class Equipa {
     public String toString() {
        
 
-        StringBuilder finalstring = new StringBuilder("Equipa.Equipa [" + this.getNome() + "] = \n\t");
+        StringBuilder finalstring = new StringBuilder("Equipa [" + this.getNome() + "] = \n\t");
         finalstring.append("Numero Titulares : " + this.getTitulares() + "\n\t");
         finalstring.append("Numero Suplentes : " + this.getSuplentes() + "\n");
 
