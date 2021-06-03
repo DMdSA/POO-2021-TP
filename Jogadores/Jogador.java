@@ -1,5 +1,3 @@
-package Jogadores;
-
 public class Jogador {
     
     private String nome;
@@ -12,7 +10,7 @@ public class Jogador {
      * Construtores
      */
     public Jogador () {             //Não sei se fará muito sentido usar este, mas também n deve fazer grande diferença
-        this.nome = "n/a";
+        this.nome = "Rambo [aleatorios!]";
         this.idade = 0;
         this.altura = 0;
         this.peso = 0;
@@ -84,7 +82,7 @@ public class Jogador {
     public boolean equals(Object o){
 
         if(this == o) return true;
-        if(this.getClass() != o.getClass()) return false;
+        if(this.getClass() != o.getClass() || o == null) return false;
 
         Jogador that = (Jogador) o;
 
@@ -108,7 +106,7 @@ public class Jogador {
      */
     public String toString(){
 
-        final StringBuffer finalString = new StringBuffer("\tJogadores.Jogador \"" + this.getNome() + "\" = {\n");
+        final StringBuffer finalString = new StringBuffer("\tJogador \"" + this.getNome() + "\" = {\n");
         finalString.append("\t\tIdade: " + this.getIdade() + ";\n");
         finalString.append("\t\tAltura: " + this.getAltura() + ";\n");
         finalString.append("\t\tPeso: " + this.getPeso() + ";\n\t}\n");

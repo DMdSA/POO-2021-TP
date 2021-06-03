@@ -1,13 +1,11 @@
-package Jogadores;
-
 import java.util.List;
 
 /**
- * Subclasse da classe jogadoresfutebol.Jogadores.JogadorFutebol.
+ * Subclasse da classe jogadoresfutebol.JogadorFutebol.
  * Herda todas as caracteristicas de um jogador de futebol, e acrescenta-lhe a elasticidade como caracteristica deste.
  *
- * @author passas a81215@alunos.uminho.pt
- * @version 28-03-2021
+ * @author dma_ & Petty
+ * @version 
  */
 
 
@@ -19,7 +17,7 @@ public class GuardaRedes extends JogadorFutebol{
 
 
     /**
-     * Construtores de Objetos da Classe jogadoresfutebol.Jogadores.GuardaRedes
+     * Construtores de Objetos da Classe jogadoresfutebol.GuardaRedes
      */
 
     public GuardaRedes(){
@@ -52,28 +50,61 @@ public class GuardaRedes extends JogadorFutebol{
     }
     
                     //Com overall - historico
-        public GuardaRedes (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, double overall, double velocidade, double impulsao, double resistencia, double destreza,
-                            double jogoCabeca, double remate, double passe, double humor, double elasticidade){
+    public GuardaRedes (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, double overall, double velocidade, double impulsao, double resistencia, double destreza,
+                        double jogoCabeca, double remate, double passe, double humor, double elasticidade){
 
         super(nome, idade, altura, peso, posicao, numero, overall, velocidade, impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor);
         this.elasticidade = elasticidade;
     }
 
                     //Sem overall + historico
-        public GuardaRedes (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, double velocidade, double impulsao, double resistencia, double destreza,
-                            double jogoCabeca, double remate, double passe, double humor, List<String> historico, double elasticidade){
+    public GuardaRedes (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, double velocidade, double impulsao, double resistencia, double destreza,
+                        double jogoCabeca, double remate, double passe, double humor, List<String> historico, double elasticidade){
 
         super(nome, idade, altura, peso, posicao, numero, velocidade, impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor, historico);
         this.elasticidade = elasticidade;
     }
 
                     //Sem overall - historico
-        public GuardaRedes (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, double velocidade, double impulsao, double resistencia, double destreza,
-                            double jogoCabeca, double remate, double passe, double humor, double elasticidade){
+    public GuardaRedes (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, double velocidade, double impulsao, double resistencia, double destreza,
+                        double jogoCabeca, double remate, double passe, double humor, double elasticidade){
 
         super(nome, idade, altura, peso, posicao, numero, velocidade, impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor);
         this.elasticidade = elasticidade;
     }
+
+
+                    //Construtor com o formato dos LOGS
+    public GuardaRedes(String nome, int numero, double velocidade, double resistencia, double destreza, double impulsao, double cabeca, double remate, double passe, double elasticidade){
+
+        super(nome, PosicaoCampo.GR);
+        this.setNumero(numero);
+        this.setVelocidade(velocidade);
+        this.setResistencia(resistencia);
+        this.setDestreza(destreza); this.setImpulsao(impulsao); this.setJogoCabeca(cabeca); this.setRemate(remate); this.setPasse(passe);
+        this.elasticidade = elasticidade;
+    }
+
+
+    /**
+     *  Parsed constructor
+     */
+
+    public static GuardaRedes parse(String input){
+
+        String[] campos = input.split(",");
+        
+        return new GuardaRedes(campos[0], Integer.parseInt(campos[1]),
+                Double.parseDouble(campos[2]),
+                Double.parseDouble(campos[3]),
+                Double.parseDouble(campos[4]),
+                Double.parseDouble(campos[5]),
+                Double.parseDouble(campos[6]),
+                Double.parseDouble(campos[7]),
+                Double.parseDouble(campos[8]),
+                Double.parseDouble((campos[9])));
+    }    //Guarda-Redes:<Nome>,<NumeroCamisola>,<Velocidade>,<Resistência>,<Destreza>,<Impulsão>,<Cabeça>,<Remate>,<Passe>,<Elasticidade>
+
 
     /**
      * Getter
@@ -97,7 +128,7 @@ public class GuardaRedes extends JogadorFutebol{
      */
     public String toString(){
 
-        final StringBuffer finalString = new StringBuffer("\tJogadores.Jogador \"" + this.getNome() + "\" = {\n");
+        final StringBuffer finalString = new StringBuffer("\tJogador \"" + this.getNome() + "\" = {\n");
         finalString.append("\t\t\tPosicao: " + PosicaoCampo.printPosicao(this.getPosicaoCampo()) + ";\n");
         finalString.append("\t\t\tIdade: " + this.getIdade() + ";\n");
         finalString.append("\t\t\tPeso: " + this.getPeso() + ";\n");
@@ -145,6 +176,13 @@ public class GuardaRedes extends JogadorFutebol{
         //Ilustrativo, defini 1 para todas as habilidades "comuns"
         return habilidade;
     }
+
+
+
+
+
+
+
 
 
 

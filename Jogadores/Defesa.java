@@ -1,5 +1,3 @@
-package Jogadores;
-
 import java.util.List;
 
 public class Defesa extends JogadorFutebol{
@@ -26,7 +24,7 @@ public class Defesa extends JogadorFutebol{
 
                 //Com overall + historico
 	public Defesa (String nome, int idade, float altura, float peso, PosicaoCampo posicao, int numero, double overall, double velocidade, double impulsao, double resistencia, double destreza,
-                   double jogoCabeca, double remate, double passe, double humor, List<String> historico, double capacidadeBloquearBolas){
+                    double jogoCabeca, double remate, double passe, double humor, List<String> historico, double capacidadeBloquearBolas){
 
 
 		super(nome, idade, altura, peso, posicao, numero, overall, velocidade, impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor, historico);
@@ -36,7 +34,7 @@ public class Defesa extends JogadorFutebol{
 
                 //Com overall - historico
     public Defesa (String nome, int idade, float altura, float peso, PosicaoCampo posicao, int numero, double overall, double velocidade, double impulsao, double resistencia, double destreza,
-                   double jogoCabeca, double remate, double passe, double humor, double capacidadeBloquearBolas){
+                    double jogoCabeca, double remate, double passe, double humor, double capacidadeBloquearBolas){
 
 
         super(nome, idade, altura, peso, posicao, numero, overall, velocidade, impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor);
@@ -46,7 +44,7 @@ public class Defesa extends JogadorFutebol{
 
             //Sem overall + historico
     public Defesa (String nome, int idade, float altura, float peso, PosicaoCampo posicao, int numero, double velocidade, double impulsao, double resistencia, double destreza,
-                   double jogoCabeca, double remate, double passe, double humor, List<String> historico, double capacidadeBloquearBolas){
+                    double jogoCabeca, double remate, double passe, double humor, List<String> historico, double capacidadeBloquearBolas){
 
 
         super(nome, idade, altura, peso, posicao, numero, velocidade, impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor, historico);
@@ -56,7 +54,7 @@ public class Defesa extends JogadorFutebol{
 
             //Sem overall - historico
     public Defesa (String nome, int idade, float altura, float peso, PosicaoCampo posicao, int numero, double velocidade, double impulsao, double resistencia, double destreza,
-                   double jogoCabeca, double remate, double passe, double humor, double capacidadeBloquearBolas){
+                    double jogoCabeca, double remate, double passe, double humor, double capacidadeBloquearBolas){
 
 
         super(nome, idade, altura, peso, posicao, numero, velocidade, impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor);
@@ -68,6 +66,34 @@ public class Defesa extends JogadorFutebol{
 		super(d);
 		this.capacidadeBloquearBolas = d.getCapacidadeBloquearBolas();
 	}
+
+            //Constructor c/formato LOGS
+    public Defesa(String nome, int numero, double velocidade, double resistencia, double destreza, double impulsao, double cabeca, double remate, double passe){
+
+        super(nome, PosicaoCampo.D);
+        this.setNumero(numero);
+        this.setVelocidade(velocidade);
+        this.setResistencia(resistencia);
+        this.setDestreza(destreza); this.setImpulsao(impulsao); this.setJogoCabeca(cabeca); this.setRemate(remate); this.setPasse(passe);
+    }
+    //Defesa:<Nome>,<NumeroCamisola>,<Velocidade>,<Resistência>,<Destreza>,<Impulsão>,<Cabeça>,<Remate>,<Passe>
+
+
+            //Parsed constructor
+    public static Defesa parse(String input){
+
+        String[] parametros = input.split(",");
+
+        return new Defesa(parametros[0], Integer.parseInt(parametros[1]),
+                Double.parseDouble(parametros[2]),
+                Double.parseDouble(parametros[3]),
+                Double.parseDouble(parametros[4]),
+                Double.parseDouble(parametros[5]),
+                Double.parseDouble(parametros[6]),
+                Double.parseDouble(parametros[7]),
+                Double.parseDouble(parametros[8]));
+    }
+
 
 
 
@@ -100,7 +126,7 @@ public class Defesa extends JogadorFutebol{
 
     public String toString(){
 
-        final StringBuffer finalString = new StringBuffer("\tJogadores.Jogador \"" + this.getNome() + "\" = {\n");
+        final StringBuffer finalString = new StringBuffer("\tJogador \"" + this.getNome() + "\" = {\n");
         finalString.append("\t\t\tPosicao: " + PosicaoCampo.printPosicao(this.getPosicaoCampo()) + ";\n");
         finalString.append("\t\t\tIdade: " + this.getIdade() + ";\n");
         finalString.append("\t\t\tPeso: " + this.getPeso() + ";\n");

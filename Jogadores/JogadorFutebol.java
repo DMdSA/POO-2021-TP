@@ -1,5 +1,3 @@
-package Jogadores;
-
 import java.util.ArrayList;
 import java.util.List;
 public class JogadorFutebol extends Jogador {
@@ -58,9 +56,9 @@ public class JogadorFutebol extends Jogador {
     }
 
     //Com Overall + historico
-    public JogadorFutebol (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero,
-                           double overall, double velocidade, double impulsao, double resistencia, double destreza, double remate,
-                           double jogoCabeca, double passe, double humor, List<String> historico) {
+    public JogadorFutebol (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, 
+                             double overall, double velocidade, double impulsao, double resistencia, double destreza, double remate,
+                                   double jogoCabeca, double passe, double humor, List<String> historico) {
        
         super (nome, idade, altura, peso);
         this.posicao = posicao;
@@ -81,8 +79,8 @@ public class JogadorFutebol extends Jogador {
     
     //Com Overall - historico
     public JogadorFutebol (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, double overall,
-                           double velocidade, double impulsao, double resistencia, double destreza, double remate, double jogoCabeca,
-                           double passe, double humor) {
+                              double velocidade, double impulsao, double resistencia, double destreza, double remate, double jogoCabeca, 
+                                double passe, double humor) {
         
 
         super (nome, idade, altura, peso);
@@ -102,9 +100,9 @@ public class JogadorFutebol extends Jogador {
 
 
     //Sem overall + historico
-    public JogadorFutebol (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero,
-                           double velocidade, double impulsao, double resistencia, double destreza, double remate, double jogoCabeca,
-                           double passe, double humor, List<String> historico) {
+    public JogadorFutebol (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, 
+                             double velocidade, double impulsao, double resistencia, double destreza, double remate, double jogoCabeca, 
+                                double passe, double humor, List<String> historico) {
         
         super (nome, idade, altura, peso);
         this.posicao = posicao;
@@ -128,9 +126,9 @@ public class JogadorFutebol extends Jogador {
 
 
     //Sem overall - historico
-    public JogadorFutebol (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero,
-                           double velocidade, double impulsao, double resistencia, double destreza, double remate, double jogoCabeca,
-                           double passe, double humor) {
+    public JogadorFutebol (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, 
+                             double velocidade, double impulsao, double resistencia, double destreza, double remate, double jogoCabeca, 
+                                double passe, double humor) {
         
         super (nome, idade, altura, peso);
         this.posicao = posicao;
@@ -164,6 +162,13 @@ public class JogadorFutebol extends Jogador {
         this.passe = jf.getPasse();
         this.humor = jf.getHumor();
         this.historico = new ArrayList<String>(jf.getHistorico());
+    }
+
+
+    public JogadorFutebol(int numeroJogador){
+
+        this();
+        this.numero = numeroJogador;
     }
     
     /**
@@ -300,7 +305,7 @@ public class JogadorFutebol extends Jogador {
      */
     public String toString(){
 
-        final StringBuffer finalString = new StringBuffer("\t\tJogadores.Jogador \"" + this.getNome() + "\" = {\n");
+        final StringBuffer finalString = new StringBuffer("\t\tJogador \"" + this.getNome() + "\" = {\n");
         finalString.append("\t\t\tPosicao: " + PosicaoCampo.printPosicao(this.getPosicaoCampo()) + ";\n");
         finalString.append("\t\t\tIdade: " + this.getIdade() + " anos;\n");
         finalString.append("\t\t\tPeso: " + this.getPeso() + " Kg;\n");

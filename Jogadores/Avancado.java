@@ -1,8 +1,6 @@
-package Jogadores;
-
 import java.util.List;
 
-public class Avancado extends JogadorFutebol {
+public class Avancado extends JogadorFutebol{
 
 
 	private double finalizacao;
@@ -26,7 +24,7 @@ public class Avancado extends JogadorFutebol {
 
                     //Com overall + historico
 	public Avancado (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, double overall, double velocidade, double impulsao, double resistencia, double destreza,
-                     double jogoCabeca, double remate, double passe, double humor, List<String> historico, double finalizacao){
+                      double jogoCabeca, double remate, double passe, double humor, List<String> historico, double finalizacao){
 
 
 		super(nome, idade, altura, peso, posicao, numero, overall, velocidade, impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor, historico);
@@ -35,7 +33,7 @@ public class Avancado extends JogadorFutebol {
 
                     //Com overall - historico
     public Avancado (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, double overall, double velocidade, double impulsao, double resistencia, double destreza,
-                     double jogoCabeca, double remate, double passe, double humor, double finalizacao){
+                      double jogoCabeca, double remate, double passe, double humor, double finalizacao){
 
 
         super(nome, idade, altura, peso, posicao, numero, overall, velocidade, impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor);
@@ -44,7 +42,7 @@ public class Avancado extends JogadorFutebol {
 
                     //Sem overall + historico
     public Avancado (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, double velocidade, double impulsao, double resistencia, double destreza,
-                     double jogoCabeca, double remate, double passe, double humor, List<String> historico, double finalizacao){
+                      double jogoCabeca, double remate, double passe, double humor, List<String> historico, double finalizacao){
 
 
         super(nome, idade, altura, peso, posicao, numero, velocidade, impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor, historico);
@@ -53,7 +51,7 @@ public class Avancado extends JogadorFutebol {
 
                     //Sem overall - historico
     public Avancado (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, double velocidade, double impulsao, double resistencia, double destreza,
-                     double jogoCabeca, double remate, double passe, double humor, double finalizacao){
+                      double jogoCabeca, double remate, double passe, double humor, double finalizacao){
 
 
         super(nome, idade, altura, peso, posicao, numero, velocidade, impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor);
@@ -61,12 +59,38 @@ public class Avancado extends JogadorFutebol {
     }
 
 
-	public Avancado(Avancado d){
+	public Avancado(Avancado av){
 
-		super(d);
-		this.finalizacao = d.getFinalizacao();
+		super(av);
+		this.finalizacao = av.getFinalizacao();
 	}
 
+                //Construtor c/Formato dos LOGS
+    public Avancado (String nome, int numero, double velocidade, double resistencia, double destreza, double impulsao, double cabeca, double remate, double passe){
+
+        super(nome, PosicaoCampo.A);
+        this.setNumero(numero);
+        this.setVelocidade(velocidade);
+        this.setResistencia(resistencia);
+        this.setDestreza(destreza); this.setImpulsao(impulsao); this.setJogoCabeca(cabeca); this.setRemate(remate); this.setPasse(passe);
+    }
+    //Avancado:<Nome>,<NumeroCamisola>,<Velocidade>,<Resistência>,<Destreza>,<Impulsão>,<Cabeça>,<Remate>,<Passe>
+
+
+    //Parsed Constructor
+    public static Avancado parse(String input){
+
+        String[] campos = input.split(",");
+        
+        return new Avancado(campos[0], Integer.parseInt(campos[1]),
+                Double.parseDouble(campos[2]),
+                Double.parseDouble(campos[3]),
+                Double.parseDouble(campos[4]),
+                Double.parseDouble(campos[5]),
+                Double.parseDouble(campos[6]),
+                Double.parseDouble(campos[7]),
+                Double.parseDouble(campos[8]));
+    }
 
 
 ///Getters,
@@ -98,7 +122,7 @@ public class Avancado extends JogadorFutebol {
 
     public String toString(){
 
-        final StringBuffer finalString = new StringBuffer("\tJogadores.Jogador \"" + this.getNome() + "\" = {\n");
+        final StringBuffer finalString = new StringBuffer("\tJogador \"" + this.getNome() + "\" = {\n");
         finalString.append("\t\t\tPosicao: " + PosicaoCampo.printPosicao(this.getPosicaoCampo()) + ";\n");
         finalString.append("\t\t\tIdade: " + this.getIdade() + ";\n");
         finalString.append("\t\t\tPeso: " + this.getPeso() + ";\n");
