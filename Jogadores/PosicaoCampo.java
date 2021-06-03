@@ -1,4 +1,3 @@
-package Jogadores;
 
 public enum PosicaoCampo {
     GR,
@@ -12,10 +11,10 @@ public enum PosicaoCampo {
 
     static{
     	GR.textFormat = "Guarda-Redes";
-    	D.textFormat = "Jogadores.Defesa";
-    	M.textFormat = "Jogadores.Medio";
+    	D.textFormat = "Defesa";
+    	M.textFormat = "Medio";
     	A.textFormat = "Atacante";
-        L.textFormat = "Jogadores.Lateral";
+        L.textFormat = "Lateral";
     	NONE.textFormat = "error_ not a football position";
     }
 
@@ -51,9 +50,9 @@ public enum PosicaoCampo {
 
 
     /**
-     * Transforma uma string num tipo ENUM de jogadoresfutebol.Jogadores.PosicaoCampo
+     * Transforma uma string num tipo ENUM de jogadoresfutebol.PosicaoCampo
      * @param s String que deverá ser transformada
-     * @return jogadoresfutebol.Jogadores.PosicaoCampo relacionada com a string recebida
+     * @return jogadoresfutebol.PosicaoCampo relacionada com a string recebida
      */
 
     public static PosicaoCampo transforma_Posicao(String s){
@@ -62,7 +61,7 @@ public enum PosicaoCampo {
 
             case "Guarda-Redes":
             case "GR":
-            case "Jogadores.GuardaRedes":
+            case "jogadoresfutebol.GuardaRedes":
             case "gr":
             case "Gr":
             case "guarda redes":
@@ -74,19 +73,19 @@ public enum PosicaoCampo {
             case "a":
                 return PosicaoCampo.A;
 
-            case "Jogadores.Medio":
+            case "Medio":
             case "M":
             case "medio":
             case "m":
                 return PosicaoCampo.M;
 
-            case "Jogadores.Defesa":
+            case "Defesa":
             case "defesa":
             case "d":
             case "D":
                 return PosicaoCampo.D;
 
-            case "Jogadores.Lateral":
+            case "Lateral":
             case "lateral":
             case "l":
             case "L":
