@@ -1,3 +1,4 @@
+package Equipa;
 public class Equipa {
 
     private String nome;

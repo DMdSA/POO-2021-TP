@@ -1,3 +1,7 @@
+package Equipa;
+import Jogadores.GuardaRedes;
+import Jogadores.JogadorFutebol;
+
 import java.util.ArrayList;
 import java.util.List;
 

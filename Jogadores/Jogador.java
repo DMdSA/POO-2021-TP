@@ -1,3 +1,4 @@
+package Jogadores;
 public class Jogador {
     
     private String nome;
@@ -60,19 +61,19 @@ public class Jogador {
     /**
      * Setters
      */
-    void setNome (String nome) {
+    public void setNome (String nome) {
         this.nome = nome;
     }
     
-    void setIdade (int idade) {
+    public void setIdade (int idade) {
         this.idade = idade;
     }
     
-    void setAltura (double altura) {
+    public void setAltura (double altura) {
         this.altura = altura;
     }
     
-    void setPeso (double peso) {
+    public void setPeso (double peso) {
         this.peso = peso;
     }
     

@@ -1,4 +1,4 @@
-
+package Jogadores;
 public enum PosicaoCampo {
     GR,
     D,
@@ -61,15 +61,16 @@ public enum PosicaoCampo {
 
             case "Guarda-Redes":
             case "GR":
-            case "jogadoresfutebol.GuardaRedes":
+            case "Guarda Redes":
             case "gr":
             case "Gr":
             case "guarda redes":
+            case "guarda-redes":
                 return PosicaoCampo.GR;
 
-            case "Atacante":
+            case "Avancado":
             case "A":
-            case "atacante":
+            case "avancado":
             case "a":
                 return PosicaoCampo.A;
 
@@ -95,4 +96,11 @@ public enum PosicaoCampo {
                 return PosicaoCampo.NONE;
         }
     }
+
+    public static boolean isPosicao(PosicaoCampo a){
+            if(a != PosicaoCampo.NONE) return true;
+            return false;
+    }
+
+
 }

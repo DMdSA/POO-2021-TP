@@ -1,3 +1,4 @@
+package Jogadores;
 import java.util.List;
 
 /**
@@ -179,12 +180,9 @@ public class GuardaRedes extends JogadorFutebol{
 
 
 
-
-
-
-
-
-
+    public void add_extra(double extra){
+	    this.elasticidade = extra;
+    }
 
 
 }

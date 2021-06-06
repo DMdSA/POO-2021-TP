@@ -1,3 +1,4 @@
+package Jogadores;
 import java.util.List;
 
 public class Avancado extends JogadorFutebol{
@@ -153,6 +154,8 @@ public class Avancado extends JogadorFutebol{
         return habilidade;
     }
 
-
+    public void add_extra(double extra){
+	    this.finalizacao = extra;
+    }
 
 }

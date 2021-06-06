@@ -1,3 +1,4 @@
+package Jogadores;
 import java.util.List;
 
 public class Medio extends JogadorFutebol{
@@ -159,7 +160,9 @@ public Medio (String nome, int idade, double altura, double peso, PosicaoCampo p
         return habilidade;
     }
 
-
+    public void add_extra(double extra){
+	    this.capacidadeRecuperarBolas = extra;
+    }
 
 
 }

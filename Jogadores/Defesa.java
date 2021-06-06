@@ -1,3 +1,4 @@
+package Jogadores;
 import java.util.List;
 
 public class Defesa extends JogadorFutebol{
@@ -157,7 +158,9 @@ public class Defesa extends JogadorFutebol{
         return habilidade;
     }
 
-
+    public void add_extra(double extra){
+	    this.capacidadeBloquearBolas = extra;
+    }
 
 
 }

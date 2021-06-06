@@ -1,3 +1,4 @@
+package Equipa;
 public enum Cor{
 
 	VERMELHO,
