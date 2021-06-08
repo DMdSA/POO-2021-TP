@@ -160,12 +160,12 @@ public class ClientModel{
             return false;
         }
 
-        for(JogadorFutebol jf : ef.getJogadoresTitulares()){    //Para cada jogador, se for novo adiciona aos jogadores
-            this.addJogador(jf);                                //presentes na conta deste user
+        for(Map.Entry<String, JogadorFutebol> jf : ef.getJogadoresTitulares().entrySet()){    //Para cada jogador, se for novo adiciona aos jogadores
+            this.addJogador(jf.getValue());                                //presentes na conta deste user
         }
 
-        for(JogadorFutebol jf : ef.getJogadoresSuplentes()){    //Para cada jogador, se for novo adiciona aos jogadores
-            this.addJogador(jf);                                //presentes na conta deste user
+        for(Map.Entry<String, JogadorFutebol> jf : ef.getJogadoresSuplentes().entrySet()){    //Para cada jogador, se for novo adiciona aos jogadores
+            this.addJogador(jf.getValue());                                //presentes na conta deste user
         }
 
         this.equipas_guardadas.put(ef.getNome(), ef.clone());   //Adicionar a nova equipa a esta conta

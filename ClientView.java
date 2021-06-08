@@ -42,6 +42,64 @@ public class ClientView {
     }
 
     /**
+     * get_double Recebe um Double atribuído pelo utilizador
+     * @param output String utilizada para contextualizar o momento do pedido
+     * @return input do utilizador
+     */
+    public static double get_Double(String output){
+        Scanner input = new Scanner(System.in).useLocale(Locale.US);
+        System.out.println("\t" + output + ": ");
+        while (!input.hasNextDouble()) {
+            input.next();
+        }
+        return input.nextDouble();
+    }
+
+    /**
+     * get_string Recebe uma String atribuída pelo utilizador
+     * @param output String utilizada para contextualizar o momento do pedido
+     * @return input do utilizador
+     */
+    public static String get_String(String output){
+        Scanner answer = new Scanner(System.in);
+        System.out.println("\t"+output+" : ");
+        return answer.nextLine();
+    }
+
+    /**
+     * get_string Recebe um Integer atribuído pelo utilizador
+     * @param output String utilizada para contextualizar o momento do pedido
+     * @return input do utilizador
+     */
+    public static int get_Int(String output){
+        Scanner input = new Scanner(System.in).useLocale(Locale.US);
+            System.out.println("\t" + output + ": ");
+            while (!input.hasNextInt()) {
+                input.next();
+            }
+            return input.nextInt();
+    }
+
+    /**
+     * warning
+     * @param warning Aviso a ser enviado ao utilizador
+     */
+    public static void warning(String warning){
+
+        System.out.println("\n + " + warning + "\n\n");
+    }
+
+    /**
+     * pause, Simulação do comando pause()
+     * @return string meramente auxiliar da execução da função
+     */
+    public static String pause(){
+
+        System.out.println("\t Pressiona alguma tecla para continuar...");
+        Scanner wait = new Scanner(System.in);
+        return wait.nextLine();
+    }
+    /**
      * criar_conta
      * @return Novo utilizador com os dados do cliente
      */
@@ -57,20 +115,6 @@ public class ClientView {
         System.out.println(conta.toString());
     }
 
-    public static String get_string(String output){
-        Scanner answer = new Scanner(System.in);
-        System.out.println("\t"+output+" : ");
-        return answer.nextLine();
-    }
-
-    public static int get_Int(String output){
-        Scanner input = new Scanner(System.in).useLocale(Locale.US);
-            System.out.println("\t" + output + ": ");
-            while (!input.hasNextInt()) {
-                input.next();
-            }
-            return input.nextInt();
-    }
 
 
     public static void criar_jogador(){
@@ -115,15 +159,6 @@ public class ClientView {
         return opcao;
     }
 
-    /**
-     * warning
-     * @param warning Aviso a ser enviado ao utilizador
-     */
-    public static void warning(String warning){
-
-        System.out.println("\n + " + warning + "\n\n");
-    }
-
     public static int nova_equipa(){
 
         clear_window();
@@ -159,14 +194,6 @@ public class ClientView {
         System.out.println("\tCor secundaria: ");
         answer[1] = input.nextLine();
         return answer;
-    }
-
-
-    public static String pause(){
-
-        System.out.println("\t Pressiona alguma tecla para continuar...");
-        Scanner wait = new Scanner(System.in);
-        return wait.nextLine();
     }
 
 
@@ -228,6 +255,8 @@ public class ClientView {
 
         return opcao;
     }
+
+
 
 
 

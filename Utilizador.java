@@ -8,9 +8,8 @@ public class Utilizador {
     private double points;
     private LocalDate date;
 
-
     public Utilizador(){
-        this.username = "Anónimo";
+        this.username = "Anonimo";
         this.mail = "";
         this.level = -1;
         this.points = -1;
@@ -79,12 +78,10 @@ public class Utilizador {
     public void setUsername(String s){ this.username = s;}
     public void setMail(String s){ this.mail = s;}
     public void setLevel(int l){
-        if(l<0) this.level = 0;
-        else if(l > 99) this.level = 99;
+        this.level = l < 0 ? 0 : ((l > 100)  ? 99 : l);
     }
     public void setPoints(double p){ this.points = p;}
     public void setDate(LocalDate ld){ this.date = ld;}
-
 
     /**
      * equals
@@ -101,7 +98,6 @@ public class Utilizador {
                 this.points == that.points &&
                 this.date.isEqual(that.date);
     }
-
     /**
      * toString
      */
@@ -112,4 +108,11 @@ public class Utilizador {
         return info.toString();
     }
 
+    /**
+     * isEmpty, Verifica se um Utilizador está completamente criado ou só instanciado (void constructor)
+     * @return
+     */
+    public boolean isEmpty(){
+        return this.username.equals("Anonimo") || this.level == -1;
+    }
 }

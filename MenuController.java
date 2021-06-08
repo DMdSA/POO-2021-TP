@@ -29,7 +29,7 @@ public class MenuController {
                     break;
 
                 case 1:
-                    this.cm.setUser(ClientView.get_string("Username"), ClientView.get_string("Email"));
+                    this.cm.setUser(ClientView.get_String("Username"), ClientView.get_String("Email"));
                     ClientView.warning("\tUtilizador registado com sucesso. Recebeste 100 pontos para comecar");
                     ClientView.pause();
                     break;
@@ -56,14 +56,14 @@ public class MenuController {
                         }
                         else {
                             int aux;
-                            EquipaFutebol ef = new EquipaFutebol(ClientView.get_string("\tNome da equipa"));
+                            EquipaFutebol ef = new EquipaFutebol(ClientView.get_String("\tNome da equipa"));
                             this.ConsultaJogadores();
 
                             int contador_aux = 0;
                             do{
                                 aux = 1;
                                 JogadorFutebolView.print_jogadores_info(cm.getJogadores());
-                                String adicionar = ClientView.get_string("Nome do jogador a adicionar");
+                                String adicionar = ClientView.get_String("Nome do jogador a adicionar");
 
                                 if(cm.hasJogador(adicionar)){
 
@@ -98,7 +98,7 @@ public class MenuController {
 
                         int njogadores = ClientView.nova_equipa();
                         int contador = 1;
-                        EquipaFutebol ef = new EquipaFutebol(ClientView.get_string("\tNome da equipa"));     //Cria a equipa com o nome dado
+                        EquipaFutebol ef = new EquipaFutebol(ClientView.get_String("\tNome da equipa"));     //Cria a equipa com o nome dado
                         if(this.cm.getEquipas().containsKey(ef.getNome())){
                             ClientView.warning("\tEssa equipa ja existe!!");
                             break;
@@ -142,7 +142,7 @@ public class MenuController {
                 case 6: //Carregar dados
                     int escolha_carregamento = ClientView.carregar_ficheiros();
                     if(escolha_carregamento == 1){
-                        String path = ClientView.get_string("Filepath");
+                        String path = ClientView.get_String("Filepath");
                         cm.carrega_dados_log(path);
                         ClientView.warning("\tDados carregados!");
                         ClientView.pause();

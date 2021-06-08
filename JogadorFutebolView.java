@@ -11,7 +11,7 @@ public class JogadorFutebolView {
 
     public static String get_nome(){
 
-       String nome = ClientView.get_string("Nome da equipa");
+       String nome = ClientView.get_String("Nome da equipa");
         return nome;
     }
 
@@ -31,7 +31,7 @@ public class JogadorFutebolView {
         Scanner input = new Scanner(System.in).useLocale(Locale.US);
         double answer = 0;
         do {
-            answer = ClientView.get_Int("Altura (m)");
+            answer = ClientView.get_Double("Altura (m)");
             if(answer < 0 || answer > 2.5) ClientView.warning("\tEssa altura nao parece ser valida!");
         } while(answer < 0 || answer > 2.5);             //Não é para cortar os sonhos a ninguém...
 
@@ -315,7 +315,7 @@ public class JogadorFutebolView {
         } while(opcao != 1 && opcao != 2);
 
         if(opcao == 1) {
-            String nome = ClientView.get_string("Nome do jogador");
+            String nome = ClientView.get_String("Nome do jogador");
             if (js.containsKey(nome)) {
                 JogadorFutebolView.print_jogador(js.get(nome));
                 ClientView.pause();
@@ -354,12 +354,13 @@ public class JogadorFutebolView {
 
             for (Map.Entry<String, EquipaFutebol> entrada : eqs.entrySet()) {
                 EquipaFutebol eq = entrada.getValue();
-                System.out.printf("\tEquipa \"%s\"\nTitulares:\n\t", eq.getNome());
-                for(JogadorFutebol jf : eq.getJogadoresTitulares())
-                    System.out.print("[" + jf.getNumero() + "] ");
-                System.out.printf("\tSuplentes:\n\t");
-                for(JogadorFutebol jf : eq.getJogadoresSuplentes())
-                    System.out.print("[" + jf.getNumero() + "] ");
+                System.out.printf("\tEquipa \"%s\"\n\tTitulares:\n\t", eq.getNome());
+                for(Map.Entry<String, JogadorFutebol> jf : eq.getJogadoresTitulares().entrySet())
+                    System.out.print("[" + jf.getValue().getNumero() + "] ");
+                System.out.printf("\n\tSuplentes:\n\t");
+                for(Map.Entry<String, JogadorFutebol> jf : eq.getJogadoresSuplentes().entrySet())
+                    System.out.print("[" + jf.getValue().getNumero() + "] ");
+                System.out.println("\tHabilidade média da equipa: " + eq.getHabilidade());
                 System.out.println("\n");
             }
             System.out.println("\nNumero de equipas guardados: " + eqs.size() + "\n");
@@ -388,7 +389,7 @@ public class JogadorFutebolView {
         } while(opcao != 1 && opcao != 2);
 
         if(opcao == 1) {
-            String nome = ClientView.get_string("Nome da equipa");
+            String nome = ClientView.get_String("Nome da equipa");
             if (eqs.containsKey(nome)) {
                 System.out.println(eqs.get(nome).toString());
                 ClientView.pause();
