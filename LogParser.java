@@ -7,12 +7,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-
-import java.util.*;
 import java.util.stream.Collectors;
 
 public class LogParser {
-
+	/**                                            Variáveis instância  */
     private Map<String, EquipaFutebol> equipas;
 	//private Map<Integer, Jogador> jogadores;
 	private Collection<JogoFutebol> jogos;

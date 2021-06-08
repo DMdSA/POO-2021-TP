@@ -6,7 +6,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class ClientModel{
-
+    /**                                            Variáveis instância  */
     private Utilizador user;
     private Map<String, JogadorFutebol> jogadores_guardados;
     private Map<String, EquipaFutebol> equipas_guardadas;

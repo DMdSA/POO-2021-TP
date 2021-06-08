@@ -1,6 +1,10 @@
 package Jogadores;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
+
 public class JogadorFutebol extends Jogador {
     
 
@@ -14,8 +18,8 @@ public class JogadorFutebol extends Jogador {
     private double jogoCabeca;
     private double remate;
     private double passe;
-    private double humor; //simulaçao comportamental
-    private List<String> historico; //historico de equipas por onde passou
+    private double humor;                           //simulaçao comportamental
+    private Collection<String> historico;           //historico de equipas por onde passou
 
     /**
      * Construtores
@@ -32,8 +36,7 @@ public class JogadorFutebol extends Jogador {
         this.remate = 0.0;
         this.passe = 0.0;
         this.humor = 0.0;
-        this.historico = new ArrayList<String>();
-        
+        this.historico = new HashSet<>();
         this.setOverall(this.getHabilidade());
     }
 
@@ -51,15 +54,14 @@ public class JogadorFutebol extends Jogador {
         this.remate = 0.0;
         this.passe = 0.0;
         this.humor = 0.0;
-        this.historico = new ArrayList<String>();
-       
+        this.historico = new HashSet<>();
         this.setOverall(this.getHabilidade());
     }
 
     //Com Overall + historico
     public JogadorFutebol (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, 
                              double overall, double velocidade, double impulsao, double resistencia, double destreza, double remate,
-                                   double jogoCabeca, double passe, double humor, List<String> historico) {
+                                   double jogoCabeca, double passe, double humor, Collection<String> historico) {
        
         super (nome, idade, altura, peso);
         this.posicao = posicao;
@@ -73,9 +75,7 @@ public class JogadorFutebol extends Jogador {
         this.jogoCabeca = jogoCabeca;
         this.passe = passe;
         this.humor = humor;
-        this.historico = new ArrayList<String>();
-        for(String clube : historico)
-            this.historico.add(clube);
+        this.historico = new HashSet<>(historico);
     }
     
     //Com Overall - historico
@@ -96,14 +96,14 @@ public class JogadorFutebol extends Jogador {
         this.jogoCabeca = jogoCabeca;
         this.passe = passe;
         this.humor = humor;
-        this.historico = new ArrayList<String>();
+        this.historico = new HashSet<>();
     }
 
 
     //Sem overall + historico
     public JogadorFutebol (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, 
                              double velocidade, double impulsao, double resistencia, double destreza, double remate, double jogoCabeca, 
-                                double passe, double humor, List<String> historico) {
+                                double passe, double humor, Collection<String> historico) {
         
         super (nome, idade, altura, peso);
         this.posicao = posicao;
@@ -116,11 +116,7 @@ public class JogadorFutebol extends Jogador {
         this.jogoCabeca = jogoCabeca;
         this.passe = passe;
         this.humor = humor;
-        this.historico = new ArrayList<String>();
-        for(String clube : historico)
-            this.historico.add(clube);
-        
-
+        this.historico = new HashSet<>(historico);
         this.setOverall(this.getHabilidade());
     }
 
@@ -142,14 +138,12 @@ public class JogadorFutebol extends Jogador {
         this.jogoCabeca = jogoCabeca;
         this.passe = passe;
         this.humor = humor;
-        this.historico = new ArrayList<String>();        
-
+        this.historico = new HashSet<>();
         this.setOverall(this.getHabilidade());
     }
 
 
-
-    public JogadorFutebol (JogadorFutebol jf) { //figo just for fun and my entertainment
+    public JogadorFutebol (JogadorFutebol jf) {
         super(jf);
         this.posicao = jf.getPosicaoCampo();
         this.numero = jf.getNumero();
@@ -162,7 +156,7 @@ public class JogadorFutebol extends Jogador {
         this.jogoCabeca = jf.getJogoCabeca();
         this.passe = jf.getPasse();
         this.humor = jf.getHumor();
-        this.historico = new ArrayList<String>(jf.getHistorico());
+        this.historico = new HashSet<>(jf.getHistorico());
     }
 
 
@@ -171,7 +165,12 @@ public class JogadorFutebol extends Jogador {
         this();
         this.numero = numeroJogador;
     }
-    
+
+    /**
+     * clone
+     */
+    public JogadorFutebol clone(){ return new JogadorFutebol(this);}
+
     /**
      * Getters
      */
@@ -219,8 +218,8 @@ public class JogadorFutebol extends Jogador {
         return this.humor;
     }
     
-    public List<String> getHistorico () {
-        return new ArrayList<>(this.historico);
+    public Collection<String> getHistorico () {
+        return new HashSet<>(this.historico);
     }
     
     /**
@@ -271,8 +270,8 @@ public class JogadorFutebol extends Jogador {
         this.historico = historico;
     }
     
-    public void setHistorico_clube(List<String> hist){
-        this.historico = new ArrayList<>(hist);
+    public void setHistorico_clube(Collection<String> hist){
+        this.historico = new HashSet<>(hist);
     }
 
 
@@ -307,47 +306,41 @@ public class JogadorFutebol extends Jogador {
     public String toString(){
 
         final StringBuffer finalString = new StringBuffer("\t\tJogador \"" + this.getNome() + "\" = {\n");
-        finalString.append("\t\t\tPosicao: " + PosicaoCampo.printPosicao(this.getPosicaoCampo()) + ";\n");
-        finalString.append("\t\t\tIdade: " + this.getIdade() + " anos;\n");
-        finalString.append("\t\t\tPeso: " + this.getPeso() + " Kg;\n");
-        finalString.append("\t\t\tAltura: " + this.getAltura() + " cm;\n");
-        finalString.append("\t\t\tNumero: " + this.getNumero() + ";\n");
-        finalString.append("\t\t\tOverall: " + this.getOverall() + ";\n");
-        finalString.append("\t\t\tVelocidade: " + this.getVelocidade() + ";\n");
-        finalString.append("\t\t\tImpulsao: " + this.getImpulsao() + ";\n");
-        finalString.append("\t\t\tResistencia: " + this.getResistencia() + ";\n");
-        finalString.append("\t\t\tDestreza: " + this.getDestreza() + ";\n");
-        finalString.append("\t\t\tJogo Cabeca: " + this.getJogoCabeca() + ";\n");
-        finalString.append("\t\t\tRemate: " + this.getRemate() + ";\n");
-        finalString.append("\t\t\tCapacidade Passe: " + this.getPasse() + ";\n");
-        finalString.append("\t\t\tHumor: " + this.getHumor() + ";\n");
-        finalString.append("\t\t\tHistorico equipas: " + this.historico.toString() + ";\n\t\t}\n");
-
+        finalString.append("\t\t\tPosicao: ").append(PosicaoCampo.printPosicao(this.getPosicaoCampo())).append(";\n");
+        finalString.append("\t\t\tIdade: ").append(this.getIdade()).append(" anos;\n");
+        finalString.append("\t\t\tPeso: ").append(this.getPeso()).append(" Kg;\n");
+        finalString.append("\t\t\tAltura: ").append(this.getAltura()).append(" cm;\n");
+        finalString.append("\t\t\tNumero: ").append(this.getNumero()).append(";\n");
+        finalString.append("\t\t\tOverall: ").append(this.getOverall()).append(";\n");
+        finalString.append("\t\t\tVelocidade: ").append(this.getVelocidade()).append(";\n");
+        finalString.append("\t\t\tImpulsao: ").append(this.getImpulsao()).append(";\n");
+        finalString.append("\t\t\tResistencia: ").append(this.getResistencia()).append(";\n");
+        finalString.append("\t\t\tDestreza: ").append(this.getDestreza()).append(";\n");
+        finalString.append("\t\t\tJogo Cabeca: ").append(this.getJogoCabeca()).append(";\n");
+        finalString.append("\t\t\tRemate: ").append(this.getRemate()).append(";\n");
+        finalString.append("\t\t\tCapacidade Passe: ").append(this.getPasse()).append(";\n");
+        finalString.append("\t\t\tHumor: ").append(this.getHumor()).append(";\n");
+        finalString.append("\t\t\tHistorico equipas: ").append(this.historico.toString()).append(";\n\t\t}\n");
         return finalString.toString();
     }
 
-
     /**
-     * clone
+     * fatorIdade, define o quão a idade do jogador influenciará na sua habilidade
+     * @return inteiro com o fator
      */
-
-    public JogadorFutebol clone(){
-        return new JogadorFutebol(this);
-    }
-
-
-
-    public double fatorIdade(){                                 //Meramente ilustrativo
+    public double fatorIdade(){                     //Meramente ilustrativo
 
         int age = getIdade();
-
         if(age >= 17 && age <= 21) return 5;
         if(age >= 22 && age <= 25) return 3;
         if(age >= 26) return 1;
         return 0;
     }
 
-
+    /**
+     * getHabilidade, calcula a habilidade que um determinado jogador de futebol tem
+     * @return double associado à sua habilidade
+     */
     public double getHabilidade(){
     
         double habilidade = 0;
@@ -356,10 +349,19 @@ public class JogadorFutebol extends Jogador {
         return habilidade;
     }
 
-
+    /**
+     * isEmpty, verifica se o objeto está vazio (void constructor)
+     * @return
+     */
     public boolean isEmpty(){
-
         return this.getNome().equals("");
     }
 
+    /**
+     * adiciona_equipa, Atualiza o histórico de equipas a que o jogador pertenceu
+     * @param nome_equipa Nome da equipa a adicionar
+     */
+    public void adiciona_equipa(String nome_equipa){
+        this.historico.add(nome_equipa);
+    }
 }

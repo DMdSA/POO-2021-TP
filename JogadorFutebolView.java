@@ -1,14 +1,11 @@
 import Equipa.EquipaFutebol;
 import Jogadores.JogadorFutebol;
 import Jogadores.PosicaoCampo;
-
-import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
 
 public class JogadorFutebolView {
-
 
     public static int get_idade(){
         Scanner input = new Scanner(System.in).useLocale(Locale.US);

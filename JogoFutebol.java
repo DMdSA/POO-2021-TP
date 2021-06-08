@@ -138,7 +138,4 @@ public class JogoFutebol extends Jogo{
         finalstring.append("\nData do jogo: ").append(this.getData()).append("\n\n");
         return finalstring.toString();
     }
-
-
-
 }

@@ -1,9 +1,8 @@
 public class Jogo {
-
+/**                                            Variáveis instância  */
     private int nEquipas;
     private double duracao;
     private int nPartes;
-
 
 
     public Jogo(){

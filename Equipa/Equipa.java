@@ -1,20 +1,20 @@
 package Equipa;
 public class Equipa {
-
+    /**                                            Variáveis instância  */
     private String nome;
     private int titulares;
     private int suplentes;
 
 
-//Constructores,
-
+    /**
+     * Construtores
+     */
     public Equipa(){
         
         this.nome = "none_";
         this.titulares = 0;
         this.suplentes = 0;
     }
-
 
     public Equipa(String nome) {
         
@@ -37,27 +37,32 @@ public class Equipa {
         this.suplentes = equipa.getSuplentes();
     }
 
-
-//Getters - Setters,
-
-    public String getNome() {
-        return this.nome;
+    /**
+     * clone
+     */
+    public Equipa clone(){
+        return new Equipa(this);
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    /**
+     * getters e setters
+     */
+    public String getNome() {
+        return this.nome;
     }
 
     public int getTitulares() {
         return titulares;
     }
 
-    public void setTitulares(int titulares) {
-        this.titulares = titulares;
-    }
-
     public int getSuplentes() {
         return suplentes;
+    }
+
+    public void setNome(String nome) { this.nome = nome;}
+
+    public void setTitulares(int titulares) {
+        this.titulares = titulares;
     }
 
     public void setSuplentes(int suplentes) {
@@ -65,39 +70,32 @@ public class Equipa {
     }
 
 
-
-//equals,
-
+    /**
+     * equals
+     * @param o Objeto a ser comparado
+     * @return True, se os objetos forem iguais
+     */
     public boolean equals(Object o){
 
         if(this == o) return true;
         if(this.getClass() != o.getClass() || o == null) return false;
-
         Equipa that = (Equipa) o;
-
         return this.nome.equals(that.getNome()) &&
                 this.titulares == that.getTitulares() &&
                 this.suplentes == that.getSuplentes();
     }
 
 
-
-
-//toString,
+    /**
+     * toString
+     * @return String com informação sobre o objeto
+     */
     public String toString() {
        
 
         StringBuilder finalstring = new StringBuilder("Equipa [" + this.getNome() + "] = \n\t");
-        finalstring.append("Numero Titulares : " + this.getTitulares() + "\n\t");
-        finalstring.append("Numero Suplentes : " + this.getSuplentes() + "\n");
-
+        finalstring.append("Numero Titulares : ").append(this.getTitulares()).append("\n\t");
+        finalstring.append("Numero Suplentes : ").append(this.getSuplentes()).append("\n");
         return finalstring.toString();
-    }
-
-
-//Clone,
-
-    public Equipa clone(){
-        return new Equipa(this);
     }
 }

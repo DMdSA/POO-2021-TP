@@ -1,13 +1,17 @@
 import java.time.LocalDate;
 
 public class Utilizador {
-
+    /**                                            Variáveis instância  */
     private String username;
     private String mail;
     private int level;
     private double points;
     private LocalDate date;
 
+
+    /**
+     * Construtores
+     */
     public Utilizador(){
         this.username = "Anonimo";
         this.mail = "";

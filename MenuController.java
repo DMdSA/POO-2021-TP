@@ -5,7 +5,7 @@ import Jogadores.JogadorFutebol;
 import java.util.Map;
 
 public class MenuController {
-
+/**                                            Variáveis instância  */
     private ClientModel cm;
 
     public MenuController(){
