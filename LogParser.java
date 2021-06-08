@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class LogParser {
 
-    private Map<String, Equipa> equipas;
+    private Map<String, EquipaFutebol> equipas;
 	//private Map<Integer, Jogador> jogadores;
 	private Collection<JogoFutebol> jogos;
 
@@ -21,7 +21,7 @@ public class LogParser {
 	public LogParser(String filename){
 
 		Collection<String> linhas = readFile(filename);
-		Map<String, Equipa> equipas = new HashMap<>();
+		Map<String, EquipaFutebol> equipas = new HashMap<>();
 		Map<Integer, Jogador> jogadores = new HashMap<>();									//What is the need of this, if I clone it's content to each 'equipa' ?
 		Collection<JogoFutebol> jogos = new ArrayList<>();
 		EquipaFutebol ultima = null; JogadorFutebol currentPlayer = null;
@@ -123,7 +123,7 @@ public class LogParser {
 	}
 
 
-	public Map<String, Equipa> getEquipas(){
+	public Map<String, EquipaFutebol> getEquipas(){
 
 	    return this.equipas.entrySet().stream()
                 .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().clone()));

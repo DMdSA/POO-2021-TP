@@ -19,16 +19,16 @@ public class Utilizador {
     public Utilizador(String name){
         this.username = name;
         this.mail = "";
-        this.level = 0;
-        this.points = 0D;
+        this.level = 1;
+        this.points = 100D;
         this.date = LocalDate.now();
     }
 
     public Utilizador(String name, String mail){
         this.username = name;
         this.mail = mail;
-        this.level = 0;
-        this.points = 0D;
+        this.level = 1;
+        this.points = 100D;
         this.date = LocalDate.now();
     }
 

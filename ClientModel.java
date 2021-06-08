@@ -1,7 +1,7 @@
 import Equipa.EquipaFutebol;
 import Jogadores.*;
-import Views.JogadorFutebolView;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -35,6 +35,15 @@ public class ClientModel{
     /**
      * Getters
      */
+
+
+    public String get_user_name(){return this.user.getUsername();}
+    public String get_user_mail(){ return this.user.getMail();}
+    public int get_user_level(){ return this.user.getLevel();}
+    public double get_user_points(){return this.user.getPoints();}
+    public LocalDate get_user_date(){ return this.user.getDate();}
+
+
     public Utilizador getUser(){
         return this.user.clone();
     }
@@ -103,6 +112,12 @@ public class ClientModel{
     }
 
 
+    public boolean user_isEmpty(){
+        if(this.user.equals(new Utilizador())){return true;};
+        return false;
+    }
+
+
     /**
      * addJogador
      * @param jf Jogador de Futebol a adicionar
@@ -164,9 +179,16 @@ public class ClientModel{
      */
     public boolean addJogo(JogoFutebol jf){
 
-        if(this.jogos_guardados.contains(jf)) return false;
-        this.jogos_guardados.add(jf.clone());
-        return true;
+        EquipaFutebol casa = jf.getEquipaCasa();
+        EquipaFutebol fora = jf.getEquipaFora();    //Tem de verificar se essas equipas estão no sistema..
+
+        if(this.equipas_guardadas.containsKey(casa.getNome()) && this.equipas_guardadas.containsKey(fora.getNome())) {
+
+            if (this.jogos_guardados.contains(jf)) return false;
+            this.jogos_guardados.add(jf.clone());
+            return true;
+        }
+        return false;
     }
 
 
@@ -253,7 +275,23 @@ public class ClientModel{
         return novo;
     }
 
+    /**
+     * carrega_dados_log
+     * Carrega os dados presentes numa file de logs
+     * @param filename Filepath do ficheiro
+     */
+    public void carrega_dados_log(String filename){
 
+        LogParser parsed_info = new LogParser(filename);
+        Map<String, EquipaFutebol> equipas = parsed_info.getEquipas();
+        Collection<JogoFutebol> jogos = parsed_info.getJogos();
+
+        for(Map.Entry<String, EquipaFutebol> entrada : equipas.entrySet()){
+            this.addEquipa(entrada.getValue());
+        }
+
+        for(JogoFutebol jf : jogos) this.addJogo(jf);
+    }
 
 
 }
