@@ -293,5 +293,23 @@ public class ClientModel{
         for(JogoFutebol jf : jogos) this.addJogo(jf);
     }
 
+    /**
+     * hasJogador, verifica se um jogador está presente na lista de guardados
+     * @param nome Nome do jogador a pesquisar
+     * @return True, se existir, False, caso contrário
+     */
+    public boolean hasJogador(String nome){
+
+        if(this.jogadores_guardados.containsKey(nome)) return true;
+        return false;
+    }
+
+
+    public JogadorFutebol get_jogador(String nome){
+
+        if(this.jogadores_guardados.containsKey(nome))
+            return this.jogadores_guardados.get(nome);
+        return new JogadorFutebol();
+    }
 
 }

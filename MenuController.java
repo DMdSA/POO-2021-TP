@@ -1,5 +1,8 @@
 import Equipa.EquipaFutebol;
+import Jogadores.Jogador;
 import Jogadores.JogadorFutebol;
+
+import java.util.Map;
 
 public class MenuController {
 
@@ -41,11 +44,11 @@ public class MenuController {
                     break;
 
                 case 3:
-                    //criar equipa - JogadoresGuardados ou novos?
+                    //criar equipa - JogadoresGuardados ou novos
                     int option = ClientView.criar_equipa_menu();
-
-                    if (option == 1) {
-                        int validation = this.cm.get_numero_equipas();
+                    int tamanho_equipa = JogadorFutebolView.get_tamanho_equipa();
+                    if (option == 1) {                                                  //Utilizar jogadores guardados
+                        int validation = this.cm.get_numero_jogadores();
                         if (validation < 11) {
                             ClientView.warning("\tNão há jogadores suficientes guardados nesta conta!");
                             ClientView.pause();
@@ -53,26 +56,53 @@ public class MenuController {
                         }
                         else {
                             int aux;
-                            do {
+                            EquipaFutebol ef = new EquipaFutebol(ClientView.get_string("\tNome da equipa"));
+                            this.ConsultaJogadores();
+
+                            int contador_aux = 0;
+                            do{
+                                aux = 1;
                                 JogadorFutebolView.print_jogadores_info(cm.getJogadores());
-                                aux = JogadorFutebolView.consultar_jogadores(cm.getJogadores());
-                                ClientView.clear_window();
-                            } while(aux != 2);
+                                String adicionar = ClientView.get_string("Nome do jogador a adicionar");
+
+                                if(cm.hasJogador(adicionar)){
+
+                                    if(!cm.get_jogador(adicionar).isEmpty()){
+                                        if(ef.get_numero_titulares()<11){
+                                            ef.adicionaTitular(cm.get_jogador(adicionar));
+                                            contador_aux++;
+                                            ClientView.warning("\t Adicionados " + contador_aux + " jogadores.");ClientView.pause();
+                                        }
+                                        else if(ef.get_numero_suplentes() < 12){
+                                            ef.adicionaSuplente(cm.get_jogador(adicionar));
+                                            contador_aux++;
+                                            ClientView.warning("\t Adicionados " + contador_aux + " jogadores.");ClientView.pause();
+                                        }
+                                        else {
+                                            ClientView.warning("\tEsta equipa ja nao aguenta mais jogadores!");
+                                            aux = 0;
+                                        }
+                                    }
+                                }
+                                else{ClientView.warning("\tEsse jogador nao esta guardado!"); ClientView.pause();}
+                            } while(aux != 0 && contador_aux < tamanho_equipa);
+
+                            this.cm.addEquipa(ef);
+                            break;
                         }
 
                         //Aqui tem de se apresentar a lista dos jogadores (+) deixar escolhê-los (+) criar equipa
                     }
 
-                    else {                   //Cria uma equipa
+                    else {                                              //Cria uma equipa
 
                         int njogadores = ClientView.nova_equipa();
-                        //criar n jogadores novos
-
                         int contador = 1;
-                        //String[] cores = MVC.ClientView.get_cores_equipa();       Para fazer tratamento das cores (n esta feito)
-
-                        EquipaFutebol ef = new EquipaFutebol(ClientView.get_nome_equipa());     //Cria a equipa com o nome dado
-
+                        EquipaFutebol ef = new EquipaFutebol(ClientView.get_string("\tNome da equipa"));     //Cria a equipa com o nome dado
+                        if(this.cm.getEquipas().containsKey(ef.getNome())){
+                            ClientView.warning("\tEssa equipa ja existe!!");
+                            break;
+                        }
                         while (contador <= njogadores) {                                        //Cria n jogadores e adiciona-os
                             ClientView.warning("\n\t [Jogador " + contador + "]\n\n");
                             JogadorFutebol current = this.cm.create_jogador();
@@ -87,11 +117,34 @@ public class MenuController {
                         break;
                     }
 
+                case 5:
+                    int escolha_consulta = ClientView.painel_consulta();
+                    switch (escolha_consulta){
+                        case 1:
+                            if(this.cm.get_numero_jogadores() == 0){
+                                ClientView.warning("\tNao ha dados carregados/disponiveis!");ClientView.pause(); break;
+                            }
+                            this.ConsultaJogadores();
+                            break;
+                        case 2:
+                            if(this.cm.get_numero_equipas() == 0){
+                                ClientView.warning("\tNao ha dados carregados/disponiveis!");ClientView.pause(); break;
+                            }
+                            this.ConsultaEquipas();
+                            break;
+                        case 3: //consulta jogos
+                            break;
+                        default: break;
+                    }
+                    break;
+
+
                 case 6: //Carregar dados
-                    int escolha = ClientView.carregar_ficheiros();
-                    if(escolha == 1){
+                    int escolha_carregamento = ClientView.carregar_ficheiros();
+                    if(escolha_carregamento == 1){
                         String path = ClientView.get_string("Filepath");
                         cm.carrega_dados_log(path);
+                        ClientView.warning("\tDados carregados!");
                         ClientView.pause();
                         break;
                     }
@@ -114,4 +167,36 @@ public class MenuController {
             }
         } while(user_option != 0);
     }
+
+
+    /**
+     * ConsultaJogadores
+     * Permite a consulta dos jogadores guardados no sistema, assim como informação extra sobre cada um
+     */
+    public void ConsultaJogadores(){
+
+        int aux;
+        do {
+            JogadorFutebolView.print_jogadores_info(cm.getJogadores());
+            aux = JogadorFutebolView.consultar_jogadores(cm.getJogadores());
+            ClientView.clear_window();
+        } while(aux != 2);
+    }
+
+    /**
+     * ConsultaEquipas
+     * Automatiza o processo de leitura de equipas guardadas, assim como a apresentação das mesmas
+     * E até uma possivel necessidade de aceder à informação intrínseca da mesma
+     */
+    public void ConsultaEquipas() {
+
+        Map<String, EquipaFutebol> equipas = this.cm.getEquipas();
+        int aux;
+        do {
+            JogadorFutebolView.print_equipas(equipas);
+            aux = JogadorFutebolView.consultar_equipa(equipas);
+        } while (aux != 2);
+    }
+
+
 }

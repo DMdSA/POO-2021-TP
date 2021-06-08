@@ -357,4 +357,9 @@ public class JogadorFutebol extends Jogador {
     }
 
 
+    public boolean isEmpty(){
+
+        return this.getNome().equals("");
+    }
+
 }

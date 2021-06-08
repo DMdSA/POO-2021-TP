@@ -172,6 +172,10 @@ public class EquipaFutebol extends Equipa {
 
 	public int getGolos(){ return this.golos;}
 
+	public int get_numero_titulares(){ return this.jogadoresTitulares.size();}
+
+	public int get_numero_suplentes(){ return this.jogadoresSuplentes.size();}
+
 
 //Setters,
 
@@ -232,7 +236,7 @@ public class EquipaFutebol extends Equipa {
 
 		StringBuilder finalstring = new StringBuilder("Equipa Futebol [" + this.getNome() + "]:\n");
 
-		finalstring.append("\tNumero Titulares: " + this.getTitulares() + ", Numero Suplentes: " + this.getSuplentes() + ", Numero substituicoes: " + this.getSubstituicoes() + "\n");
+		finalstring.append("\tNumero Titulares: ").append(this.getTitulares()).append(", Numero Suplentes: ").append(this.getSuplentes()).append(", Numero substituicoes: ").append(this.getSubstituicoes()).append("\n");
 
 		finalstring.append("\tTitulares:\n");
 		for (JogadorFutebol jf : this.jogadoresTitulares)
@@ -242,7 +246,7 @@ public class EquipaFutebol extends Equipa {
 		for (JogadorFutebol jf : this.jogadoresSuplentes)
 			finalstring.append(jf.toString());
 
-		finalstring.append("\tGolos: " + this.golos + "\n");
+		finalstring.append("\tGolos: ").append(this.golos).append("\n");
 
 		return finalstring.toString();
 	}

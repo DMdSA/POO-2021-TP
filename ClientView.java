@@ -58,13 +58,13 @@ public class ClientView {
     }
 
     public static String get_string(String output){
-        Scanner answer = new Scanner(System.in).useLocale(Locale.US);
+        Scanner answer = new Scanner(System.in);
         System.out.println("\t"+output+" : ");
         return answer.nextLine();
     }
 
     public static int get_Int(String output){
-        Scanner input = new Scanner(System.in);
+        Scanner input = new Scanner(System.in).useLocale(Locale.US);
             System.out.println("\t" + output + ": ");
             while (!input.hasNextInt()) {
                 input.next();
@@ -149,12 +149,6 @@ public class ClientView {
         return n;
     }
 
-    public static String get_nome_equipa(){
-
-        Scanner input = new Scanner(System.in).useLocale(Locale.US);
-        System.out.println("\tNome da equipa: ");
-        return input.nextLine();
-    }
 
     public static String[] get_cores_equipa(){
 
@@ -188,8 +182,8 @@ public class ClientView {
                                    profile_menu.append("\t        #Level: ").append(level).append("\n");
                                    profile_menu.append("\t        #Points: ").append(points).append("\n");
                                    profile_menu.append("\t        #Since: ").append(date.toString()).append("\n");
-                                   profile_menu.append("\t|                                             |\n");
-                                   profile_menu.append("\t||___________________________________________||\n\n");
+                                   profile_menu.append("\t|                                            |\n");
+                                   profile_menu.append("\t||__________________________________________||\n\n");
         System.out.println(profile_menu.toString());
     }
 
@@ -198,7 +192,6 @@ public class ClientView {
 
         clear_window();
         int opcao;
-        Scanner input = new Scanner(System.in).useLocale(Locale.US);
 
         StringBuilder s = new StringBuilder("\t___________________________________\n");
                                    s.append("\t||      CARREGAMENTO DADOS       ||\n");
@@ -207,13 +200,32 @@ public class ClientView {
                                    s.append("\t|       #2 ) Estado Jogo          |\n");
                                    s.append("\t||_______________________________||\n\n");
         System.out.println(s.toString());
-        do {
-            System.out.println("\tOpcao: ");
-            while (!input.hasNextInt()) {
-                input.next();
-            }
-            opcao = input.nextInt();
+        do{
+            opcao = ClientView.get_Int("Opcao");
+            if(opcao != 1 && opcao != 2) System.out.println("\tEssa opcao nao estao disponivel!");
         } while (opcao != 1 && opcao != 2);
+
+        return opcao;
+    }
+
+    public static int painel_consulta(){
+
+        clear_window();
+        StringBuilder s = new StringBuilder("\t___________________________________\n");
+                                   s.append("\t||    CONSULTA DADOS GUARDADOS   ||\n");
+                                   s.append("\t|                                 |\n");
+                                   s.append("\t|       #1 ) Jogadores            |\n");
+                                   s.append("\t|       #2 ) Equipas              |\n");
+                                   s.append("\t|       #3 ) Jogos                |\n");
+                                   s.append("\t||_______________________________||\n\n");
+        System.out.println(s);
+
+        int opcao;
+        do{
+            opcao = ClientView.get_Int("Opcao");
+            if(opcao != 1 && opcao != 2 && opcao != 3) System.out.println("\tEssa opcao nao estao disponivel!");
+        } while (opcao != 1 && opcao != 2 && opcao != 3);
+
         return opcao;
     }
 

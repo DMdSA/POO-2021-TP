@@ -1,3 +1,4 @@
+import Equipa.EquipaFutebol;
 import Jogadores.JogadorFutebol;
 import Jogadores.PosicaoCampo;
 
@@ -279,14 +280,13 @@ public class JogadorFutebolView {
      * @param js Lista de jogadores guardados até ao momento
      */
     public static void print_jogadores_info(Map<String, JogadorFutebol> js) {
-        int opcao;
-        do {
+
             ClientView.clear_window();
 
             StringBuilder view = new StringBuilder("\t___________________________________\n");
-                                      view.append("\t||     JOGADORES GUARDADOS       ||\n");
-                                      view.append("\t|                                 |\n");
-                                      view.append("\t||_______________________________||\n\n");
+            view.append("\t||     JOGADORES GUARDADOS       ||\n");
+            view.append("\t|                                 |\n");
+            view.append("\t||_______________________________||\n\n");
             System.out.println(view);
 
             for (Map.Entry<String, JogadorFutebol> entrada : js.entrySet()) {
@@ -296,40 +296,19 @@ public class JogadorFutebolView {
 
             }
             System.out.println("\nNumero de jogadores guardados: " + js.size() + "\n");
-            Scanner input = new Scanner(System.in);
-
-
-            JogadorFutebolView.consultar_jogadores(js);
-            view.append("\t___________________________________\n");
-            view.append("\t||            VOLTAR             ||\n");
-            view.append("\t|                                 |\n");
-            view.append("\t|             1) SIM              |\n");
-            view.append("\t|             2) NAO              |\n");
-            view.append("\t||_______________________________||\n\n");
-
-            do {
-                System.out.println("\tOpcao: ");
-                while (!input.hasNextInt()) {
-                    input.next();
-                }
-                opcao = input.nextInt();
-            } while (opcao != 1 && opcao != 2);
-        } while (opcao != 1);
     }
 
     public static int consultar_jogadores(Map<String, JogadorFutebol> js){
 
-        Scanner input = new Scanner(System.in);
-
         int opcao;
         System.out.println("\tQueres consultar a informacao de algum jogador?\n");
 
-        StringBuilder view = new StringBuilder("\t___________________________________\n");
-                                  view.append("\t||                               ||\n");
-                                  view.append("\t|             1) SIM              |\n");
-                                  view.append("\t|             2) NAO              |\n");
-                                  view.append("\t||_______________________________||\n\n");
-        System.out.println(view);
+        StringBuilder s = new StringBuilder("\t___________________________________\n");
+                                  s.append("\t||                               ||\n");
+                                  s.append("\t|             1) SIM              |\n");
+                                  s.append("\t|             2) NAO              |\n");
+                                  s.append("\t||_______________________________||\n\n");
+        System.out.println(s);
 
         do {
            opcao = ClientView.get_Int("Opcao");
@@ -344,9 +323,84 @@ public class JogadorFutebolView {
                 ClientView.warning("\tEsse jogador nao esta guardado!");
             }
         }
-        ClientView.pause();
         return opcao;
     }
+
+
+    public static int get_tamanho_equipa(){
+        int tamanho;
+        do {
+            ClientView.warning("\tQual o tamanho da equipa? (Titulares + Suplentes)");
+            tamanho = ClientView.get_Int("Tamanho");
+            if(tamanho < 7 || tamanho > 23) ClientView.warning("\tNumero minimo [7], Numero maximo [11+12]");
+        } while (tamanho < 7 || tamanho > 23);
+
+        return tamanho;
+    }
+
+    /**
+     *
+     * @param eqs
+     */
+    public static void print_equipas(Map<String, EquipaFutebol> eqs) {
+
+            ClientView.clear_window();
+
+            StringBuilder s = new StringBuilder("\t___________________________________\n");
+            s.append("\t||       EQUIPAS GUARDADAS       ||\n");
+            s.append("\t|                                 |\n");
+            s.append("\t||_______________________________||\n\n");
+            System.out.println(s);
+
+            for (Map.Entry<String, EquipaFutebol> entrada : eqs.entrySet()) {
+                EquipaFutebol eq = entrada.getValue();
+                System.out.printf("\tEquipa \"%s\"\nTitulares:\n\t", eq.getNome());
+                for(JogadorFutebol jf : eq.getJogadoresTitulares())
+                    System.out.print("[" + jf.getNumero() + "] ");
+                System.out.printf("\tSuplentes:\n\t");
+                for(JogadorFutebol jf : eq.getJogadoresSuplentes())
+                    System.out.print("[" + jf.getNumero() + "] ");
+                System.out.println("\n");
+            }
+            System.out.println("\nNumero de equipas guardados: " + eqs.size() + "\n");
+    }
+
+    /**
+     *
+      * @param eqs
+     * @return
+     */
+    public static int consultar_equipa(Map<String, EquipaFutebol> eqs){
+
+        int opcao;
+        System.out.println("\tQueres consultar a informacao de alguma equipa?\n");
+
+        StringBuilder s = new StringBuilder("\t___________________________________\n");
+                                  s.append("\t||                               ||\n");
+                                  s.append("\t|             1) SIM              |\n");
+                                  s.append("\t|             2) NAO              |\n");
+                                  s.append("\t||_______________________________||\n\n");
+        System.out.println(s);
+
+        do {
+           opcao = ClientView.get_Int("Opcao");
+           if(opcao != 1 && opcao != 2) ClientView.warning("\tEssa opcao nao esta disponivel!");
+        } while(opcao != 1 && opcao != 2);
+
+        if(opcao == 1) {
+            String nome = ClientView.get_string("Nome da equipa");
+            if (eqs.containsKey(nome)) {
+                System.out.println(eqs.get(nome).toString());
+                ClientView.pause();
+            } else {
+                ClientView.warning("\tEssa equipa nao esta guardada!");
+            }
+        }
+        return opcao;
+    }
+
+
+
 }
 
 

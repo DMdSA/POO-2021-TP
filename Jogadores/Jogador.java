@@ -11,7 +11,7 @@ public class Jogador {
      * Construtores
      */
     public Jogador () {             //Não sei se fará muito sentido usar este, mas também n deve fazer grande diferença
-        this.nome = "Rambo [aleatorios!]";
+        this.nome = "";
         this.idade = 0;
         this.altura = 0;
         this.peso = 0;
