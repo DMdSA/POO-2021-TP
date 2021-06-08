@@ -9,22 +9,17 @@ import java.util.Scanner;
 public class JogadorFutebolView {
 
     public static String get_nome(){
-        Scanner input = new Scanner(System.in).useLocale(Locale.US);
-        System.out.println("\tNome do jogador: ");
-        String aux = input.nextLine();
 
-        return aux;
+       String nome = ClientView.get_string("Nome da equipa");
+        return nome;
     }
+
 
     public static int get_idade(){
         Scanner input = new Scanner(System.in).useLocale(Locale.US);
         int answer = 0;
-        do {
-            System.out.println("\tIdade: ");
-            while (!input.hasNextInt()) {
-                input.nextLine();;
-            }
-            answer = input.nextInt();
+        do{
+            answer = ClientView.get_Int("Idade");
             if(answer < 0 || answer > 60) ClientView.warning("\t Essa pessoa ja nao devia estar a jogar");
         } while(answer < 0 || answer > 60); //Não é para cortar os sonhos a ninguém...
 
@@ -35,11 +30,7 @@ public class JogadorFutebolView {
         Scanner input = new Scanner(System.in).useLocale(Locale.US);
         double answer = 0;
         do {
-            System.out.println("\tAltura (m): ");
-            while (!input.hasNextDouble()) {
-                input.next();
-            }
-            answer = input.nextDouble();
+            answer = ClientView.get_Int("Altura (m)");
             if(answer < 0 || answer > 2.5) ClientView.warning("\tEssa altura nao parece ser valida!");
         } while(answer < 0 || answer > 2.5);             //Não é para cortar os sonhos a ninguém...
 
@@ -81,11 +72,7 @@ public class JogadorFutebolView {
         Scanner input = new Scanner(System.in).useLocale(Locale.US);
         int answer = 0;
         do {
-            System.out.println("\tNumero da camisola: ");
-            while (!input.hasNextDouble()) {
-                input.next();
-            }
-            answer = input.nextInt();
+            answer =ClientView.get_Int("Numero da camisola");
             if(answer < 0) ClientView.warning("\t Esse numero nao e valido!");
         } while(answer < 0);             //Não é para cortar os sonhos a ninguém...
         return answer;
@@ -300,7 +287,7 @@ public class JogadorFutebolView {
                                       view.append("\t||     JOGADORES GUARDADOS       ||\n");
                                       view.append("\t|                                 |\n");
                                       view.append("\t||_______________________________||\n\n");
-            System.out.println(view.toString());
+            System.out.println(view);
 
             for (Map.Entry<String, JogadorFutebol> entrada : js.entrySet()) {
 
@@ -330,7 +317,7 @@ public class JogadorFutebolView {
         } while (opcao != 1);
     }
 
-    public static void consultar_jogadores(Map<String, JogadorFutebol> js){
+    public static int consultar_jogadores(Map<String, JogadorFutebol> js){
 
         Scanner input = new Scanner(System.in);
 
@@ -342,35 +329,25 @@ public class JogadorFutebolView {
                                   view.append("\t|             1) SIM              |\n");
                                   view.append("\t|             2) NAO              |\n");
                                   view.append("\t||_______________________________||\n\n");
-        System.out.println(view.toString());
+        System.out.println(view);
 
         do {
-            System.out.println("\tOpcao: ");
-            while (!input.hasNextInt()) {
-                input.next();
-            }
-            opcao = input.nextInt();
+           opcao = ClientView.get_Int("Opcao");
         } while(opcao != 1 && opcao != 2);
 
-        switch (opcao){
-            case 1:
-                String nome;
-                System.out.println("\tNome do jogador: ");
-                nome = input.nextLine();
-                if(js.containsKey(nome)){
-                    JogadorFutebolView.print_jogador(js.get(nome));
-                    ClientView.pause();
-                }
-                else{
-                    ClientView.warning("\tEsse jogador nao esta guardado!");
-                }
-                break;
-            case 2:
-                break;
+        if(opcao == 1) {
+            String nome = ClientView.get_string("Nome do jogador");
+            if (js.containsKey(nome)) {
+                JogadorFutebolView.print_jogador(js.get(nome));
+                ClientView.pause();
+            } else {
+                ClientView.warning("\tEsse jogador nao esta guardado!");
+            }
         }
         ClientView.pause();
+        return opcao;
     }
-
-
 }
+
+
 

@@ -63,7 +63,14 @@ public class ClientView {
         return answer.nextLine();
     }
 
-
+    public static int get_Int(String output){
+        Scanner input = new Scanner(System.in);
+            System.out.println("\t" + output + ": ");
+            while (!input.hasNextInt()) {
+                input.next();
+            }
+            return input.nextInt();
+    }
 
 
     public static void criar_jogador(){

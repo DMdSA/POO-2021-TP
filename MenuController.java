@@ -52,10 +52,13 @@ public class MenuController {
                             break;
                         }
                         else {
-                            JogadorFutebolView.print_jogadores_info(cm.getJogadores());
-                            JogadorFutebolView.consultar_jogadores(cm.getJogadores());
+                            int aux;
+                            do {
+                                JogadorFutebolView.print_jogadores_info(cm.getJogadores());
+                                aux = JogadorFutebolView.consultar_jogadores(cm.getJogadores());
+                                ClientView.clear_window();
+                            } while(aux != 2);
                         }
-                        ClientView.pause();
 
                         //Aqui tem de se apresentar a lista dos jogadores (+) deixar escolhê-los (+) criar equipa
                     }
