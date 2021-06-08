@@ -9,12 +9,6 @@ import java.util.Scanner;
 
 public class JogadorFutebolView {
 
-    public static String get_nome(){
-
-       String nome = ClientView.get_String("Nome da equipa");
-        return nome;
-    }
-
 
     public static int get_idade(){
         Scanner input = new Scanner(System.in).useLocale(Locale.US);

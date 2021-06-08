@@ -209,7 +209,7 @@ public class ClientModel{
 
     public Avancado cria_avancado(){
 
-        Avancado novo = new Avancado(JogadorFutebolView.get_nome(), PosicaoCampo.A);
+        Avancado novo = new Avancado(ClientView.get_String("Nome do jogador"), PosicaoCampo.A);
         novo.setIdade(JogadorFutebolView.get_idade()); novo.setAltura(JogadorFutebolView.get_altura());
         novo.setPeso(JogadorFutebolView.get_peso()); novo.setNumero(JogadorFutebolView.get_numero());
         novo.setVelocidade(JogadorFutebolView.get_velocidade()); novo.setResistencia(JogadorFutebolView.get_resistencia());
@@ -222,7 +222,7 @@ public class ClientModel{
 
         public GuardaRedes cria_guardaredes(){
 
-        GuardaRedes novo = new GuardaRedes(JogadorFutebolView.get_nome(), PosicaoCampo.GR);
+        GuardaRedes novo = new GuardaRedes(ClientView.get_String("Nome do jogador"), PosicaoCampo.GR);
         novo.setIdade(JogadorFutebolView.get_idade()); novo.setAltura(JogadorFutebolView.get_altura());
         novo.setPeso(JogadorFutebolView.get_peso()); novo.setNumero(JogadorFutebolView.get_numero());
         novo.setVelocidade(JogadorFutebolView.get_velocidade()); novo.setResistencia(JogadorFutebolView.get_resistencia());
@@ -236,7 +236,7 @@ public class ClientModel{
 
         public Defesa cria_defesa(){
 
-        Defesa novo = new Defesa(JogadorFutebolView.get_nome(), PosicaoCampo.D);
+        Defesa novo = new Defesa(ClientView.get_String("Nome do jogador"), PosicaoCampo.D);
         novo.setIdade(JogadorFutebolView.get_idade()); novo.setAltura(JogadorFutebolView.get_altura());
         novo.setPeso(JogadorFutebolView.get_peso()); novo.setNumero(JogadorFutebolView.get_numero());
         novo.setVelocidade(JogadorFutebolView.get_velocidade()); novo.setResistencia(JogadorFutebolView.get_resistencia());
@@ -250,7 +250,7 @@ public class ClientModel{
 
         public Lateral cria_lateral(){
 
-        Lateral novo = new Lateral(JogadorFutebolView.get_nome(), PosicaoCampo.L);
+        Lateral novo = new Lateral(ClientView.get_String("Nome do jogador"), PosicaoCampo.L);
         novo.setIdade(JogadorFutebolView.get_idade()); novo.setAltura(JogadorFutebolView.get_altura());
         novo.setPeso(JogadorFutebolView.get_peso()); novo.setNumero(JogadorFutebolView.get_numero());
         novo.setVelocidade(JogadorFutebolView.get_velocidade()); novo.setResistencia(JogadorFutebolView.get_resistencia());
@@ -264,7 +264,7 @@ public class ClientModel{
 
         public Medio cria_medio(){
 
-        Medio novo = new Medio(JogadorFutebolView.get_nome(), PosicaoCampo.M);
+        Medio novo = new Medio(ClientView.get_String("Nome do jogador"), PosicaoCampo.M);
         novo.setIdade(JogadorFutebolView.get_idade()); novo.setAltura(JogadorFutebolView.get_altura());
         novo.setPeso(JogadorFutebolView.get_peso()); novo.setNumero(JogadorFutebolView.get_numero());
         novo.setVelocidade(JogadorFutebolView.get_velocidade()); novo.setResistencia(JogadorFutebolView.get_resistencia());
