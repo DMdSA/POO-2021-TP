@@ -1,9 +1,6 @@
 import Equipa.EquipaFutebol;
 import Jogadores.JogadorFutebol;
-
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
 public class JogoFutebol extends Jogo{
@@ -20,11 +17,11 @@ public class JogoFutebol extends Jogo{
         this.data = LocalDate.now();
     }
 
-    public JogoFutebol(EquipaFutebol eq1, EquipaFutebol eq2, String date){
+    public JogoFutebol(EquipaFutebol eq1, EquipaFutebol eq2, LocalDate date){
         super(2,90,2);
         this.equipaCasa = eq1;
         this.equipaFora = eq2;
-        this.data = LocalDate.parse(date);
+        this.data = date;
     }
 
     public JogoFutebol(JogoFutebol jf){
@@ -95,7 +92,7 @@ public class JogoFutebol extends Jogo{
 
     public void setEquipaCasa(EquipaFutebol eq1){ this.equipaCasa = eq1;}
     public void setEquipaFora(EquipaFutebol eqFora){ this.equipaFora = eqFora;}
-    public void setData(String data){ this.data = LocalDate.parse(data);}
+    public void setData(String data){ this.data = LocalDate.parse(data);}    //Não aceita horas..
 
     /**
      * equals
@@ -135,7 +132,7 @@ public class JogoFutebol extends Jogo{
         for(Map.Entry<String, JogadorFutebol> jf : jsfora.entrySet())
             finalstring.append("\t").append(jf.getValue().getNumero());
 
-        finalstring.append("\nData do jogo: ").append(this.getData()).append("\n\n");
+        finalstring.append("\nData do jogo: ").append(this.getData().toString()).append("\n\n");
         return finalstring.toString();
     }
 }

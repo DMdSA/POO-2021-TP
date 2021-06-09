@@ -135,7 +135,7 @@ public class LogParser {
 
     public Collection<JogoFutebol> getJogos(){
 
-	    return this.jogos.stream().map(JogoFutebol::clone).collect(Collectors.toList());
+	    return this.jogos.stream().map(JogoFutebol::clone).collect(Collectors.toCollection(LinkedList::new));
     }
 
 }

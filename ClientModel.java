@@ -61,7 +61,7 @@ public class ClientModel{
 
     public Set<JogoFutebol> getJogos(){
 
-        return this.jogos_guardados.stream().map(JogoFutebol::clone).collect(Collectors.toCollection(TreeSet :: new));
+        return this.jogos_guardados.stream().map(JogoFutebol::clone).collect(Collectors.toCollection(HashSet :: new));
     }
 
     public int get_numero_jogadores(){
@@ -291,12 +291,13 @@ public class ClientModel{
             this.addEquipa(entrada.getValue());
         }
 
+        this.jogos_guardados = new HashSet<JogoFutebol>();
         for(JogoFutebol jf : jogos) this.addJogo(jf);
     }
 
     /**
-     * guarda_dados
-     * @param filename
+     * guarda_dados Guarda os dados do programa num ficheiro de objetos
+     * @param filename Nome do ficheiro
      * @throws IOException
      */
     public void guarda_Dados(String filename) throws IOException {
@@ -316,10 +317,18 @@ public class ClientModel{
      */
     public boolean hasJogador(String nome){
 
-        if(this.jogadores_guardados.containsKey(nome)) return true;
-        return false;
+        return this.jogadores_guardados.containsKey(nome);
     }
 
+    /**
+     * hasEquipa, verifica se uma equipa está presente na lista de guardados
+     * @param equipa Nome equipa
+     * @return True, se existir
+     */
+    public boolean hasEquipa(String equipa){
+
+        return this.equipas_guardadas.containsKey(equipa);
+    }
 
     public JogadorFutebol get_jogador(String nome){
 
@@ -328,4 +337,10 @@ public class ClientModel{
         return new JogadorFutebol();
     }
 
+    public EquipaFutebol get_equipa(String nome){
+
+        if(this.equipas_guardadas.containsKey(nome))
+            return this.equipas_guardadas.get(nome);
+        return new EquipaFutebol();
+    }
 }
