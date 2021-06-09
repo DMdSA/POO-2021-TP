@@ -14,7 +14,7 @@ public class MenuController {
 
 
 
-    public void run() {
+    public void run() throws IOException {
 
         int user_option = -1;
         do {
