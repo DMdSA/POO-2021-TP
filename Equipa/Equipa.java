@@ -1,5 +1,8 @@
 package Equipa;
-public class Equipa {
+
+import java.io.Serializable;
+
+public class Equipa implements Serializable {
     /**                                            Variáveis instância  */
     private String nome;
     private int titulares;

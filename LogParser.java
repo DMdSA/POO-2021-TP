@@ -43,7 +43,7 @@ public class LogParser {
 					currentPlayer = Lateral.parse(analyse[1]);
 					jogadores.put(currentPlayer.getNumero(), currentPlayer);
 					// if (ultima == null) throw new LinhaIncorretaException();				//Shouldn't I make another expection for the case Jogador does not exist??...
-					ultima.adicionaTitular(currentPlayer.clone());
+					ultima.adiciona_jogador(currentPlayer.clone());
 					break;
 
 				case "Defesa":
@@ -51,7 +51,7 @@ public class LogParser {
 					currentPlayer = Defesa.parse(analyse[1]);
 					jogadores.put(currentPlayer.getNumero(), currentPlayer);
 					// if (ultima == null) throw new LinhaIncorretaException();
-					ultima.adicionaTitular(currentPlayer.clone());
+					ultima.adiciona_jogador(currentPlayer.clone());
 					break;
 
 				case "Medio":
@@ -59,7 +59,7 @@ public class LogParser {
 					currentPlayer = Medio.parse(analyse[1]);
 					jogadores.put(currentPlayer.getNumero(), currentPlayer);
 					// if (ultima == null) throw new LinhaIncorretaException();
-					ultima.adicionaTitular(currentPlayer.clone());
+					ultima.adiciona_jogador(currentPlayer.clone());
 					break;
 
 				case "Avancado":
@@ -67,7 +67,7 @@ public class LogParser {
 					currentPlayer = Avancado.parse(analyse[1]);
 					jogadores.put(currentPlayer.getNumero(), currentPlayer);
 					// if (ultima == null) throw new LinhaIncorretaException();
-					ultima.adicionaTitular(currentPlayer.clone());
+					ultima.adiciona_jogador(currentPlayer.clone());
 					break;
 
 				case "Guarda-Redes":
@@ -75,7 +75,7 @@ public class LogParser {
 					currentPlayer = GuardaRedes.parse(analyse[1]);
 					jogadores.put(currentPlayer.getNumero(), currentPlayer);
 					// if (ultima == null) throw new LinhaIncorretaException();
-					ultima.adicionaTitular(currentPlayer.clone());
+					ultima.adiciona_jogador(currentPlayer.clone());
 					break;
 
 

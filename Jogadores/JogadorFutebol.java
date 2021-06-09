@@ -328,8 +328,7 @@ public class JogadorFutebol extends Jogador {
      * fatorIdade, define o quão a idade do jogador influenciará na sua habilidade
      * @return inteiro com o fator
      */
-    public double fatorIdade(){                     //Meramente ilustrativo
-
+    public double fatorIdade(){
         int age = getIdade();
         if(age >= 17 && age <= 21) return 5;
         if(age >= 22 && age <= 25) return 3;

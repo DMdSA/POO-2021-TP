@@ -1,4 +1,6 @@
-public class Jogo {
+import java.io.Serializable;
+
+public class Jogo implements Serializable {
 /**                                            Variáveis instância  */
     private int nEquipas;
     private double duracao;

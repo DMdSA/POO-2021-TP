@@ -1,6 +1,7 @@
 import Equipa.EquipaFutebol;
 import Jogadores.*;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -291,6 +292,21 @@ public class ClientModel{
         }
 
         for(JogoFutebol jf : jogos) this.addJogo(jf);
+    }
+
+    /**
+     * guarda_dados
+     * @param filename
+     * @throws IOException
+     */
+    public void guarda_Dados(String filename) throws IOException {
+        WriteToFile writeToFile = new WriteToFile();
+        writeToFile.WriteObjectToFile(user,filename);
+        writeToFile.WriteObjectToFile(jogadores_guardados,filename);
+        writeToFile.WriteObjectToFile(equipas_guardadas,filename);
+        for(Jogo j : jogos_guardados){
+            writeToFile.WriteObjectToFile(j,filename);
+        }
     }
 
     /**

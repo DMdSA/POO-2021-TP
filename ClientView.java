@@ -235,6 +235,26 @@ public class ClientView {
         return opcao;
     }
 
+    public static int guardar_ficheiros(){
+
+        clear_window();
+        int opcao;
+
+        StringBuilder s = new StringBuilder("\t___________________________________\n");
+        s.append("\t||        GUARDAR DADOS          ||\n");
+        s.append("\t|                                 |\n");
+        s.append("\t|      #1 ) Guardar Estado        |\n");
+        s.append("\t||_______________________________||\n\n");
+        System.out.println(s.toString());
+        do{
+            opcao = ClientView.get_Int("Opcao");
+            if(opcao != 1)System.out.println("\tEssa opcao nao estao disponivel!");
+        }while (opcao != 1);
+
+        return opcao;
+
+    }
+
     public static int painel_consulta(){
 
         clear_window();

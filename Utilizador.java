@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Utilizador {
+public class Utilizador implements Serializable {
     /**                                            Variáveis instância  */
     private String username;
     private String mail;

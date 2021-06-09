@@ -2,6 +2,7 @@ import Equipa.EquipaFutebol;
 import Jogadores.Jogador;
 import Jogadores.JogadorFutebol;
 
+import java.io.IOException;
 import java.util.Map;
 
 public class MenuController {
@@ -152,6 +153,16 @@ public class MenuController {
                         //carregar OBJECTSTREAM
                         break;
                     }
+
+                case 7: //Guardar Dados
+                    int escolha_guardar = ClientView.guardar_ficheiros();
+                    if(escolha_guardar == 1){
+                        String file = ClientView.get_String("Filepath");
+                        cm.guarda_Dados(file);
+                        ClientView.warning("Ficheiro criado com sucesso");
+                        ClientView.pause();
+                    }
+                    break;
 
                 case 8:
                     if(cm.user_isEmpty()){
