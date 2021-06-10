@@ -328,8 +328,7 @@ public class JogadorFutebol extends Jogador {
      * fatorIdade, define o quão a idade do jogador influenciará na sua habilidade
      * @return inteiro com o fator
      */
-    public double fatorIdade(){                     //Meramente ilustrativo
-
+    public double fatorIdade(){
         int age = getIdade();
         if(age >= 17 && age <= 21) return 5;
         if(age >= 22 && age <= 25) return 3;
@@ -342,11 +341,10 @@ public class JogadorFutebol extends Jogador {
      * @return double associado à sua habilidade
      */
     public double getHabilidade(){
-    
+
         double habilidade = 0;
-        habilidade += this.fatorIdade() + 1 + 1 + 1 + 1 + 1 + 1 + 1 + this.getHumor()*2;
-        //Ilustrativo, defini 1 para todas as habilidades "comuns"
-        return habilidade;
+        habilidade += this.getVelocidade() + this.getImpulsao() + this.getResistencia() + this.getDestreza() + this.getJogoCabeca() + this.getRemate() + this.getPasse();
+        return habilidade/7;
     }
 
     /**

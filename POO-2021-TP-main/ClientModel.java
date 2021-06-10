@@ -1,7 +1,9 @@
 import Equipa.EquipaFutebol;
 import Jogadores.*;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -61,7 +63,7 @@ public class ClientModel{
 
     public Set<JogoFutebol> getJogos(){
 
-        return this.jogos_guardados.stream().map(JogoFutebol::clone).collect(Collectors.toCollection(TreeSet :: new));
+        return this.jogos_guardados.stream().map(JogoFutebol::clone).collect(Collectors.toCollection(HashSet :: new));
     }
 
     public int get_numero_jogadores(){
@@ -218,6 +220,7 @@ public class ClientModel{
         novo.setRemate(JogadorFutebolView.get_remate()); novo.setPasse(JogadorFutebolView.get_passe());
         novo.setImpulsao(JogadorFutebolView.get_impulsao());
         novo.setFinalizacao(JogadorFutebolView.get_finalizacao());
+        novo.setOverall(novo.getHabilidade());
         return novo;
     }
 
@@ -231,6 +234,7 @@ public class ClientModel{
         novo.setRemate(JogadorFutebolView.get_remate()); novo.setPasse(JogadorFutebolView.get_passe());
         novo.setImpulsao(JogadorFutebolView.get_impulsao());
         novo.setElasticidade(JogadorFutebolView.get_elasticidade());
+        novo.setOverall(novo.getHabilidade());
         return novo;
     }
 
@@ -245,6 +249,7 @@ public class ClientModel{
         novo.setRemate(JogadorFutebolView.get_remate()); novo.setPasse(JogadorFutebolView.get_passe());
         novo.setImpulsao(JogadorFutebolView.get_impulsao());
         novo.setCapacidadeBloquearBolas(JogadorFutebolView.get_capacidade_bloquear_bolas());
+        novo.setOverall(novo.getHabilidade());
         return novo;
     }
 
@@ -259,6 +264,7 @@ public class ClientModel{
         novo.setRemate(JogadorFutebolView.get_remate()); novo.setPasse(JogadorFutebolView.get_passe());
         novo.setImpulsao(JogadorFutebolView.get_impulsao());
         novo.setCapacidadeCruzamentos(JogadorFutebolView.get_capacidade_cruzamentos());
+        novo.setOverall(novo.getHabilidade());
         return novo;
     }
 
@@ -273,6 +279,7 @@ public class ClientModel{
         novo.setRemate(JogadorFutebolView.get_remate()); novo.setPasse(JogadorFutebolView.get_passe());
         novo.setImpulsao(JogadorFutebolView.get_impulsao());
         novo.setCapacidadeRecuperarBolas(JogadorFutebolView.get_capacidade_recuperar_bolas());
+        novo.setOverall(novo.getHabilidade());
         return novo;
     }
 
@@ -291,10 +298,15 @@ public class ClientModel{
             this.addEquipa(entrada.getValue());
         }
 
+        this.jogos_guardados = new HashSet<JogoFutebol>();
         for(JogoFutebol jf : jogos) this.addJogo(jf);
     }
 
-
+    /**
+     * guarda_dados Guarda os dados do programa num ficheiro de objetos
+     * @param filename Nome do ficheiro
+     * @throws IOException
+     */
     public void guarda_Dados(String filename) throws IOException {
         WriteToFile writeToFile = new WriteToFile();
         writeToFile.WriteObjectToFile(user,filename);
@@ -305,6 +317,15 @@ public class ClientModel{
         }
     }
 
+    public void carrega_dados_obj(String filename) throws IOException, ClassNotFoundException {
+        FileInputStream fileStream = new FileInputStream(filename);
+        ObjectInputStream input = new ObjectInputStream(fileStream);
+        this.user = (Utilizador) input.readObject();
+        HashMap<String,JogadorFutebol> aux_equipa = new HashMap<>();
+        aux_equipa = (HashMap<String,JogadorFutebol>) input.readObject();
+
+    }
+
     /**
      * hasJogador, verifica se um jogador está presente na lista de guardados
      * @param nome Nome do jogador a pesquisar
@@ -312,10 +333,18 @@ public class ClientModel{
      */
     public boolean hasJogador(String nome){
 
-        if(this.jogadores_guardados.containsKey(nome)) return true;
-        return false;
+        return this.jogadores_guardados.containsKey(nome);
     }
 
+    /**
+     * hasEquipa, verifica se uma equipa está presente na lista de guardados
+     * @param equipa Nome equipa
+     * @return True, se existir
+     */
+    public boolean hasEquipa(String equipa){
+
+        return this.equipas_guardadas.containsKey(equipa);
+    }
 
     public JogadorFutebol get_jogador(String nome){
 
@@ -324,4 +353,10 @@ public class ClientModel{
         return new JogadorFutebol();
     }
 
+    public EquipaFutebol get_equipa(String nome){
+
+        if(this.equipas_guardadas.containsKey(nome))
+            return this.equipas_guardadas.get(nome);
+        return new EquipaFutebol();
+    }
 }

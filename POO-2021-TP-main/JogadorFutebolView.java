@@ -1,239 +1,166 @@
 import Equipa.EquipaFutebol;
 import Jogadores.JogadorFutebol;
 import Jogadores.PosicaoCampo;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 public class JogadorFutebolView {
 
     public static int get_idade(){
-        Scanner input = new Scanner(System.in).useLocale(Locale.US);
-        int answer = 0;
+        int answer = 0; boolean flag;
         do{
             answer = ClientView.get_Int("Idade");
-            if(answer < 0 || answer > 60) ClientView.warning("\t Essa pessoa ja nao devia estar a jogar");
-        } while(answer < 0 || answer > 60); //Não é para cortar os sonhos a ninguém...
+            flag = ClientView.not_an_option(answer, 0, 60);
+        } while(!flag); //Não é para cortar os sonhos a ninguém...
 
         return answer;
     }
 
     public static double get_altura(){
-        Scanner input = new Scanner(System.in).useLocale(Locale.US);
-        double answer = 0;
+        double answer = 0; boolean flag;
         do {
             answer = ClientView.get_Double("Altura (m)");
-            if(answer < 0 || answer > 2.5) ClientView.warning("\tEssa altura nao parece ser valida!");
-        } while(answer < 0 || answer > 2.5);             //Não é para cortar os sonhos a ninguém...
+            flag = ClientView.not_an_option(answer, 0, 2.5);
+            if(!flag) ClientView.warning("Essa altura nao parece ser valida!");
+        } while(!flag);             //Não é para cortar os sonhos a ninguém...
 
         return answer;
     }
 
     public static double get_peso(){
-        Scanner input = new Scanner(System.in).useLocale(Locale.US);
         double answer = 0;
         do {
-            System.out.println("\tPeso do jogador (Kg): ");
-            while (!input.hasNextDouble()) {
-                input.next();
-            }
-            answer = input.nextDouble();
-            if(answer < 0) ClientView.warning("\t Esse peso nao e valido!");
+            answer = ClientView.get_Double("Peso do jogador (Kg): ");
+            if(answer < 0) ClientView.warning("Esse peso nao e valido!");
         } while(answer < 0);
 
         return answer;
     }
 
     public static PosicaoCampo get_posicao(){
-
-        Scanner input = new Scanner(System.in).useLocale(Locale.US);
         PosicaoCampo posicao;
         String aux;
         do {
-            System.out.println("\tPosicao do Jogador: ");
-            aux = input.nextLine();
+           aux = ClientView.get_String("Posicao do jogador");
             posicao = PosicaoCampo.transforma_Posicao(aux);
-            if(!PosicaoCampo.isPosicao(posicao)) ClientView.warning("\t Essa posicao nao e valida!");
+            if(!PosicaoCampo.isPosicao(posicao)) ClientView.warning("Essa posicao nao e valida!");
         } while(!PosicaoCampo.isPosicao(posicao));             //Não é para cortar os sonhos a ninguém...
         return posicao;
     }
 
 
     public static int get_numero(){
-
-        Scanner input = new Scanner(System.in).useLocale(Locale.US);
         int answer = 0;
         do {
             answer =ClientView.get_Int("Numero da camisola");
-            if(answer < 0) ClientView.warning("\t Esse numero nao e valido!");
+            if(answer < 0) ClientView.warning("Esse numero nao e valido!");
         } while(answer < 0);             //Não é para cortar os sonhos a ninguém...
         return answer;
     }
 
 
     public static double get_velocidade(){
-
-        Scanner input = new Scanner(System.in).useLocale(Locale.US);
         double answer = 0;
         do {
-            System.out.println("\tVelocidade: ");
-            while (!input.hasNextDouble()) {
-                input.next();
-            }
-            answer = input.nextInt();
-            if(answer < 0 || answer > 100) ClientView.warning("\t Valores para velocidade invalidos! [0..100]");
+           answer = ClientView.get_Double("Velocidade: ");
+            if(answer < 0 || answer > 100) ClientView.warning(" Valores para velocidade invalidos! [0..100]");
         } while(answer < 0 || answer > 100);
         return answer;
     }
 
     public static double get_resistencia(){
-
-        Scanner input = new Scanner(System.in).useLocale(Locale.US);
         double answer = 0;
         do {
-            System.out.println("\tResistencia: ");
-            while (!input.hasNextDouble()) {
-                input.next();
-            }
-            answer = input.nextInt();
-            if(answer < 0 || answer > 100) ClientView.warning("\t Valores para resistencia invalidos! [0..100]");
+            answer = ClientView.get_Double("Resistencia: ");
+            if(answer < 0 || answer > 100) ClientView.warning("Valores para resistencia invalidos! [0..100]");
         } while(answer < 0 || answer > 100);
         return answer;
     }
 
     public static double get_destreza(){
-
-        Scanner input = new Scanner(System.in).useLocale(Locale.US);
         double answer = 0;
         do {
-            System.out.println("\tDestreza: ");
-            while (!input.hasNextDouble()) {
-                input.next();
-            }
-            answer = input.nextInt();
-            if(answer < 0 || answer > 100) ClientView.warning("\t Valores para destreza invalidos! [0..100]");
+           answer = ClientView.get_Double("Destreza: ");
+            if(answer < 0 || answer > 100) ClientView.warning("Valores para destreza invalidos! [0..100]");
         } while(answer < 0 || answer > 100);
         return answer;
     }
 
     public static double get_jogo_cabeca(){
-
-        Scanner input = new Scanner(System.in).useLocale(Locale.US);
         double answer = 0;
         do {
-            System.out.println("\tJogo Cabeca: ");
-            while (!input.hasNextDouble()) {
-                input.next();
-            }
-            answer = input.nextInt();
-            if(answer < 0 || answer > 100) ClientView.warning("\t Valores para jogo cabeca invalidos! [0..100]");
+           answer = ClientView.get_Double("Jogo de Cabeca: ");
+            if(answer < 0 || answer > 100) ClientView.warning("Valores para jogo cabeca invalidos! [0..100]");
         } while(answer < 0 || answer > 100);
         return answer;
     }
 
     public static double get_remate(){
-
-        Scanner input = new Scanner(System.in).useLocale(Locale.US);
         double answer = 0;
         do {
-            System.out.println("\tCapacidade remate: ");
-            while (!input.hasNextDouble()) {
-                input.next();
-            }
-            answer = input.nextInt();
-            if(answer < 0 || answer > 100) ClientView.warning("\t Valores para capacidade remate invalidos! [0..100]");
+            answer = ClientView.get_Double("Capacidade de Remate: ");
+            if(answer < 0 || answer > 100) ClientView.warning("Valores para capacidade remate invalidos! [0..100]");
         } while(answer < 0 || answer > 100);
         return answer;
     }
 
     public static double get_passe(){
-
-        Scanner input = new Scanner(System.in).useLocale(Locale.US);
         double answer = 0;
         do {
-            System.out.println("\tCapacidade passe: ");
-            while (!input.hasNextDouble()) {
-                input.next();
-            }
-            answer = input.nextInt();
-            if(answer < 0 || answer > 100) ClientView.warning("\t Valores para capacidade passe invalidos! [0..100]");
+            answer = ClientView.get_Double("Capacidade de Passe: ");
+            if(answer < 0 || answer > 100) ClientView.warning("Valores para capacidade passe invalidos! [0..100]");
         } while(answer < 0 || answer > 100);
         return answer;
     }
 
     public static double get_impulsao(){
-
-        Scanner input = new Scanner(System.in).useLocale(Locale.US);
         double answer = 0;
         do {
-           System.out.println("\tImpulsao: ");
-            while (!input.hasNextDouble()) {
-                input.next();
-            }
-            answer = input.nextInt();
-            if(answer < 0 || answer > 100) ClientView.warning("\t Valores para impulsao invalidos! [0..100]");
+           answer =ClientView.get_Double("Impulsao: ");
+            if(answer < 0 || answer > 100) ClientView.warning("Valores para impulsao invalidos! [0..100]");
         } while(answer < 0 || answer > 100);
         return answer;
     }
 
     public static double get_finalizacao(){
-
-        Scanner input = new Scanner(System.in).useLocale(Locale.US);
         double answer = 0;
         do {
-            System.out.println("\tFinalizacao: ");
-            while (!input.hasNextDouble()) {
-                input.next();
-            }
-            answer = input.nextInt();
-            if(answer < 0 || answer > 100) ClientView.warning("\t Valores para finalizacao invalidos! [0..100]");
+            answer = ClientView.get_Double("Finalizacao: ");
+            if(answer < 0 || answer > 100) ClientView.warning("Valores para finalizacao invalidos! [0..100]");
         } while(answer < 0 || answer > 100);
         return answer;
     }
 
 
     public static double get_capacidade_bloquear_bolas(){
-
-        Scanner input = new Scanner(System.in).useLocale(Locale.US);
         double answer = 0;
         do {
-            System.out.println("\tCapacidade Bloquear Bolas: ");
-            while (!input.hasNextDouble()) {
-                input.next();
-            }
-            answer = input.nextInt();
-            if(answer < 0 || answer > 100) ClientView.warning("\t Valores para capacidade de bloquear bolas invalidos! [0..100]");
+            answer = ClientView.get_Double("Capacidade Recuperar Bolas: ");
+            if(answer < 0 || answer > 100) ClientView.warning("Valores para capacidade de bloquear bolas invalidos! [0..100]");
         } while(answer < 0 || answer > 100);
         return answer;
     }
 
     public static double get_elasticidade(){
-
-        Scanner input = new Scanner(System.in).useLocale(Locale.US);
         double answer = 0;
         do {
-            System.out.println("\tElasticidade: ");
-            while (!input.hasNextDouble()) {
-                input.next();
-            }
-            answer = input.nextInt();
-            if(answer < 0 || answer > 100) ClientView.warning("\t Valores para elasticidade invalidos! [0..100]");
+           answer = ClientView.get_Double("Elasticidade: ");
+            if(answer < 0 || answer > 100) ClientView.warning("Valores para elasticidade invalidos! [0..100]");
         } while(answer < 0 || answer > 100);
         return answer;
     }
 
 
     public static double get_capacidade_cruzamentos(){
-
-        Scanner input = new Scanner(System.in).useLocale(Locale.US);
         double answer = 0;
         do {
-            System.out.println("\tCapacidade Cruzamentos: ");
-            while (!input.hasNextDouble()) {
-                input.next();
-            }
-            answer = input.nextInt();
-            if(answer < 0 || answer > 100) ClientView.warning("\t Valores para capacidade de cruzamentos invalidos! [0..100]");
+            answer = ClientView.get_Double("Capacidade para Cruzamentos: ");
+            if(answer < 0 || answer > 100) ClientView.warning("Valores para capacidade de cruzamentos invalidos! [0..100]");
         } while(answer < 0 || answer > 100);
         return answer;
     }
@@ -243,12 +170,8 @@ public class JogadorFutebolView {
         Scanner input = new Scanner(System.in).useLocale(Locale.US);
         double answer = 0;
         do {
-            System.out.println("\tCapacidade Recuperar Bolas: ");
-            while (!input.hasNextDouble()) {
-                input.next();
-            }
-            answer = input.nextInt();
-            if(answer < 0 || answer > 100) ClientView.warning("\t Valores para capacidade de recuperar bolas invalidos! [0..100]");
+           answer = ClientView.get_Double("Capacidade Recuperar Bolas: ");
+            if(answer < 0 || answer > 100) ClientView.warning("Valores para capacidade de recuperar bolas invalidos! [0..100]");
         } while(answer < 0 || answer > 100);
         return answer;
     }
@@ -282,27 +205,21 @@ public class JogadorFutebolView {
 
             for (Map.Entry<String, JogadorFutebol> entrada : js.entrySet()) {
 
-                System.out.println("Jogador : " + entrada.getKey() + " | Posicao : " + entrada.getValue().getPosicaoCampo().toString()
-                        + " | Pontos Habilidade: " + entrada.getValue().getHabilidade());
+                System.out.println("\t|Jogador : " + entrada.getKey() + " (+) Posicao : " + entrada.getValue().getPosicaoCampo().toString()
+                        + " (+) Pontos Habilidade: " + entrada.getValue().getHabilidade());
 
             }
-            System.out.println("\nNumero de jogadores guardados: " + js.size() + "\n");
+            System.out.println("\n\t|(+) Numero de jogadores guardados: " + js.size() + "\n");
     }
 
     public static int consultar_jogadores(Map<String, JogadorFutebol> js){
 
         int opcao;
-        System.out.println("\tQueres consultar a informacao de algum jogador?\n");
-
-        StringBuilder s = new StringBuilder("\t___________________________________\n");
-                                  s.append("\t||                               ||\n");
-                                  s.append("\t|             1) SIM              |\n");
-                                  s.append("\t|             2) NAO              |\n");
-                                  s.append("\t||_______________________________||\n\n");
-        System.out.println(s);
-
+        ClientView.SimNao("Queres consultar a informacao de algum jogador?");
+        boolean flag;
         do {
            opcao = ClientView.get_Int("Opcao");
+           flag = ClientView.not_an_option(opcao, 1, 2);
         } while(opcao != 1 && opcao != 2);
 
         if(opcao == 1) {
@@ -311,7 +228,8 @@ public class JogadorFutebolView {
                 JogadorFutebolView.print_jogador(js.get(nome));
                 ClientView.pause();
             } else {
-                ClientView.warning("\tEsse jogador nao esta guardado!");
+                ClientView.warning("Esse jogador nao esta guardado!");
+                ClientView.pause();
             }
         }
         return opcao;
@@ -321,9 +239,9 @@ public class JogadorFutebolView {
     public static int get_tamanho_equipa(){
         int tamanho;
         do {
-            ClientView.warning("\tQual o tamanho da equipa? (Titulares + Suplentes)");
+            ClientView.warning("Qual o tamanho da equipa? (Titulares + Suplentes)");
             tamanho = ClientView.get_Int("Tamanho");
-            if(tamanho < 7 || tamanho > 23) ClientView.warning("\tNumero minimo [7], Numero maximo [11+12]");
+            if(tamanho < 7 || tamanho > 23) ClientView.warning("Numero minimo [7], Numero maximo [11+12]");
         } while (tamanho < 7 || tamanho > 23);
 
         return tamanho;
@@ -345,13 +263,16 @@ public class JogadorFutebolView {
 
             for (Map.Entry<String, EquipaFutebol> entrada : eqs.entrySet()) {
                 EquipaFutebol eq = entrada.getValue();
-                System.out.printf("\tEquipa \"%s\"\n\tTitulares:\n\t", eq.getNome());
+                System.out.printf("\t|| Equipa \"%s\" ||\n\t\t[-Titulares-]:\n", eq.getNome());
+
                 for(Map.Entry<String, JogadorFutebol> jf : eq.getJogadoresTitulares().entrySet())
-                    System.out.print("[" + jf.getValue().getNumero() + "] ");
-                System.out.printf("\n\tSuplentes:\n\t");
+                    System.out.println("\t\t\t (+) " + jf.getKey() + " ["+ jf.getValue().getNumero() + "] " + jf.getValue().getPosicaoCampo().toString());
+
+                System.out.print("\t\t[-Suplentes-]:\n");
                 for(Map.Entry<String, JogadorFutebol> jf : eq.getJogadoresSuplentes().entrySet())
-                    System.out.print("[" + jf.getValue().getNumero() + "] ");
-                System.out.println("\tHabilidade média da equipa: " + eq.getHabilidade());
+                     System.out.println("\t\t\t (+) " + jf.getKey() + " ["+ jf.getValue().getNumero() + "] " + jf.getValue().getPosicaoCampo().toString());
+
+                System.out.println("\t+ Habilidade média da equipa: " + eq.getHabilidade());
                 System.out.println("\n");
             }
             System.out.println("\nNumero de equipas guardados: " + eqs.size() + "\n");
@@ -365,18 +286,11 @@ public class JogadorFutebolView {
     public static int consultar_equipa(Map<String, EquipaFutebol> eqs){
 
         int opcao;
-        System.out.println("\tQueres consultar a informacao de alguma equipa?\n");
-
-        StringBuilder s = new StringBuilder("\t___________________________________\n");
-                                  s.append("\t||                               ||\n");
-                                  s.append("\t|             1) SIM              |\n");
-                                  s.append("\t|             2) NAO              |\n");
-                                  s.append("\t||_______________________________||\n\n");
-        System.out.println(s);
+        ClientView.SimNao("Queres consultar a informacao de alguma equipa?");
 
         do {
            opcao = ClientView.get_Int("Opcao");
-           if(opcao != 1 && opcao != 2) ClientView.warning("\tEssa opcao nao esta disponivel!");
+           ClientView.not_an_option(opcao, 1, 2);
         } while(opcao != 1 && opcao != 2);
 
         if(opcao == 1) {
@@ -385,12 +299,32 @@ public class JogadorFutebolView {
                 System.out.println(eqs.get(nome).toString());
                 ClientView.pause();
             } else {
-                ClientView.warning("\tEssa equipa nao esta guardada!");
+                ClientView.warning("Essa equipa nao esta guardada!");
             }
         }
         return opcao;
     }
 
+
+    public static void print_jogos(Set<JogoFutebol> jogos) {
+
+            ClientView.clear_window();
+
+            StringBuilder s = new StringBuilder("\t___________________________________\n");
+            s.append("\t||        JOGOS GUARDADOS        ||\n");
+            s.append("\t|                                 |\n");
+            s.append("\t||_______________________________||\n\n");
+            System.out.println(s);
+
+            for(JogoFutebol jf : jogos){
+
+               System.out.println("\t||__|-[" + jf.get_nome_equipa_casa() + "]-| VS [" + jf.get_nome_equipa_fora() + "]-|__");
+               System.out.println("\t\t(+) Data: " + jf.getData().toString() + "\n");
+
+           }
+
+            System.out.println("\nNumero de jogos guardados: " + jogos.size() + "\n");
+    }
 
 
 }

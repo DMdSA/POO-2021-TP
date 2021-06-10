@@ -152,13 +152,13 @@ public Medio (String nome, int idade, double altura, double peso, PosicaoCampo p
 
 
 //getHabilidade
-    public double getHabilidade(){
-    
-        double habilidade = 0;
-        habilidade += this.fatorIdade() + 1 + 1 + 1 + 1 + 1 + 1 + 1 + this.getHumor()*2 + this.getCapacidadeRecuperarBolas()* 2;
-        //Ilustrativo, defini 1 para todas as habilidades "comuns"
-        return habilidade;
-    }
+public double getHabilidade(){
+
+    double habilidade = 0;
+    habilidade += this.getVelocidade() + this.getImpulsao() + this.getResistencia() + this.getDestreza() + this.getJogoCabeca() + this.getRemate() + this.getPasse() + this.getCapacidadeRecuperarBolas();
+    //Ilustrativo, defini 1 para todas as habilidades "comuns"
+    return habilidade/8;
+}
 
     public void add_extra(double extra){
 	    this.capacidadeRecuperarBolas = extra;
