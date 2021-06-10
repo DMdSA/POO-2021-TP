@@ -1,4 +1,5 @@
 package Jogadores;
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -25,6 +26,7 @@ public class GuardaRedes extends JogadorFutebol{
         
         super();
         this.elasticidade = 0;
+        this.setOverall(this.getHabilidade());
     }
     
 
@@ -32,6 +34,7 @@ public class GuardaRedes extends JogadorFutebol{
         
         super(nome, pc);
         this.elasticidade = 0;
+        this.setOverall(this.getHabilidade());
     }
 
 
@@ -40,6 +43,7 @@ public class GuardaRedes extends JogadorFutebol{
         
         super(gr);
         this.elasticidade = gr.getElasticidade();
+        this.setOverall(this.getHabilidade());
     }
     
                     //Com overall + historico
@@ -64,6 +68,7 @@ public class GuardaRedes extends JogadorFutebol{
 
         super(nome, idade, altura, peso, posicao, numero, velocidade, impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor, historico);
         this.elasticidade = elasticidade;
+        this.setOverall(this.getHabilidade());
     }
 
                     //Sem overall - historico
@@ -72,18 +77,26 @@ public class GuardaRedes extends JogadorFutebol{
 
         super(nome, idade, altura, peso, posicao, numero, velocidade, impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor);
         this.elasticidade = elasticidade;
+        this.setOverall(this.getHabilidade());
     }
 
 
                     //Construtor com o formato dos LOGS
-    public GuardaRedes(String nome, int numero, double velocidade, double resistencia, double destreza, double impulsao, double cabeca, double remate, double passe, double elasticidade){
+    public GuardaRedes(String nome, int numero, double velocidade, double resistencia
+                            , double destreza, double impulsao, double cabeca, double remate
+                                , double passe, double elasticidade){
 
         super(nome, PosicaoCampo.GR);
+        this.setIdade(this.int_random_generator(16, 50));
+        this.setAltura(this.double_random_generator(1.40, 2.8));
+        this.setPeso(this.double_random_generator(40, 80));
+        this.setHumor(this.double_random_generator(1, 100));
         this.setNumero(numero);
         this.setVelocidade(velocidade);
         this.setResistencia(resistencia);
         this.setDestreza(destreza); this.setImpulsao(impulsao); this.setJogoCabeca(cabeca); this.setRemate(remate); this.setPasse(passe);
         this.elasticidade = elasticidade;
+        this.setOverall(this.getHabilidade());
     }
 
 
@@ -106,6 +119,11 @@ public class GuardaRedes extends JogadorFutebol{
                 Double.parseDouble((campos[9])));
     }    //Guarda-Redes:<Nome>,<NumeroCamisola>,<Velocidade>,<Resistência>,<Destreza>,<Impulsão>,<Cabeça>,<Remate>,<Passe>,<Elasticidade>
 
+    /**
+     * clone
+     */
+    public GuardaRedes clone(){ return new GuardaRedes(this);}
+
 
     /**
      * Getter
@@ -120,7 +138,7 @@ public class GuardaRedes extends JogadorFutebol{
      */
 
     public void setElasticidade (double elasticidade) {
-        this.elasticidade = elasticidade;
+        this.elasticidade = elasticidade; this.setOverall(this.getHabilidade());
     }
 
 
@@ -128,25 +146,10 @@ public class GuardaRedes extends JogadorFutebol{
      * toString
      */
     public String toString(){
-
-        final StringBuffer finalString = new StringBuffer("\tJogador \"" + this.getNome() + "\" = {\n");
-        finalString.append("\t\t\tPosicao: " + PosicaoCampo.printPosicao(this.getPosicaoCampo()) + ";\n");
-        finalString.append("\t\t\tIdade: " + this.getIdade() + ";\n");
-        finalString.append("\t\t\tPeso: " + this.getPeso() + ";\n");
-        finalString.append("\t\t\tAltura: " + this.getAltura() + ";\n");
-        finalString.append("\t\t\tNumero: " + this.getNumero() + ";\n");
-        finalString.append("\t\t\tOverall: " + this.getOverall() + ";\n");
-        finalString.append("\t\t\tVelocidade: " + this.getVelocidade() + ";\n");
-        finalString.append("\t\t\tImpulsao: " + this.getImpulsao() + ";\n");
-        finalString.append("\t\t\tResistencia: " + this.getResistencia() + ";\n");
-        finalString.append("\t\t\tDestreza: " + this.getDestreza() + ";\n");
-        finalString.append("\t\t\tJogo Cabeca: " + this.getJogoCabeca() + ";\n");
-        finalString.append("\t\t\tRemate: " + this.getRemate() + ";\n");
-        finalString.append("\t\t\tCapacidade Passe: " + this.getPasse() + ";\n");
-        finalString.append("\t\t\tHumor: " + this.getHumor() + ";\n");
-        finalString.append("\t\t\tElasticidade: " + this.getElasticidade() + ";\n");
-        finalString.append("\t\t\tPontos Habilidade: " + this.getHabilidade() + ";\n");
-        finalString.append("\t\t\tHistorico equipas: " + this.getHistorico().toString() + ";\n}\n");
+        DecimalFormat df = new DecimalFormat("#.##");
+        final StringBuffer finalString = new StringBuffer(this.toString_aux());
+        finalString.append("\t\t\t|-| Elasticidade: ").append(df.format(this.getElasticidade())).append(";\n");
+        finalString.append("\t\t\t|-| Historico equipas: ").append(this.getHistorico().toString()).append(";\n}\n");
 
         return finalString.toString();
     }
@@ -163,26 +166,13 @@ public class GuardaRedes extends JogadorFutebol{
     }
 
 
-
-//clone,
-
-    public GuardaRedes clone(){ return new GuardaRedes(this);}
-
-
-
     public double getHabilidade(){
-    
+
         double habilidade = 0;
-        habilidade += this.fatorIdade() + 1 + 1 + 1 + 1 + 1 + 1 + 1 + this.getHumor()*2 + this.getElasticidade()* 2;
-        //Ilustrativo, defini 1 para todas as habilidades "comuns"
-        return habilidade;
+        habilidade += this.getVelocidade() + this.getImpulsao() + this.getResistencia()
+                                    + this.getDestreza() + this.getJogoCabeca() + this.getRemate()
+                                            + this.getPasse() + this.getElasticidade();
+        return habilidade/8;
     }
-
-
-
-    public void add_extra(double extra){
-	    this.elasticidade = extra;
-    }
-
 
 }

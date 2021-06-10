@@ -1,4 +1,5 @@
 package Jogadores;
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class Medio extends JogadorFutebol{
@@ -13,6 +14,7 @@ public class Medio extends JogadorFutebol{
 
 		super();
 		this.capacidadeRecuperarBolas = 0;
+		this.setOverall(this.getHabilidade());
 	}
 
 
@@ -20,6 +22,7 @@ public class Medio extends JogadorFutebol{
 
 		super(nome, posicao);
 		this.capacidadeRecuperarBolas = 0;
+		this.setOverall(this.getHabilidade());
 	}
 
                 //Com overall + historico
@@ -49,6 +52,7 @@ public Medio (String nome, int idade, double altura, double peso, PosicaoCampo p
         super(nome, idade, altura, peso, posicao, numero, velocidade, impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor, historico);
         this.setOverall(this.getHabilidade());
         this.capacidadeRecuperarBolas = capacidadeRecuperarBolas;
+        this.setOverall(this.getHabilidade());
     }
 
                 //Sem overall - historico
@@ -58,6 +62,7 @@ public Medio (String nome, int idade, double altura, double peso, PosicaoCampo p
 
         super(nome, idade, altura, peso, posicao, numero, velocidade, impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor);
         this.capacidadeRecuperarBolas = capacidadeRecuperarBolas;
+        this.setOverall(this.getHabilidade());
     }
 
 
@@ -65,20 +70,25 @@ public Medio (String nome, int idade, double altura, double peso, PosicaoCampo p
 
 		super(d);
 		this.capacidadeRecuperarBolas = d.getCapacidadeRecuperarBolas();
+		this.setOverall(this.getHabilidade());
 	}
 
             //Constructor c/formato LOGS
     public Medio(String nome, int numero, double velocidade, double resistencia, double destreza, double impulsao, double cabeca, double remate, double passe, double recuperacao){
 
         super(nome, PosicaoCampo.M);
+        this.setIdade(this.int_random_generator(16, 50));
+        this.setAltura(this.double_random_generator(1.40, 2.8));
+        this.setPeso(this.double_random_generator(40, 80));
+        this.setHumor(this.double_random_generator(1, 100));
         this.setNumero(numero);
         this.setVelocidade(velocidade);
         this.setResistencia(resistencia);
         this.setDestreza(destreza); this.setImpulsao(impulsao); this.setJogoCabeca(cabeca); this.setRemate(remate); this.setPasse(passe);
         this.capacidadeRecuperarBolas = recuperacao;
+        this.setOverall(this.getHabilidade());
 
     }
-    //Medio:<Nome>,<NumeroCamisola>,<Velocidade>,<Resistência>,<Destreza>,<Impulsão>,<Cabeça>,<Remate>,<Passe>,<Recuperacao>
 
             //Parsed constructor
     public static Medio parse(String input){
@@ -107,7 +117,8 @@ public Medio (String nome, int idade, double altura, double peso, PosicaoCampo p
 
 //Setters,
 
-	public void setCapacidadeRecuperarBolas(double recuperarbolas){ this.capacidadeRecuperarBolas = recuperarbolas;}
+	public void setCapacidadeRecuperarBolas(double recuperarbolas){ this.capacidadeRecuperarBolas = recuperarbolas;
+	this.setOverall(this.getHabilidade());}
 
 
 
@@ -128,41 +139,22 @@ public Medio (String nome, int idade, double altura, double peso, PosicaoCampo p
 //toString,
 
     public String toString(){
+        DecimalFormat df = new DecimalFormat("#.##");
+        final StringBuffer s = new StringBuffer(this.toString_aux());
+            s.append("\t\t\t|-| Capacidade recuperar bolas: ").append(df.format(this.getCapacidadeRecuperarBolas())).append(";\n");
+            s.append("\t\t\t|-| Historico equipas: ").append(this.getHistorico().toString()).append(";\n}\n");
 
-        final StringBuffer finalString = new StringBuffer("\tJogador \"" + this.getNome() + "\" = {\n");
-        finalString.append("\t\t\tPosicao: " + PosicaoCampo.printPosicao(this.getPosicaoCampo()) + ";\n");
-        finalString.append("\t\t\tIdade: " + this.getIdade() + ";\n");
-        finalString.append("\t\t\tPeso: " + this.getPeso() + ";\n");
-        finalString.append("\t\t\tAltura: " + this.getAltura() + ";\n");
-        finalString.append("\t\t\tNumero: " + this.getNumero() + ";\n");
-        finalString.append("\t\t\tOverall: " + this.getOverall() + ";\n");
-        finalString.append("\t\t\tVelocidade: " + this.getVelocidade() + ";\n");
-        finalString.append("\t\t\tImpulsao: " + this.getImpulsao() + ";\n");
-        finalString.append("\t\t\tResistencia: " + this.getResistencia() + ";\n");
-        finalString.append("\t\t\tDestreza: " + this.getDestreza() + ";\n");
-        finalString.append("\t\t\tJogo Cabeca: " + this.getJogoCabeca() + ";\n");
-        finalString.append("\t\t\tRemate: " + this.getRemate() + ";\n");
-        finalString.append("\t\t\tCapacidade Passe: " + this.getPasse() + ";\n");
-        finalString.append("\t\t\tHumor: " + this.getHumor() + ";\n");
-        finalString.append("\t\t\tCapacidade recuperar bolas: " + this.getCapacidadeRecuperarBolas() + ";\n");
-        finalString.append("\t\t\tHistorico equipas: " + this.getHistorico().toString() + ";\n}\n");
-
-        return finalString.toString();
+        return s.toString();
     }
 
 
-//getHabilidade
+
     public double getHabilidade(){
-    
-        double habilidade = 0;
-        habilidade += this.fatorIdade() + 1 + 1 + 1 + 1 + 1 + 1 + 1 + this.getHumor()*2 + this.getCapacidadeRecuperarBolas()* 2;
-        //Ilustrativo, defini 1 para todas as habilidades "comuns"
-        return habilidade;
-    }
 
-    public void add_extra(double extra){
-	    this.capacidadeRecuperarBolas = extra;
-    }
-
-
+    double habilidade = 0;
+    habilidade += this.getVelocidade() + this.getImpulsao() + this.getResistencia()
+                                + this.getDestreza() + this.getJogoCabeca() + this.getRemate()
+                                    + this.getPasse() + this.getCapacidadeRecuperarBolas();
+    return habilidade/8;
+}
 }

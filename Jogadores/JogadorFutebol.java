@@ -1,9 +1,8 @@
 package Jogadores;
-import java.util.ArrayList;
+import java.text.DecimalFormat;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class JogadorFutebol extends Jogador {
     
@@ -226,10 +225,10 @@ public class JogadorFutebol extends Jogador {
      * Setters
      */
 
-    public void setPosicao(PosicaoCampo pc){ this.posicao = pc;}
+    public void setPosicao(PosicaoCampo pc){ this.posicao = pc; this.setOverall(this.getHabilidade());}
 
     public void setNumero (int numero) {
-        this.numero = numero;
+        this.numero = numero; this.setOverall(this.getHabilidade());
     }
     
     public void setOverall (double overall) {
@@ -237,33 +236,33 @@ public class JogadorFutebol extends Jogador {
     }
     
     public void setVelocidade (double velocidade) {
-        this.velocidade = velocidade;
+        this.velocidade = velocidade; this.setOverall(this.getHabilidade());
     }
 
-    public void setImpulsao(double impulsao){ this.impulsao = impulsao;}
+    public void setImpulsao(double impulsao){ this.impulsao = impulsao; this.setOverall(this.getHabilidade());}
     
     public void setResistencia (double resistencia) {
-        this.resistencia = resistencia;
+        this.resistencia = resistencia; this.setOverall(this.getHabilidade());
     }
     
     public void setDestreza (double destreza) {
-        this.destreza = destreza;
+        this.destreza = destreza; this.setOverall(this.getHabilidade());
     }
     
     public void setRemate (double remate) {
-        this.remate = remate;
+        this.remate = remate; this.setOverall(this.getHabilidade());
     }
     
     public void setJogoCabeca (double jogoCabeca) {
-        this.jogoCabeca = jogoCabeca;
+        this.jogoCabeca = jogoCabeca; this.setOverall(this.getHabilidade());
     }
     
     public void setPasse (double passe) {
-        this.passe = passe;
+        this.passe = passe; this.setOverall(this.getHabilidade());
     }
     
     public void setHumor (double humor) {
-        this.humor = humor;
+        this.humor = humor;this.setOverall(this.getHabilidade());
     }
     
     public void setHistorico (List<String> historico) {
@@ -305,24 +304,32 @@ public class JogadorFutebol extends Jogador {
      */
     public String toString(){
 
-        final StringBuffer finalString = new StringBuffer("\t\tJogador \"" + this.getNome() + "\" = {\n");
-        finalString.append("\t\t\tPosicao: ").append(PosicaoCampo.printPosicao(this.getPosicaoCampo())).append(";\n");
-        finalString.append("\t\t\tIdade: ").append(this.getIdade()).append(" anos;\n");
-        finalString.append("\t\t\tPeso: ").append(this.getPeso()).append(" Kg;\n");
-        finalString.append("\t\t\tAltura: ").append(this.getAltura()).append(" cm;\n");
-        finalString.append("\t\t\tNumero: ").append(this.getNumero()).append(";\n");
-        finalString.append("\t\t\tOverall: ").append(this.getOverall()).append(";\n");
-        finalString.append("\t\t\tVelocidade: ").append(this.getVelocidade()).append(";\n");
-        finalString.append("\t\t\tImpulsao: ").append(this.getImpulsao()).append(";\n");
-        finalString.append("\t\t\tResistencia: ").append(this.getResistencia()).append(";\n");
-        finalString.append("\t\t\tDestreza: ").append(this.getDestreza()).append(";\n");
-        finalString.append("\t\t\tJogo Cabeca: ").append(this.getJogoCabeca()).append(";\n");
-        finalString.append("\t\t\tRemate: ").append(this.getRemate()).append(";\n");
-        finalString.append("\t\t\tCapacidade Passe: ").append(this.getPasse()).append(";\n");
-        finalString.append("\t\t\tHumor: ").append(this.getHumor()).append(";\n");
-        finalString.append("\t\t\tHistorico equipas: ").append(this.historico.toString()).append(";\n\t\t}\n");
-        return finalString.toString();
+        final StringBuffer s = new StringBuffer(this.toString_aux());
+        s.append("\t\t\tHistorico equipas: ").append(this.historico.toString()).append(";\n\t\t}\n");
+        return s.toString();
     }
+
+    public String toString_aux(){
+        DecimalFormat df = new DecimalFormat("#.##");
+        final StringBuffer s = new StringBuffer("\t\tJogador \"" + this.getNome() + "\" = {\n");
+            s.append("\t\t\t|-| Idade: ").append(this.getIdade()).append(" anos;\n");
+            s.append("\t\t\t|-| Posicao: ").append(PosicaoCampo.printPosicao(this.getPosicaoCampo())).append(";\n");
+            s.append("\t\t\t|-| Peso: ").append(df.format(this.getPeso())).append(" Kg;\n");
+            s.append("\t\t\t|-| Altura: ").append(df.format(this.getAltura())).append(" cm;\n");
+            s.append("\t\t\t|-| Numero: ").append(this.getNumero()).append(";\n");
+            s.append("\t\t\t|-| Overall: ").append(df.format(this.getOverall())).append(";\n");
+            s.append("\t\t\t|-| Velocidade: ").append(df.format(this.getVelocidade())).append(";\n");
+            s.append("\t\t\t|-| Impulsao: ").append(df.format(this.getImpulsao())).append(";\n");
+            s.append("\t\t\t|-| Resistencia: ").append(df.format(this.getResistencia())).append(";\n");
+            s.append("\t\t\t|-| Destreza: ").append(df.format(this.getDestreza())).append(";\n");
+            s.append("\t\t\t|-| Jogo Cabeca: ").append(df.format(this.getJogoCabeca())).append(";\n");
+            s.append("\t\t\t|-| Remate: ").append(df.format(this.getRemate())).append(";\n");
+            s.append("\t\t\t|-| Capacidade Passe: ").append(df.format(this.getPasse())).append(";\n");
+            s.append("\t\t\t|-| Humor: ").append(df.format(this.getHumor())).append(";\n");
+        return s.toString();
+    }
+
+
 
     /**
      * fatorIdade, define o quão a idade do jogador influenciará na sua habilidade
@@ -341,11 +348,12 @@ public class JogadorFutebol extends Jogador {
      * @return double associado à sua habilidade
      */
     public double getHabilidade(){
-    
+
         double habilidade = 0;
-        habilidade += this.fatorIdade() + 1 + 1 + 1 + 1 + 1 + 1 + 1 + this.getHumor()*2;
-        //Ilustrativo, defini 1 para todas as habilidades "comuns"
-        return habilidade;
+        habilidade += this.getVelocidade() + this.getImpulsao() + this.getResistencia()
+                                    + this.getDestreza() + this.getJogoCabeca()
+                                           + this.getRemate() + this.getPasse();
+        return habilidade/7;
     }
 
     /**
@@ -363,4 +371,17 @@ public class JogadorFutebol extends Jogador {
     public void adiciona_equipa(String nome_equipa){
         this.historico.add(nome_equipa);
     }
+
+
+
+    public int int_random_generator(int min, int max){
+
+        return (int) ((Math.random() * (max-min)) + min);
+    }
+
+    public double double_random_generator(double min, double max){
+
+        return (double) ((Math.random() * (max-min)) + min);
+    }
+
 }

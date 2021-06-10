@@ -15,7 +15,8 @@ public class JogadorFutebolView {
         int answer = 0; boolean flag;
         do{
             answer = ClientView.get_Int("Idade");
-            flag = ClientView.not_an_option(answer, 0, 60);
+            flag = ClientView.not_an_option(answer, 16, 50);
+            if(!flag) ClientView.warning("Com essa idade nao vai dar...");
         } while(!flag); //Não é para cortar os sonhos a ninguém...
 
         return answer;
@@ -25,7 +26,7 @@ public class JogadorFutebolView {
         double answer = 0; boolean flag;
         do {
             answer = ClientView.get_Double("Altura (m)");
-            flag = ClientView.not_an_option(answer, 0, 2.5);
+            flag = ClientView.not_an_option(answer, 0, 2.8);
             if(!flag) ClientView.warning("Essa altura nao parece ser valida!");
         } while(!flag);             //Não é para cortar os sonhos a ninguém...
 

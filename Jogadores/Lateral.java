@@ -1,4 +1,5 @@
 package Jogadores;
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class Lateral extends JogadorFutebol{
@@ -13,6 +14,7 @@ public class Lateral extends JogadorFutebol{
 
 		super();
 		this.capacidadeCruzamentos = 0;
+		this.setOverall(this.getHabilidade());
 	}
 
 
@@ -20,6 +22,7 @@ public class Lateral extends JogadorFutebol{
 
 		super(nome, posicao);
 		this.capacidadeCruzamentos = 0;
+		this.setOverall(this.getHabilidade());
 	}
 
             //Com overall + historico
@@ -47,6 +50,7 @@ public class Lateral extends JogadorFutebol{
 
         super(nome, idade, altura, peso, posicao, numero, velocidade, impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor, historico);
         this.capacidadeCruzamentos = cruzamentos;
+        this.setOverall(this.getHabilidade());
     }
 
 
@@ -57,6 +61,7 @@ public class Lateral extends JogadorFutebol{
 
         super(nome, idade, altura, peso, posicao, numero, velocidade, impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor);
         this.capacidadeCruzamentos = cruzamentos;
+        this.setOverall(this.getHabilidade());
     }
 
 
@@ -64,17 +69,25 @@ public class Lateral extends JogadorFutebol{
 
 		super(d);
 		this.capacidadeCruzamentos = d.getCapacidadeCruzamentos();
+		this.setOverall(this.getHabilidade());
 	}
 
             //Constructor c/formato LOGS
-    public Lateral(String nome, int numero, double velocidade, double resistencia, double destreza, double impulsao, double cabeca, double remate, double passe, double cruzamento){
+    public Lateral(String nome, int numero, double velocidade, double resistencia, double destreza,
+                                    double impulsao, double cabeca, double remate,
+                                            double passe, double cruzamento){
 
         super(nome, PosicaoCampo.L);
+        this.setIdade(this.int_random_generator(16, 50));
+        this.setAltura(this.double_random_generator(1.40, 2.8));
+        this.setPeso(this.double_random_generator(40, 80));
+        this.setHumor(this.double_random_generator(1, 100));
         this.setNumero(numero);
         this.setVelocidade(velocidade);
         this.setResistencia(resistencia);
         this.setDestreza(destreza); this.setImpulsao(impulsao); this.setJogoCabeca(cabeca); this.setRemate(remate); this.setPasse(passe);
         this.capacidadeCruzamentos = cruzamento;
+        this.setOverall(this.getHabilidade());
 
     }
     //Lateral:<Nome>,<NumeroCamisola>,<Velocidade>,<Resistência>,<Destreza>,<Impulsão>,<Cabeça>,<Remate>,<Passe>,<Cruzamento>
@@ -126,39 +139,22 @@ public class Lateral extends JogadorFutebol{
 //toString,
 
     public String toString(){
+        DecimalFormat df = new DecimalFormat("#.##");
+        final StringBuffer s = new StringBuffer(this.toString_aux());
+            s.append("\t\t\t|-| Capacidade cruzamentos: ").append(df.format(this.getCapacidadeCruzamentos())).append(";\n");
+            s.append("\t\t\t|-| Historico equipas: ").append(this.getHistorico().toString()).append(";\n}\n");
 
-        final StringBuffer finalString = new StringBuffer("\tJogador \"" + this.getNome() + "\" = {\n");
-        finalString.append("\t\t\tPosicao: " + PosicaoCampo.printPosicao(this.getPosicaoCampo()) + ";\n");
-        finalString.append("\t\t\tIdade: " + this.getIdade() + ";\n");
-        finalString.append("\t\t\tPeso: " + this.getPeso() + ";\n");
-        finalString.append("\t\t\tAltura: " + this.getAltura() + ";\n");
-        finalString.append("\t\t\tNumero: " + this.getNumero() + ";\n");
-        finalString.append("\t\t\tOverall: " + this.getOverall() + ";\n");
-        finalString.append("\t\t\tVelocidade: " + this.getVelocidade() + ";\n");
-        finalString.append("\t\t\tImpulsao: " + this.getImpulsao() + ";\n");
-        finalString.append("\t\t\tResistencia: " + this.getResistencia() + ";\n");
-        finalString.append("\t\t\tDestreza: " + this.getDestreza() + ";\n");
-        finalString.append("\t\t\tJogo Cabeca: " + this.getJogoCabeca() + ";\n");
-        finalString.append("\t\t\tRemate: " + this.getRemate() + ";\n");
-        finalString.append("\t\t\tCapacidade Passe: " + this.getPasse() + ";\n");
-        finalString.append("\t\t\tHumor: " + this.getHumor() + ";\n");
-        finalString.append("\t\t\tCapacidade cruzamentos: " + this.getCapacidadeCruzamentos() + ";\n");
-        finalString.append("\t\t\tHistorico equipas: " + this.getHistorico().toString() + ";\n}\n");
-
-        return finalString.toString();
+        return s.toString();
     }
 
 
     public double getHabilidade(){
 
         double habilidade = 0;
-        habilidade += this.fatorIdade() + 1 + 1 + 1 + 1 + 1 + 1 + 1 + this.getHumor()*2 + this.capacidadeCruzamentos * 2;
-        //Ilustrativo, defini 1 para todas as habilidades "comuns"
-        return habilidade;
-    }
-
-    public void add_extra(double extra){
-	    this.capacidadeCruzamentos = extra;
+        habilidade += this.getVelocidade() + this.getImpulsao() + this.getResistencia()
+                                + this.getDestreza() + this.getJogoCabeca() + this.getRemate()
+                                        + this.getPasse() + this.getCapacidadeCruzamentos();
+        return habilidade/8;
     }
 
 }
