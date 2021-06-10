@@ -95,8 +95,7 @@ public class Defesa extends JogadorFutebol{
     public static Defesa parse(String input){
 
         String[] parametros = input.split(",");
-
-        return new Defesa(parametros[0], Integer.parseInt(parametros[1]),
+        Defesa defesa = new Defesa(parametros[0], Integer.parseInt(parametros[1]),
                 Double.parseDouble(parametros[2]),
                 Double.parseDouble(parametros[3]),
                 Double.parseDouble(parametros[4]),
@@ -104,6 +103,8 @@ public class Defesa extends JogadorFutebol{
                 Double.parseDouble(parametros[6]),
                 Double.parseDouble(parametros[7]),
                 Double.parseDouble(parametros[8]));
+        defesa.setCapacidadeBloquearBolas(defesa.double_random_generator(1, 100));
+        return defesa;
     }
 
 

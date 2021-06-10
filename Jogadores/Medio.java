@@ -94,8 +94,7 @@ public Medio (String nome, int idade, double altura, double peso, PosicaoCampo p
     public static Medio parse(String input){
 
         String[] campos = input.split(",");
-
-        return new Medio(campos[0], Integer.parseInt(campos[1]),
+        Medio medio = new Medio(campos[0], Integer.parseInt(campos[1]),
                 Double.parseDouble(campos[2]),
                 Double.parseDouble(campos[3]),
                 Double.parseDouble(campos[4]),
@@ -104,6 +103,8 @@ public Medio (String nome, int idade, double altura, double peso, PosicaoCampo p
                 Double.parseDouble(campos[7]),
                 Double.parseDouble(campos[8]),
                 Double.parseDouble((campos[9])));
+        medio.setCapacidadeRecuperarBolas(medio.double_random_generator(1, 100));
+        return medio;
     }
 
 
