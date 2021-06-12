@@ -1,9 +1,13 @@
 import Equipa.EquipaFutebol;
-import Jogadores.*;
+import Jogadores.Futebol.*;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class ClientModel{
@@ -217,7 +221,7 @@ public class ClientModel{
         novo.setDestreza(JogadorFutebolView.get_destreza()); novo.setJogoCabeca(JogadorFutebolView.get_jogo_cabeca());
         novo.setRemate(JogadorFutebolView.get_remate()); novo.setPasse(JogadorFutebolView.get_passe());
         novo.setImpulsao(JogadorFutebolView.get_impulsao());
-        novo.setFinalizacao(JogadorFutebolView.get_finalizacao());
+        novo.setFinalizacao(JogadorFutebolView.get_finalizacao());novo.setHumor(novo.double_random_generator(0, 100));
         return novo;
     }
 
@@ -230,7 +234,7 @@ public class ClientModel{
         novo.setDestreza(JogadorFutebolView.get_destreza()); novo.setJogoCabeca(JogadorFutebolView.get_jogo_cabeca());
         novo.setRemate(JogadorFutebolView.get_remate()); novo.setPasse(JogadorFutebolView.get_passe());
         novo.setImpulsao(JogadorFutebolView.get_impulsao());
-        novo.setElasticidade(JogadorFutebolView.get_elasticidade());
+        novo.setElasticidade(JogadorFutebolView.get_elasticidade());novo.setHumor(novo.double_random_generator(0, 100));
         return novo;
     }
 
@@ -244,7 +248,7 @@ public class ClientModel{
         novo.setDestreza(JogadorFutebolView.get_destreza()); novo.setJogoCabeca(JogadorFutebolView.get_jogo_cabeca());
         novo.setRemate(JogadorFutebolView.get_remate()); novo.setPasse(JogadorFutebolView.get_passe());
         novo.setImpulsao(JogadorFutebolView.get_impulsao());
-        novo.setCapacidadeBloquearBolas(JogadorFutebolView.get_capacidade_bloquear_bolas());
+        novo.setCapacidadeBloquearBolas(JogadorFutebolView.get_capacidade_bloquear_bolas());novo.setHumor(novo.double_random_generator(0, 100));
         return novo;
     }
 
@@ -258,7 +262,7 @@ public class ClientModel{
         novo.setDestreza(JogadorFutebolView.get_destreza()); novo.setJogoCabeca(JogadorFutebolView.get_jogo_cabeca());
         novo.setRemate(JogadorFutebolView.get_remate()); novo.setPasse(JogadorFutebolView.get_passe());
         novo.setImpulsao(JogadorFutebolView.get_impulsao());
-        novo.setCapacidadeCruzamentos(JogadorFutebolView.get_capacidade_cruzamentos());
+        novo.setCapacidadeCruzamentos(JogadorFutebolView.get_capacidade_cruzamentos());novo.setHumor(novo.double_random_generator(0, 100));
         return novo;
     }
 
@@ -272,7 +276,7 @@ public class ClientModel{
         novo.setDestreza(JogadorFutebolView.get_destreza()); novo.setJogoCabeca(JogadorFutebolView.get_jogo_cabeca());
         novo.setRemate(JogadorFutebolView.get_remate()); novo.setPasse(JogadorFutebolView.get_passe());
         novo.setImpulsao(JogadorFutebolView.get_impulsao());
-        novo.setCapacidadeRecuperarBolas(JogadorFutebolView.get_capacidade_recuperar_bolas());
+        novo.setCapacidadeRecuperarBolas(JogadorFutebolView.get_capacidade_recuperar_bolas());novo.setHumor(novo.double_random_generator(0, 100));
         return novo;
     }
 
@@ -293,21 +297,6 @@ public class ClientModel{
 
         this.jogos_guardados = new HashSet<JogoFutebol>();
         for(JogoFutebol jf : jogos) this.addJogo(jf);
-    }
-
-    /**
-     * guarda_dados Guarda os dados do programa num ficheiro de objetos
-     * @param filename Nome do ficheiro
-     * @throws IOException
-     */
-    public void guarda_Dados(String filename) throws IOException {
-        WriteToFile writeToFile = new WriteToFile();
-        writeToFile.WriteObjectToFile(user,filename);
-        writeToFile.WriteObjectToFile(jogadores_guardados,filename);
-        writeToFile.WriteObjectToFile(equipas_guardadas,filename);
-        for(Jogo j : jogos_guardados){
-            writeToFile.WriteObjectToFile(j,filename);
-        }
     }
 
     /**
@@ -343,4 +332,34 @@ public class ClientModel{
             return this.equipas_guardadas.get(nome);
         return new EquipaFutebol();
     }
+
+
+    /**
+     * guarda_dados Guarda os dados do programa num ficheiro de objetos
+     * @param filename Nome do ficheiro
+     * @throws IOException
+     */
+    public void guarda_Dados(String filename) throws IOException {
+        ArrayList<Object> tofile = new ArrayList<>();
+        tofile.add(user);
+        for(Map.Entry<String,JogadorFutebol> entrada : jogadores_guardados.entrySet()){
+            tofile.add(entrada.getValue());
+        }
+        //tofile.add(jogadores_guardados);
+        for(Map.Entry<String,EquipaFutebol> entrada2 : equipas_guardadas.entrySet()){
+            tofile.add(entrada2.getValue());
+        }
+            tofile.add(jogos_guardados);
+
+        ObjectFileProcessing.WriteObjectToFile(tofile,filename);
+    }
+
+    /**
+     * add_points, atualiza o número de pontos do utilizador
+     * @param points pontos a adicionar
+     */
+    public void add_points(int points){
+        this.user.add_points(points);
+    }
+
 }

@@ -120,4 +120,15 @@ public class Utilizador implements Serializable {
     public boolean isEmpty(){
         return this.username.equals("Anonimo") || this.level == -1;
     }
+
+    /**
+     * add_points, Atualiza o número de pontos do utilizador
+     * @param points pontos a adicionar
+     */
+    public void add_points(int points){
+
+        this.points += points;
+        this.level = (int) Math.floor(this.points/100);
+
+    }
 }

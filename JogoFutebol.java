@@ -1,5 +1,5 @@
 import Equipa.EquipaFutebol;
-import Jogadores.JogadorFutebol;
+import Jogadores.Futebol.JogadorFutebol;
 import java.time.LocalDate;
 import java.util.Map;
 
