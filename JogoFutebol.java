@@ -135,4 +135,10 @@ public class JogoFutebol extends Jogo{
         finalstring.append("\nData do jogo: ").append(this.getData().toString()).append("\n\n");
         return finalstring.toString();
     }
+
+    public boolean substitui(JogadorFutebol t, JogadorFutebol b){
+
+        return this.equipaCasa.substitui(t, b);
+
+    }
 }

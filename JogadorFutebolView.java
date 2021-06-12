@@ -373,12 +373,30 @@ public class JogadorFutebolView {
 
             for(JogoFutebol jf : jogos){
 
+                System.out.println(jf.toString());
                System.out.println("\t||__|-[" + jf.get_nome_equipa_casa() + "]-| VS [" + jf.get_nome_equipa_fora() + "]-|__");
                System.out.println("\t\t(+) Data: " + jf.getData().toString() + "\n");
 
            }
 
             System.out.println("\nNumero de jogos guardados: " + jogos.size() + "\n");
+    }
+
+
+    public static void print_jogadores_jogo(JogoFutebol jogoFutebol) {
+        System.out.println("\t(+) Jogadores Titulares: ");
+        DecimalFormat df = new DecimalFormat("#.##");
+        for (Map.Entry<String, JogadorFutebol> entrada : jogoFutebol.getEquipaCasa().getJogadoresTitulares().entrySet()) {
+
+            System.out.println("\t\t|Jogador : " + entrada.getKey() + " (+) Posicao : " + entrada.getValue().getPosicaoCampo().toString()
+                    + " (+) Pontos Habilidade: " + df.format(entrada.getValue().getHabilidade()));
+        }
+        System.out.println("\t(+) Jogadores Suplentes: ");
+        for (Map.Entry<String, JogadorFutebol> entrada : jogoFutebol.getEquipaCasa().getJogadoresSuplentes().entrySet()) {
+
+            System.out.println("\t\t|Jogador : " + entrada.getKey() + " (+) Posicao : " + entrada.getValue().getPosicaoCampo().toString()
+                    + " (+) Pontos Habilidade: " + df.format(entrada.getValue().getHabilidade()));
+        }
     }
 }
 

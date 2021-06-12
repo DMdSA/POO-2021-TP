@@ -1,5 +1,6 @@
 import Jogadores.Futebol.JogadorFutebol;
 
+import java.text.DecimalFormat;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
@@ -199,14 +200,37 @@ public class JogoFutebolModel {
     public static void substituicoes(JogoFutebol jogoFutebol){
         int subs;
         boolean flag;
+        String titular,suplente;
 
         do {
             ClientView.warning("(-) Quantas substituicoes queres fazer? ");
-            subs = ClientView.get_Int("(-)  Numero de substituicoes: ");
+            subs = ClientView.get_Int("(-)  Numero de substituicoes ");
             flag = ClientView.not_an_option(subs,0,3);
         }while (!flag);
 
-        JogadorFutebolView.print_jogadores_info(jogoFutebol.getEquipaCasa().getJogadoresTitulares());
-        JogadorFutebolView.print_jogadores_info(jogoFutebol.getEquipaCasa().getJogadoresSuplentes());
+        JogadorFutebolView.print_jogadores_jogo(jogoFutebol);
+        for(int i = 0; i < subs; i++){
+            do {
+                 titular = ClientView.get_String("Jogador que vai sair ");
+                 suplente = ClientView.get_String("Jogador que vai entrar ");
+                 flag = (jogoFutebol.getEquipaCasa().hasJogador(titular) && jogoFutebol.getEquipaCasa().hasJogador(suplente));
+                 if(!flag){
+                     ClientView.warning("Um dos jogadores nao esta presente na equipa ou os jogadores nao jogam na mesma posicao");
+                 }
+            }while (!flag);
+
+            flag = jogoFutebol.substitui(jogoFutebol.getEquipaCasa().getJogadorByName(titular),
+                    jogoFutebol.getEquipaCasa().getJogadorByName(suplente));
+            if(flag){
+                ClientView.warning("Substituicao efetuada com sucesso");
+
+            }
+            else{
+                ClientView.warning("Ocorreu um erro");
+            }
+
+        }
     }
+
+
 }
