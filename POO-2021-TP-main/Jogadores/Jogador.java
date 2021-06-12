@@ -2,18 +2,24 @@ package Jogadores;
 
 import java.io.Serializable;
 
+/**
+ * Jogador Class
+ *
+ * @author Diogo Araújo, Diogo Rebelo
+ * @version 1.0
+ */
+
 public class Jogador implements Serializable {
     
     private String nome;
     private int idade;
     private double altura;
     private double peso;
-    //private int ID; //para garantir a unicidade do jogador
     
     /**
      * Construtores
      */
-    public Jogador () {             //Não sei se fará muito sentido usar este, mas também n deve fazer grande diferença
+    public Jogador () {
         this.nome = "";
         this.idade = 0;
         this.altura = 0;
@@ -26,7 +32,6 @@ public class Jogador implements Serializable {
         this.altura = 0;
         this.peso = 0;
     }
-
 
     public Jogador (String nome, int idade, double altura, double peso) {
         this.nome = nome;
@@ -41,7 +46,14 @@ public class Jogador implements Serializable {
         this.altura = j.getAltura();
         this.peso = j.getPeso();
     }
-    
+
+    /**
+     * Clone
+     */
+    public Jogador clone(){
+        return new Jogador(this);
+    }
+
     /**
      * Getters
      */
@@ -95,29 +107,16 @@ public class Jogador implements Serializable {
                 this.altura == that.altura &&
                 this.peso == that.peso;
     }
-    
-    
-    /**
-     * Clone
-     */
-    public Jogador clone(){
-        return new Jogador(this);
-    }
-
 
     /**
      * toString
      */
     public String toString(){
 
-        final StringBuffer finalString = new StringBuffer("\tJogador \"" + this.getNome() + "\" = {\n");
-        finalString.append("\t\tIdade: " + this.getIdade() + ";\n");
-        finalString.append("\t\tAltura: " + this.getAltura() + ";\n");
-        finalString.append("\t\tPeso: " + this.getPeso() + ";\n\t}\n");
-
-        return finalString.toString();
+        final StringBuffer s = new StringBuffer("\tJogador \"" + this.getNome() + "\" = {\n");
+        s.append("\t\tIdade: ").append(this.getIdade()).append(";\n");
+        s.append("\t\tAltura: ").append(this.getAltura()).append(";\n");
+        s.append("\t\tPeso: ").append(this.getPeso()).append(";\n\t}\n");
+        return s.toString();
     }
-
-
-
 }

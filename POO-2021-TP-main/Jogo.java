@@ -1,12 +1,20 @@
 import java.io.Serializable;
 
+/**
+ * Avancado Class
+ *
+ * @author Diogo Araújo, Diogo Rebelo
+ * @version 1.0
+ */
 public class Jogo implements Serializable {
 /**                                            Variáveis instância  */
     private int nEquipas;
     private double duracao;
     private int nPartes;
 
-
+    /**
+     * Construtores
+     */
     public Jogo(){
 
         this.nEquipas = 1;
@@ -20,7 +28,6 @@ public class Jogo implements Serializable {
         this.duracao = 0;
         this.nPartes = 1;
     }
-
 
     public Jogo(int nPartes){
 
@@ -46,17 +53,25 @@ public class Jogo implements Serializable {
         return new Jogo(this);
     }
 
-
+    /**
+     * getters
+     */
     public int get_NEquipas(){ return this.nEquipas;}
     public double get_Duracao(){ return this.duracao;}
     public int get_NPartes(){ return this.nPartes;}
 
-
+    /**
+     * setters
+     */
     public void set_NEquipas(int n){ this.nEquipas = n;}
     public void set_Duracao(double d){ this.duracao = d;}
     public void set_NPartes(int n){ this.nPartes = n;}
 
-
+    /**
+     * equals, Verifica se 2 objetos são iguais
+     * @param o Objeto a ser comparado
+     * @return True, se forem iguais
+     */
     public boolean equals(Object o){
 
         if(this == o) return true;
@@ -68,5 +83,13 @@ public class Jogo implements Serializable {
                 this.nPartes == that.nPartes;
     }
 
-    //toString
+    /**
+     * toString
+     */
+    public String toString(){
+
+        StringBuilder s = new StringBuilder("\tJogo:\t(+)Numero de equipas: " + this.nEquipas
+                + "\n\t\tDuracao: " + this.duracao + "\n\t\tNumero de Partes: " + this.nPartes);
+        return s.toString();
+    }
 }

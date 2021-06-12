@@ -1,6 +1,12 @@
 package Equipa;
-
 import java.io.Serializable;
+
+/**
+ * Equipa Class
+ *
+ * @author Diogo Araújo, Diogo Rebelo
+ * @version 1.0
+ */
 
 public class Equipa implements Serializable {
     /**                                            Variáveis instância  */
@@ -72,7 +78,6 @@ public class Equipa implements Serializable {
         this.suplentes = suplentes;
     }
 
-
     /**
      * equals
      * @param o Objeto a ser comparado
@@ -88,10 +93,8 @@ public class Equipa implements Serializable {
                 this.suplentes == that.getSuplentes();
     }
 
-
     /**
      * toString
-     * @return String com informação sobre o objeto
      */
     public String toString() {
        

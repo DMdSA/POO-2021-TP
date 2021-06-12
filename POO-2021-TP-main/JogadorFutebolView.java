@@ -1,10 +1,9 @@
 import Equipa.Equipa;
 import Equipa.EquipaFutebol;
-import Jogadores.JogadorFutebol;
-import Jogadores.PosicaoCampo;
+import Jogadores.Futebol.JogadorFutebol;
+import Jogadores.Futebol.PosicaoCampo;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.text.DecimalFormat;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
@@ -16,7 +15,8 @@ public class JogadorFutebolView {
         int answer = 0; boolean flag;
         do{
             answer = ClientView.get_Int("Idade");
-            flag = ClientView.not_an_option(answer, 0, 60);
+            flag = ClientView.not_an_option(answer, 16, 50);
+            if(!flag) ClientView.warning("Com essa idade nao vai dar...");
         } while(!flag); //Não é para cortar os sonhos a ninguém...
 
         return answer;
@@ -26,7 +26,7 @@ public class JogadorFutebolView {
         double answer = 0; boolean flag;
         do {
             answer = ClientView.get_Double("Altura (m)");
-            flag = ClientView.not_an_option(answer, 0, 2.5);
+            flag = ClientView.not_an_option(answer, 0, 2.8);
             if(!flag) ClientView.warning("Essa altura nao parece ser valida!");
         } while(!flag);             //Não é para cortar os sonhos a ninguém...
 
@@ -213,6 +213,21 @@ public class JogadorFutebolView {
             System.out.println("\n\t|(+) Numero de jogadores guardados: " + js.size() + "\n");
     }
 
+    public static void print_jogadores_jogo(JogoFutebol jogoFutebol) {
+        System.out.println("\t(+) Jogadores Titulares: ");
+        for (Map.Entry<String, JogadorFutebol> entrada : jogoFutebol.getEquipaCasa().getJogadoresTitulares().entrySet()) {
+
+            System.out.println("\t\t|Jogador : " + entrada.getKey() + " (+) Posicao : " + entrada.getValue().getPosicaoCampo().toString()
+                    + " (+) Pontos Habilidade: " + entrada.getValue().getHabilidade());
+        }
+        System.out.println("\t(+) Jogadores Suplentes: ");
+        for (Map.Entry<String, JogadorFutebol> entrada : jogoFutebol.getEquipaCasa().getJogadoresSuplentes().entrySet()) {
+
+            System.out.println("\t\t|Jogador : " + entrada.getKey() + " (+) Posicao : " + entrada.getValue().getPosicaoCampo().toString()
+                    + " (+) Pontos Habilidade: " + entrada.getValue().getHabilidade());
+        }
+    }
+
     public static int consultar_jogadores(Map<String, JogadorFutebol> js){
 
         int opcao;
@@ -262,6 +277,7 @@ public class JogadorFutebolView {
             s.append("\t||_______________________________||\n\n");
             System.out.println(s);
 
+            DecimalFormat df = new DecimalFormat("#.##");
             for (Map.Entry<String, EquipaFutebol> entrada : eqs.entrySet()) {
                 EquipaFutebol eq = entrada.getValue();
                 System.out.printf("\t|| Equipa \"%s\" ||\n\t\t[-Titulares-]:\n", eq.getNome());
@@ -273,7 +289,7 @@ public class JogadorFutebolView {
                 for(Map.Entry<String, JogadorFutebol> jf : eq.getJogadoresSuplentes().entrySet())
                      System.out.println("\t\t\t (+) " + jf.getKey() + " ["+ jf.getValue().getNumero() + "] " + jf.getValue().getPosicaoCampo().toString());
 
-                System.out.println("\t+ Habilidade média da equipa: " + eq.getHabilidade());
+                System.out.println("\t+ Habilidade média da equipa: " + df.format(eq.getHabilidade()));
                 System.out.println("\n");
             }
             System.out.println("\nNumero de equipas guardados: " + eqs.size() + "\n");
@@ -286,47 +302,77 @@ public class JogadorFutebolView {
      */
     public static int consultar_equipa(Map<String, EquipaFutebol> eqs){
 
-        int opcao;
+        int opcao; boolean flag;
         ClientView.SimNao("Queres consultar a informacao de alguma equipa?");
 
         do {
            opcao = ClientView.get_Int("Opcao");
-           ClientView.not_an_option(opcao, 1, 2);
-        } while(opcao != 1 && opcao != 2);
+           flag = ClientView.not_an_option(opcao, 1, 2);
+        } while(!flag);
 
         if(opcao == 1) {
             String nome = ClientView.get_String("Nome da equipa");
             if (eqs.containsKey(nome)) {
-                System.out.println(eqs.get(nome).toString());
+                JogadorFutebolView.print_equipa(eqs.get(nome));
                 ClientView.pause();
             } else {
                 ClientView.warning("Essa equipa nao esta guardada!");
+                ClientView.pause();
             }
         }
         return opcao;
     }
 
-    public static int consultar_equipa_jogo(EquipaFutebol equipa1, EquipaFutebol equipa2){
 
-        int opcao;
-        boolean flag;
-        ClientView.SimNao("Queres consultar a informacao de alguma equipa?");
+    public static int consultar_equipa_jogo(EquipaFutebol eq_casa){
+
+        int opcao; boolean flag;
+        ClientView.SimNao("Queres consultar a informacao da tua equipa?");
 
         do {
             opcao = ClientView.get_Int("Opcao");
             flag = ClientView.not_an_option(opcao, 1, 2);
         } while(!flag);
 
-        if(opcao == 1) {
-            String nome = ClientView.get_String("Nome da equipa");
-            if (equipa1.getNome().equals(nome)) {
-                System.out.println(equipa1.toString());
-                ClientView.pause();
-            } else {
-                ClientView.warning("Essa equipa nao esta guardada!");
-            }
+        if(opcao == 1){
+            JogadorFutebolView.print_equipa(eq_casa);
         }
-        return opcao;
+
+        //É aq q se procede à substituicao
+
+        else return opcao;
+        return  opcao;
+    }
+
+    /**
+     * print_equipa, Imprime a informação sobre os jogadores de uma equipa
+     * @param ef Equipa de Futebol
+     */
+    public static void print_equipa(EquipaFutebol ef){
+
+        ClientView.clear_window();
+
+            StringBuilder s = new StringBuilder("\t___________________________________\n");
+            s.append("\t||        INFO DA EQUIPA         ||\n");
+            s.append("\t|                                 |\n");
+            s.append("\t||_______________________________||\n\n");
+            System.out.println(s);
+
+        System.out.println("\t(+) Titulares:");
+        for(Map.Entry<String, JogadorFutebol> titulares : ef.getJogadoresTitulares().entrySet()){
+
+            System.out.println("\t\t|Jogador : " + titulares.getKey() + " (+) Posicao : " + titulares.getValue().getPosicaoCampo().toString()
+                        + " (+) Pontos Habilidade: " + titulares.getValue().getHabilidade());
+        }
+        System.out.println();
+        System.out.println("\t(+) Suplentes:");
+        for(Map.Entry<String, JogadorFutebol> suplentes : ef.getJogadoresSuplentes().entrySet()){
+
+            System.out.println("\t\t|Jogador : " + suplentes.getKey() + " (+) Posicao : " + suplentes.getValue().getPosicaoCampo().toString()
+                        + " (+) Pontos Habilidade: " + suplentes.getValue().getHabilidade());
+        }
+
+        System.out.println("\t|(+) Numero de jogadores guardados: " + (ef.get_numero_titulares() + ef.get_numero_suplentes()) + "\n");
     }
 
 
@@ -349,8 +395,6 @@ public class JogadorFutebolView {
 
             System.out.println("\nNumero de jogos guardados: " + jogos.size() + "\n");
     }
-
-
 }
 
 

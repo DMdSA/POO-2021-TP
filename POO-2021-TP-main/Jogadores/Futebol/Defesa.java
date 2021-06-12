@@ -1,21 +1,25 @@
-package Jogadores;
+package Jogadores.Futebol;
 import java.text.DecimalFormat;
 import java.util.List;
 
+/**
+ * Defesa Class
+ *
+ * @author Diogo Araújo, Diogo Rebelo
+ * @version 1.0
+ */
 public class Defesa extends JogadorFutebol{
-
-
+    /**                                            Variáveis instância  */
 	private double capacidadeBloquearBolas;
 
-
-//Constructors,
-
+	/**
+     * Construtores
+     */
 	public Defesa(){
 
 		super();
 		this.capacidadeBloquearBolas = 0;
 	}
-
 
 	public Defesa(String nome, PosicaoCampo posicao){
 
@@ -24,44 +28,51 @@ public class Defesa extends JogadorFutebol{
 		this.setOverall(this.getHabilidade());
 	}
 
-
-                //Com overall + historico
-	public Defesa (String nome, int idade, float altura, float peso, PosicaoCampo posicao, int numero, double overall, double velocidade, double impulsao, double resistencia, double destreza,
+	/** Com overall (+) historico   */
+	public Defesa (String nome, int idade, float altura, float peso, PosicaoCampo posicao
+            , int numero, double overall, double velocidade, double impulsao, double resistencia, double destreza,
                     double jogoCabeca, double remate, double passe, double humor, List<String> historico, double capacidadeBloquearBolas){
 
 
-		super(nome, idade, altura, peso, posicao, numero, overall, velocidade, impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor, historico);
+		super(nome, idade, altura, peso, posicao, numero, overall, velocidade
+                , impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor, historico);
 		this.capacidadeBloquearBolas = capacidadeBloquearBolas;
 	}
 
 
-                //Com overall - historico
-    public Defesa (String nome, int idade, float altura, float peso, PosicaoCampo posicao, int numero, double overall, double velocidade, double impulsao, double resistencia, double destreza,
+	/** Com overall (-) historico   */
+    public Defesa (String nome, int idade, float altura, float peso, PosicaoCampo posicao
+            , int numero, double overall, double velocidade, double impulsao, double resistencia, double destreza,
                     double jogoCabeca, double remate, double passe, double humor, double capacidadeBloquearBolas){
 
 
-        super(nome, idade, altura, peso, posicao, numero, overall, velocidade, impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor);
+        super(nome, idade, altura, peso, posicao, numero, overall, velocidade
+                , impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor);
         this.capacidadeBloquearBolas = capacidadeBloquearBolas;
     }
 
 
-            //Sem overall + historico
-    public Defesa (String nome, int idade, float altura, float peso, PosicaoCampo posicao, int numero, double velocidade, double impulsao, double resistencia, double destreza,
+    /** Sem overall (+) historico   */
+    public Defesa (String nome, int idade, float altura, float peso, PosicaoCampo posicao
+            , int numero, double velocidade, double impulsao, double resistencia, double destreza,
                     double jogoCabeca, double remate, double passe, double humor, List<String> historico, double capacidadeBloquearBolas){
 
 
-        super(nome, idade, altura, peso, posicao, numero, velocidade, impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor, historico);
+        super(nome, idade, altura, peso, posicao, numero, velocidade, impulsao
+                , resistencia, destreza, jogoCabeca, remate, passe, humor, historico);
         this.capacidadeBloquearBolas = capacidadeBloquearBolas;
         this.setOverall(this.getHabilidade());
     }
 
 
-            //Sem overall - historico
-    public Defesa (String nome, int idade, float altura, float peso, PosicaoCampo posicao, int numero, double velocidade, double impulsao, double resistencia, double destreza,
+    /** Sem overall (-) historico   */
+    public Defesa (String nome, int idade, float altura, float peso, PosicaoCampo posicao
+            , int numero, double velocidade, double impulsao, double resistencia, double destreza,
                     double jogoCabeca, double remate, double passe, double humor, double capacidadeBloquearBolas){
 
 
-        super(nome, idade, altura, peso, posicao, numero, velocidade, impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor);
+        super(nome, idade, altura, peso, posicao, numero, velocidade, impulsao
+                , resistencia, destreza, jogoCabeca, remate, passe, humor);
         this.capacidadeBloquearBolas = capacidadeBloquearBolas;
         this.setOverall(this.getHabilidade());
     }
@@ -72,6 +83,11 @@ public class Defesa extends JogadorFutebol{
 		this.capacidadeBloquearBolas = d.getCapacidadeBloquearBolas();
 		this.setOverall(this.getHabilidade());
 	}
+
+    /**
+     * clone
+     */
+    public Defesa clone(){ return new Defesa(this);}
 
     /**
      * Logs text file constructor
@@ -91,7 +107,7 @@ public class Defesa extends JogadorFutebol{
         this.setOverall(this.getHabilidade());
     }
 
-    //Parsed constructor
+    /** Parsed Constructor  */
     public static Defesa parse(String input){
 
         String[] parametros = input.split(",");
@@ -107,22 +123,22 @@ public class Defesa extends JogadorFutebol{
         return defesa;
     }
 
-
-
-
-///Getters,
-
+    /**
+     * getters,
+     */
 	public double getCapacidadeBloquearBolas(){ return this.capacidadeBloquearBolas;}
 
+    /**
+     * setters,
+     */
+	public void setCapacidadeBloquearBolas(double bloquearbolas){
+	    this.capacidadeBloquearBolas = bloquearbolas; this.setOverall(this.getHabilidade());}
 
-//Setters,
-
-	public void setCapacidadeBloquearBolas(double bloquearbolas){ this.capacidadeBloquearBolas = bloquearbolas; this.setOverall(this.getHabilidade());}
-
-
-
-//equals,
-
+    /**
+     * equals, Verifica se 2 objetos são iguais
+     * @param o Objeto a ser comparado
+     * @return True, se forem iguais
+     */
 	public boolean equals(Object o){
 
         if (this.getClass() != o.getClass()) return false;
@@ -130,13 +146,9 @@ public class Defesa extends JogadorFutebol{
     }
 
 
-//clone,
-
-    public Defesa clone(){ return new Defesa(this);}
-
-
-//toString,
-
+    /**
+     * toString
+     */
     public String toString(){
         DecimalFormat df = new DecimalFormat("#.##");
         final StringBuffer s = new StringBuffer(this.toString_aux());
@@ -146,13 +158,16 @@ public class Defesa extends JogadorFutebol{
         return s.toString();
     }
 
-
+    /**
+     * getHabilidade, retorna a habilidade calculada para o jogador
+     * @return double associado à habilidade
+     */
     public double getHabilidade(){
 
         double habilidade = 0;
-        habilidade += this.getVelocidade() + this.getImpulsao() + this.getResistencia() + this.getDestreza()
-                             + this.getJogoCabeca() + this.getRemate() + this.getPasse()
-                                    + this.getCapacidadeBloquearBolas();
+        habilidade += this.getVelocidade() + this.getImpulsao() + this.getResistencia()
+                + this.getDestreza()*1.5 + this.getJogoCabeca()/2 + this.getRemate()/2 + this.getPasse()
+                    + this.getCapacidadeBloquearBolas()*1.5;
         return habilidade/8;
     }
 }

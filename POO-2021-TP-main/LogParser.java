@@ -1,5 +1,6 @@
 import Equipa.*;
-import Jogadores.*;
+import Jogadores.Futebol.*;
+
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -20,7 +21,7 @@ public class LogParser {
 
 		Collection<String> linhas = readFile(filename);
 		Map<String, EquipaFutebol> equipas = new HashMap<>();
-		Map<Integer, Jogador> jogadores = new HashMap<>();									//What is the need of this, if I clone it's content to each 'equipa' ?
+		Map<Integer, JogadorFutebol> jogadores = new HashMap<>();									//What is the need of this, if I clone it's content to each 'equipa' ?
 		Collection<JogoFutebol> jogos = new ArrayList<>();
 		EquipaFutebol ultima = null; JogadorFutebol currentPlayer = null;
 		String[] analyse;

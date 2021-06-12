@@ -1,22 +1,26 @@
-package Jogadores;
+package Jogadores.Futebol;
 import java.text.DecimalFormat;
 import java.util.List;
 
+/**
+ * Medio Class
+ *
+ * @author Diogo Araújo, Diogo Rebelo
+ * @version 1.0
+ */
 public class Medio extends JogadorFutebol{
-
-
+    /**                                            Variáveis instância  */
 	private double capacidadeRecuperarBolas;
 
-
-//Constructors,
-
+    /**
+     * Construtores
+     */
 	public Medio(){
 
 		super();
 		this.capacidadeRecuperarBolas = 0;
 		this.setOverall(this.getHabilidade());
 	}
-
 
 	public Medio(String nome, PosicaoCampo posicao){
 
@@ -25,46 +29,53 @@ public class Medio extends JogadorFutebol{
 		this.setOverall(this.getHabilidade());
 	}
 
-                //Com overall + historico
-	public Medio (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, double overall, double velocidade, double impulsao, double resistencia, double destreza,
+	/** Com overall (+) historico   */
+	public Medio (String nome, int idade, double altura, double peso, PosicaoCampo posicao
+            , int numero, double overall, double velocidade, double impulsao, double resistencia, double destreza,
                    double jogoCabeca, double remate, double passe, double humor, List<String> historico, double capacidadeRecuperarBolas){
 
 
-		super(nome, idade, altura, peso, posicao, numero, overall, velocidade, impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor, historico);
+		super(nome, idade, altura, peso, posicao, numero, overall, velocidade, impulsao, resistencia
+                , destreza, jogoCabeca, remate, passe, humor, historico);
 		this.capacidadeRecuperarBolas = capacidadeRecuperarBolas;
 	}
 
-                //Com overall - historico
-public Medio (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, double overall, double velocidade, double impulsao, double resistencia, double destreza,
+	/** Com overall (-) historico   */
+public Medio (String nome, int idade, double altura, double peso, PosicaoCampo posicao
+        , int numero, double overall, double velocidade, double impulsao, double resistencia, double destreza,
                    double jogoCabeca, double remate, double passe, double humor, double capacidadeRecuperarBolas){
 
 
-        super(nome, idade, altura, peso, posicao, numero, overall, velocidade, impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor);
+        super(nome, idade, altura, peso, posicao, numero, overall, velocidade, impulsao
+                , resistencia, destreza, jogoCabeca, remate, passe, humor);
         this.capacidadeRecuperarBolas = capacidadeRecuperarBolas;
     }
 
 
-                //Sem overall + historico
-    public Medio (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, double velocidade, double impulsao, double resistencia, double destreza,
+    /** Sem overall (+) historico   */
+    public Medio (String nome, int idade, double altura, double peso, PosicaoCampo posicao
+            , int numero, double velocidade, double impulsao, double resistencia, double destreza,
                    double jogoCabeca, double remate, double passe, double humor, List<String> historico, double capacidadeRecuperarBolas){
 
 
-        super(nome, idade, altura, peso, posicao, numero, velocidade, impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor, historico);
+        super(nome, idade, altura, peso, posicao, numero, velocidade, impulsao, resistencia, destreza
+                , jogoCabeca, remate, passe, humor, historico);
         this.setOverall(this.getHabilidade());
         this.capacidadeRecuperarBolas = capacidadeRecuperarBolas;
         this.setOverall(this.getHabilidade());
     }
 
-                //Sem overall - historico
-    public Medio (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, double velocidade, double impulsao, double resistencia, double destreza,
+    /** Sem overall (-) historico   */
+    public Medio (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero
+            , double velocidade, double impulsao, double resistencia, double destreza,
                    double jogoCabeca, double remate, double passe, double humor, double capacidadeRecuperarBolas){
 
 
-        super(nome, idade, altura, peso, posicao, numero, velocidade, impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor);
+        super(nome, idade, altura, peso, posicao, numero, velocidade, impulsao, resistencia
+                , destreza, jogoCabeca, remate, passe, humor);
         this.capacidadeRecuperarBolas = capacidadeRecuperarBolas;
         this.setOverall(this.getHabilidade());
     }
-
 
 	public Medio(Medio d){
 
@@ -73,8 +84,14 @@ public Medio (String nome, int idade, double altura, double peso, PosicaoCampo p
 		this.setOverall(this.getHabilidade());
 	}
 
-            //Constructor c/formato LOGS
-    public Medio(String nome, int numero, double velocidade, double resistencia, double destreza, double impulsao, double cabeca, double remate, double passe, double recuperacao){
+	/**
+     * clone
+     */
+    public Medio clone(){ return new Medio(this);}
+
+	/** Constructor c/formato LOGS  */
+    public Medio(String nome, int numero, double velocidade, double resistencia, double destreza
+            , double impulsao, double cabeca, double remate, double passe, double recuperacao){
 
         super(nome, PosicaoCampo.M);
         this.setIdade(this.int_random_generator(16, 50));
@@ -90,7 +107,7 @@ public Medio (String nome, int idade, double altura, double peso, PosicaoCampo p
 
     }
 
-            //Parsed constructor
+    /** Parsed constructor  */
     public static Medio parse(String input){
 
         String[] campos = input.split(",");
@@ -107,38 +124,44 @@ public Medio (String nome, int idade, double altura, double peso, PosicaoCampo p
         return medio;
     }
 
-
-
-
-
-///Getters,
-
+    /**
+     * getters
+     */
 	public double getCapacidadeRecuperarBolas(){ return this.capacidadeRecuperarBolas;}
 
-
-//Setters,
-
+    /**
+     * getters
+     */
 	public void setCapacidadeRecuperarBolas(double recuperarbolas){ this.capacidadeRecuperarBolas = recuperarbolas;
 	this.setOverall(this.getHabilidade());}
 
-
-
-//equals,
-
+    /**
+     * equals, Verifica se 2 objetos são iguais
+     * @param o Objeto a ser comparado
+     * @return True, se forem iguais
+     */
 	public boolean equals(Object o){
 
         if (this.getClass() != o.getClass()) return false;
         return super.equals(o) && this.capacidadeRecuperarBolas == ((Medio)o).capacidadeRecuperarBolas;
     }
 
+    /**
+     * getHabilidade, retorna a habilidade calculada para o jogador
+     * @return double associado à habilidade
+     */
+    public double getHabilidade(){
 
-//clone,
+        double habilidade = 0;
+        habilidade += this.getVelocidade() + this.getImpulsao()/2 + this.getResistencia()*1.5
+                + this.getDestreza() + this.getJogoCabeca()/2 + this.getRemate()
+                    + this.getPasse() + this.getCapacidadeRecuperarBolas()*1.5;
+        return habilidade/8;
+    }
 
-    public Medio clone(){ return new Medio(this);}
-
-
-//toString,
-
+    /**
+     * toString
+     */
     public String toString(){
         DecimalFormat df = new DecimalFormat("#.##");
         final StringBuffer s = new StringBuffer(this.toString_aux());
@@ -147,15 +170,4 @@ public Medio (String nome, int idade, double altura, double peso, PosicaoCampo p
 
         return s.toString();
     }
-
-
-
-    public double getHabilidade(){
-
-    double habilidade = 0;
-    habilidade += this.getVelocidade() + this.getImpulsao() + this.getResistencia()
-                                + this.getDestreza() + this.getJogoCabeca() + this.getRemate()
-                                    + this.getPasse() + this.getCapacidadeRecuperarBolas();
-    return habilidade/8;
-}
 }

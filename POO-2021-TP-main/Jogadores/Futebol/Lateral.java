@@ -1,22 +1,26 @@
-package Jogadores;
+package Jogadores.Futebol;
 import java.text.DecimalFormat;
 import java.util.List;
 
+/**
+ * Lateral Class
+ *
+ * @author Diogo Araújo, Diogo Rebelo
+ * @version 1.0
+ */
 public class Lateral extends JogadorFutebol{
-
-
+    /**                                            Variáveis instância  */
 	private double capacidadeCruzamentos;
 
-
-//Constructors,
-
+    /**
+     * Construtores
+     */
 	public Lateral(){
 
 		super();
 		this.capacidadeCruzamentos = 0;
 		this.setOverall(this.getHabilidade());
 	}
-
 
 	public Lateral(String nome, PosicaoCampo posicao){
 
@@ -25,45 +29,52 @@ public class Lateral extends JogadorFutebol{
 		this.setOverall(this.getHabilidade());
 	}
 
-            //Com overall + historico
-	public Lateral (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, double overall, double velocidade, double impulsao, double resistencia, double destreza,
+	/** Com overall (+) historico   */
+	public Lateral (String nome, int idade, double altura, double peso, PosicaoCampo posicao
+            , int numero, double overall, double velocidade, double impulsao, double resistencia, double destreza,
                      double jogoCabeca, double remate, double passe, double humor, List<String> historico, double cruzamentos){
 
 
-		super(nome, idade, altura, peso, posicao, numero, overall, velocidade, impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor, historico);
+		super(nome, idade, altura, peso, posicao, numero, overall, velocidade, impulsao, resistencia
+                , destreza, jogoCabeca, remate, passe, humor, historico);
 		this.capacidadeCruzamentos = cruzamentos;
 	}
 
-            //Com overall - historico
-    public Lateral (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, double overall, double velocidade, double impulsao, double resistencia, double destreza,
+	/** Com overall (-) historico   */
+    public Lateral (String nome, int idade, double altura, double peso, PosicaoCampo posicao
+            , int numero, double overall, double velocidade, double impulsao, double resistencia, double destreza,
                      double jogoCabeca, double remate, double passe, double humor, double cruzamentos){
 
 
-        super(nome, idade, altura, peso, posicao, numero, overall, velocidade, impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor);
+        super(nome, idade, altura, peso, posicao, numero, overall, velocidade, impulsao, resistencia
+                , destreza, jogoCabeca, remate, passe, humor);
         this.capacidadeCruzamentos = cruzamentos;
     }
 
-            //Sem overall + historico
-    public Lateral (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, double velocidade, double impulsao, double resistencia, double destreza,
+    /** Sem overall (+) historico   */
+    public Lateral (String nome, int idade, double altura, double peso, PosicaoCampo posicao,
+                    int numero, double velocidade, double impulsao, double resistencia, double destreza,
                      double jogoCabeca, double remate, double passe, double humor, List<String> historico, double cruzamentos){
 
 
-        super(nome, idade, altura, peso, posicao, numero, velocidade, impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor, historico);
+        super(nome, idade, altura, peso, posicao, numero, velocidade, impulsao, resistencia
+                , destreza, jogoCabeca, remate, passe, humor, historico);
         this.capacidadeCruzamentos = cruzamentos;
         this.setOverall(this.getHabilidade());
     }
 
 
-            //Sem overall - historico
-    public Lateral (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, double velocidade, double impulsao, double resistencia, double destreza,
+    /** Sem overall (-) historico   */
+    public Lateral (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero
+            , double velocidade, double impulsao, double resistencia, double destreza,
                      double jogoCabeca, double remate, double passe, double humor, double cruzamentos){
 
 
-        super(nome, idade, altura, peso, posicao, numero, velocidade, impulsao, resistencia, destreza, jogoCabeca, remate, passe, humor);
+        super(nome, idade, altura, peso, posicao, numero, velocidade, impulsao, resistencia
+                , destreza, jogoCabeca, remate, passe, humor);
         this.capacidadeCruzamentos = cruzamentos;
         this.setOverall(this.getHabilidade());
     }
-
 
 	public Lateral(Lateral d){
 
@@ -72,7 +83,12 @@ public class Lateral extends JogadorFutebol{
 		this.setOverall(this.getHabilidade());
 	}
 
-            //Constructor c/formato LOGS
+	/**
+     * clone
+     */
+    public Lateral clone(){ return new Lateral(this);}
+
+	/** Constructor c/formato LOGS  */
     public Lateral(String nome, int numero, double velocidade, double resistencia, double destreza,
                                     double impulsao, double cabeca, double remate,
                                             double passe, double cruzamento){
@@ -92,7 +108,7 @@ public class Lateral extends JogadorFutebol{
     }
     //Lateral:<Nome>,<NumeroCamisola>,<Velocidade>,<Resistência>,<Destreza>,<Impulsão>,<Cabeça>,<Remate>,<Passe>,<Cruzamento>
 
-            //Parsed Constructor
+    /** Parsed Constructor  */
     public static Lateral parse(String input){
 
         String[] parametros = input.split(",");
@@ -108,36 +124,44 @@ public class Lateral extends JogadorFutebol{
                 Double.parseDouble((parametros[9])));
     }
 
-
-
-
-///Getters,
-
+    /**
+     * getters
+     */
 	public double getCapacidadeCruzamentos(){ return this.capacidadeCruzamentos;}
 
 
-//Setters,
-
+    /**
+     * setters
+     */
 	public void setCapacidadeCruzamentos(double cruzamentos){ this.capacidadeCruzamentos = cruzamentos;}
 
-
-
-//equals,
-
+    /**
+     * equals, Verifica se 2 objetos são iguais
+     * @param o Objeto a ser comparado
+     * @return True, se forem iguais
+     */
 	public boolean equals(Object o){
 
         if (this.getClass() != o.getClass()) return false;
         return super.equals(o) && this.capacidadeCruzamentos == ((Lateral)o).capacidadeCruzamentos;
     }
 
+    /**
+     * getHabilidade, retorna a habilidade calculada para o jogador
+     * @return double associado à habilidade
+     */
+    public double getHabilidade(){
 
-//clone,
+        double habilidade = 0;
+        habilidade += this.getVelocidade()*1.5 + this.getImpulsao()*1.5 + this.getResistencia()
+                + this.getDestreza()/2 + this.getJogoCabeca()/2 + this.getRemate()
+                    + this.getPasse()/2 + this.getCapacidadeCruzamentos()*1.5;
+        return habilidade/8;
+    }
 
-    public Lateral clone(){ return new Lateral(this);}
-
-
-//toString,
-
+    /**
+     * toString
+     */
     public String toString(){
         DecimalFormat df = new DecimalFormat("#.##");
         final StringBuffer s = new StringBuffer(this.toString_aux());
@@ -146,15 +170,4 @@ public class Lateral extends JogadorFutebol{
 
         return s.toString();
     }
-
-
-    public double getHabilidade(){
-
-        double habilidade = 0;
-        habilidade += this.getVelocidade() + this.getImpulsao() + this.getResistencia()
-                                + this.getDestreza() + this.getJogoCabeca() + this.getRemate()
-                                        + this.getPasse() + this.getCapacidadeCruzamentos();
-        return habilidade/8;
-    }
-
 }

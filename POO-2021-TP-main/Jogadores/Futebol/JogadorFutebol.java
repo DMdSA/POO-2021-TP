@@ -1,12 +1,21 @@
-package Jogadores;
+package Jogadores.Futebol;
+import Jogadores.Jogador;
+
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
-public class JogadorFutebol extends Jogador {
-    
+/**
+ * JogadorFutebol Class
+ *
+ * @author Diogo Araújo, Diogo Rebelo
+ * @version 1.0
+ */
 
+public class JogadorFutebol extends Jogador {
+    /**                                            Variáveis instância  */
     private PosicaoCampo posicao;
     private int numero;
     private double overall;
@@ -18,7 +27,7 @@ public class JogadorFutebol extends Jogador {
     private double remate;
     private double passe;
     private double humor;                           //simulaçao comportamental
-    private Collection<String> historico;           //historico de equipas por onde passou
+    private Collection<String> historico;
 
     /**
      * Construtores
@@ -39,7 +48,6 @@ public class JogadorFutebol extends Jogador {
         this.setOverall(this.getHabilidade());
     }
 
-
      public JogadorFutebol (String nome, PosicaoCampo pc) {
         
         super(nome);
@@ -57,7 +65,7 @@ public class JogadorFutebol extends Jogador {
         this.setOverall(this.getHabilidade());
     }
 
-    //Com Overall + historico
+    /** Com Overall + historico */
     public JogadorFutebol (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, 
                              double overall, double velocidade, double impulsao, double resistencia, double destreza, double remate,
                                    double jogoCabeca, double passe, double humor, Collection<String> historico) {
@@ -77,7 +85,7 @@ public class JogadorFutebol extends Jogador {
         this.historico = new HashSet<>(historico);
     }
     
-    //Com Overall - historico
+    /**Com Overall - historico  */
     public JogadorFutebol (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, double overall,
                               double velocidade, double impulsao, double resistencia, double destreza, double remate, double jogoCabeca, 
                                 double passe, double humor) {
@@ -98,8 +106,7 @@ public class JogadorFutebol extends Jogador {
         this.historico = new HashSet<>();
     }
 
-
-    //Sem overall + historico
+    /**Sem overall + historico  */
     public JogadorFutebol (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, 
                              double velocidade, double impulsao, double resistencia, double destreza, double remate, double jogoCabeca, 
                                 double passe, double humor, Collection<String> historico) {
@@ -119,10 +126,8 @@ public class JogadorFutebol extends Jogador {
         this.setOverall(this.getHabilidade());
     }
 
-
-
-    //Sem overall - historico
-    public JogadorFutebol (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero, 
+    /**Sem overall - historico  */
+    public JogadorFutebol (String nome, int idade, double altura, double peso, PosicaoCampo posicao, int numero,
                              double velocidade, double impulsao, double resistencia, double destreza, double remate, double jogoCabeca, 
                                 double passe, double humor) {
         
@@ -141,7 +146,6 @@ public class JogadorFutebol extends Jogador {
         this.setOverall(this.getHabilidade());
     }
 
-
     public JogadorFutebol (JogadorFutebol jf) {
         super(jf);
         this.posicao = jf.getPosicaoCampo();
@@ -158,7 +162,6 @@ public class JogadorFutebol extends Jogador {
         this.historico = new HashSet<>(jf.getHistorico());
     }
 
-
     public JogadorFutebol(int numeroJogador){
 
         this();
@@ -173,8 +176,7 @@ public class JogadorFutebol extends Jogador {
     /**
      * Getters
      */
-    
-    //should we set getters from supercalss?!?
+
     public PosicaoCampo getPosicaoCampo (){
         return this.posicao;
     }
@@ -265,10 +267,6 @@ public class JogadorFutebol extends Jogador {
         this.humor = humor;this.setOverall(this.getHabilidade());
     }
     
-    public void setHistorico (List<String> historico) {
-        this.historico = historico;
-    }
-    
     public void setHistorico_clube(Collection<String> hist){
         this.historico = new HashSet<>(hist);
     }
@@ -330,19 +328,6 @@ public class JogadorFutebol extends Jogador {
     }
 
 
-
-    /**
-     * fatorIdade, define o quão a idade do jogador influenciará na sua habilidade
-     * @return inteiro com o fator
-     */
-    public double fatorIdade(){
-        int age = getIdade();
-        if(age >= 17 && age <= 21) return 5;
-        if(age >= 22 && age <= 25) return 3;
-        if(age >= 26) return 1;
-        return 0;
-    }
-
     /**
      * getHabilidade, calcula a habilidade que um determinado jogador de futebol tem
      * @return double associado à sua habilidade
@@ -351,8 +336,8 @@ public class JogadorFutebol extends Jogador {
 
         double habilidade = 0;
         habilidade += this.getVelocidade() + this.getImpulsao() + this.getResistencia()
-                                    + this.getDestreza() + this.getJogoCabeca()
-                                           + this.getRemate() + this.getPasse();
+                + this.getDestreza() + this.getJogoCabeca()
+                    + this.getRemate() + this.getPasse();
         return habilidade/7;
     }
 
@@ -371,7 +356,6 @@ public class JogadorFutebol extends Jogador {
     public void adiciona_equipa(String nome_equipa){
         this.historico.add(nome_equipa);
     }
-
 
 
     public int int_random_generator(int min, int max){

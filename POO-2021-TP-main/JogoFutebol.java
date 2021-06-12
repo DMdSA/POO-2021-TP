@@ -1,5 +1,5 @@
 import Equipa.EquipaFutebol;
-import Jogadores.JogadorFutebol;
+import Jogadores.Futebol.JogadorFutebol;
 import java.time.LocalDate;
 import java.util.Map;
 
@@ -17,7 +17,7 @@ public class JogoFutebol extends Jogo{
         this.data = LocalDate.now();
     }
 
-    public JogoFutebol(EquipaFutebol eq1, EquipaFutebol eq2, LocalDate date, int n_golos_casa, int n_golos_fora){
+    public JogoFutebol(EquipaFutebol eq1, EquipaFutebol eq2, LocalDate date){
         super(2,90,2);
         this.equipaCasa = eq1;
         this.equipaFora = eq2;
@@ -134,5 +134,16 @@ public class JogoFutebol extends Jogo{
 
         finalstring.append("\nData do jogo: ").append(this.getData().toString()).append("\n\n");
         return finalstring.toString();
+    }
+
+
+    public boolean substitui(JogadorFutebol t, JogadorFutebol b){
+
+        return this.equipaCasa.substitui(t, b);
+
+    }
+
+    public boolean mesma_posicao(JogadorFutebol j1, JogadorFutebol j2){
+        return j1.getPosicaoCampo() == j2.getPosicaoCampo();
     }
 }

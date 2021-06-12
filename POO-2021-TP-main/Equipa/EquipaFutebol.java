@@ -1,7 +1,8 @@
 package Equipa;
-import Jogadores.GuardaRedes;
-import Jogadores.JogadorFutebol;
-import Jogadores.PosicaoCampo;
+import Jogadores.Futebol.Avancado;
+import Jogadores.Futebol.GuardaRedes;
+import Jogadores.Futebol.JogadorFutebol;
+import Jogadores.Futebol.PosicaoCampo;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
@@ -10,10 +11,9 @@ import java.util.stream.Collectors;
 /**
  * EquipaFutebol Class
  *
- * @author dma_,
+ * @author Diogo Araújo, Diogo Rebelo
  * @version 1.0
  */
-
 
 public class EquipaFutebol extends Equipa {
 	/**                                            Variáveis instância  */
@@ -24,7 +24,6 @@ public class EquipaFutebol extends Equipa {
 	private Cor corPrimaria;
 	private Cor corSecundaria;
 	private int golos;
-
 
 	/**
 	 * Construtores
@@ -65,7 +64,8 @@ public class EquipaFutebol extends Equipa {
 		this.golos = 0;
 	}
 
-	public EquipaFutebol(String nome, int titulares, int suplentes, int substituicoes, List<JogadorFutebol> jTitulares, List<JogadorFutebol> jSuplentes) {
+	public EquipaFutebol(String nome, int titulares, int suplentes, int substituicoes, List<JogadorFutebol> jTitulares
+			, List<JogadorFutebol> jSuplentes) {
 
 		super(nome, titulares, suplentes);
 		this.substituicoes = substituicoes;
@@ -83,16 +83,16 @@ public class EquipaFutebol extends Equipa {
 		this.golos = 0;
 	}
 
-
-	public EquipaFutebol(String nome, int titulares, int suplentes, int substituicoes, List<JogadorFutebol> jTitulares, List<JogadorFutebol> jSuplentes, double overall, Cor primaria, Cor secundaria) {
+	public EquipaFutebol(String nome, int titulares, int suplentes, int substituicoes, List<JogadorFutebol> jTitulares
+			, List<JogadorFutebol> jSuplentes, double overall, Cor primaria, Cor secundaria) {
 
 		super(nome, titulares, suplentes);
 		this.substituicoes = substituicoes;
-		this.jogadoresTitulares = new HashMap<String, JogadorFutebol>();
+		this.jogadoresTitulares = new HashMap<>();
 		for (JogadorFutebol jf : jTitulares)
 			this.jogadoresTitulares.put(jf.getNome(), jf.clone());
 
-		this.jogadoresSuplentes = new HashMap<String, JogadorFutebol>();
+		this.jogadoresSuplentes = new HashMap<>();
 		for (JogadorFutebol jf : jSuplentes)
 			this.jogadoresSuplentes.put(jf.getNome(), jf.clone());
 
@@ -106,9 +106,13 @@ public class EquipaFutebol extends Equipa {
 
 		super(ef);
 		this.substituicoes = ef.getSubstituicoes();
-		this.jogadoresTitulares = ef.getJogadoresTitulares().entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, e->e.getValue().clone()));
-		this.jogadoresSuplentes = ef.getJogadoresSuplentes().entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, e->e.getValue().clone()));
-		this.overall = ef.getHabilidade();
+		this.jogadoresTitulares = ef.getJogadoresTitulares().entrySet().stream()
+				.collect(Collectors.toMap(Map.Entry::getKey, e->e.getValue().clone()));
+
+		this.jogadoresSuplentes = ef.getJogadoresSuplentes().entrySet().stream()
+				.collect(Collectors.toMap(Map.Entry::getKey, e->e.getValue().clone()));
+
+		this.overall = ef.getOverall();
 		this.corPrimaria = ef.getCorPrimaria();
 		this.corSecundaria = ef.getCorSecundaria();
 		this.golos = ef.getGolos();
@@ -119,7 +123,6 @@ public class EquipaFutebol extends Equipa {
 		String[] parametro = input.split(",");
 		return new EquipaFutebol(parametro[0]);
 	}
-
 
 	/**
 	 * getters
@@ -166,6 +169,24 @@ public class EquipaFutebol extends Equipa {
 	}
 
 	/**
+	 * getJogadorByName, Procura um jogador pelo seu nome
+	 * @param s Nome do jogador
+	 * @return JogadorFutebol
+	 */
+	public JogadorFutebol getJogadorByName(String s){
+		if(this.jogadoresTitulares.containsKey(s)){
+			return this.jogadoresTitulares.get(s);
+		}
+		return new JogadorFutebol();
+	}
+
+
+	/**
+	 * clone
+	 */
+	public EquipaFutebol clone() { return new EquipaFutebol(this); }
+
+	/**
 	 * Setters
 	 */
 	public void setSubstituicoes(int substituicoes){ this.substituicoes = substituicoes;}
@@ -189,7 +210,7 @@ public class EquipaFutebol extends Equipa {
 	/**
 	 * equals
 	 * @param o Objeto a ser comparado
-	 * @return True, se forem iguais, False, caso contrário
+	 * @return True, se forem iguais
 	 */
 	public boolean equals(Object o) {
 
@@ -211,29 +232,20 @@ public class EquipaFutebol extends Equipa {
 	 */
 	public String toString() {
 
-		StringBuilder finalstring = new StringBuilder("Equipa Futebol [" + this.getNome() + "]:\n");
+		StringBuilder s = new StringBuilder("Equipa Futebol [" + this.getNome() + "]:\n");
+		s.append("\tNumero Titulares: ").append(this.getTitulares()).append(", Numero Suplentes: ")
+				.append(this.getSuplentes()).append(", Numero substituicoes: ").append(this.getSubstituicoes()).append("\n");
 
-		finalstring.append("\tNumero Titulares: ").append(this.getTitulares()).append(", Numero Suplentes: ").append(this.getSuplentes()).append(", Numero substituicoes: ").append(this.getSubstituicoes()).append("\n");
-
-		finalstring.append("\tTitulares:\n");
+		s.append("\tTitulares:\n");
 		for (Map.Entry<String, JogadorFutebol> jf : this.jogadoresTitulares.entrySet())
-			finalstring.append(jf.toString());
+			s.append(jf.toString());
 
-		finalstring.append("\tSuplentes:\n");
+		s.append("\tSuplentes:\n");
 		for (Map.Entry<String, JogadorFutebol> jf : this.jogadoresSuplentes.entrySet())
-			finalstring.append(jf.toString());
+			s.append(jf.toString());
 
-		finalstring.append("\tGolos: ").append(this.golos).append("\n");
-
-		return finalstring.toString();
-	}
-
-	/**
-	 * clone
-	 */
-	public EquipaFutebol clone() {
-
-		return new EquipaFutebol(this);
+		s.append("\tGolos: ").append(this.golos).append("\n");
+		return s.toString();
 	}
 
 	/**
@@ -243,15 +255,15 @@ public class EquipaFutebol extends Equipa {
 	 */
 	public boolean adicionaTitular(JogadorFutebol jf) {
 
-		if (this.getTitulares() == 11)                                                //Se o limite de jogadores tiver sido alcançado, return false
+		if (this.getTitulares() == 11)                                               			//Se o limite de jogadores tiver sido alcançado, return false
 			return false;
 
-		if (this.jogadoresTitulares.containsKey(jf.getNome()))                        //se o jogador já se encontra na equipa, return false
+		if (this.jogadoresTitulares.containsKey(jf.getNome()))                        			//se o jogador já se encontra na equipa, return false
 			return false;
 
-		if (jf instanceof GuardaRedes) {                                              //Se o jogador a adicionar é GR &&
+		if (jf instanceof GuardaRedes) {                                              			//Se o jogador a adicionar é GR &&
 
-			for (Map.Entry<String, JogadorFutebol> j : this.jogadoresTitulares.entrySet()) {                    //Se a equipa já tem um guarda-redes, return false
+			for (Map.Entry<String, JogadorFutebol> j : this.jogadoresTitulares.entrySet()) {	//Se a equipa já tem um guarda-redes, return false
 				if (j.getValue() instanceof GuardaRedes)
 					return false;
 			}
@@ -321,7 +333,7 @@ public class EquipaFutebol extends Equipa {
 	public boolean isReady(){													//Confirma se a equipa tem o número de jogadores necessários para começar
 		if(this.getTitulares() >= 7 && this.getTitulares() <= 11){
 
-			if(this.getSuplentes() <= 12){
+			if(this.getSuplentes() <= 12 && this.golos == 0){
 
 				for(Map.Entry<String, JogadorFutebol> j : this.jogadoresTitulares.entrySet())
 					if(j.getValue() instanceof GuardaRedes)
@@ -360,6 +372,9 @@ public class EquipaFutebol extends Equipa {
 		this.golos++;
 	}
 
+	/**
+	 * reinicia_golos, Reinicia o número de golos de uma equipa
+	 */
 	public void reinicia_golos(){ this.golos = 0;}
 
 	/**
@@ -428,6 +443,10 @@ public class EquipaFutebol extends Equipa {
 		return false;
 	}
 
+	/**
+	 * getOverallMedios, Calcula o overall de todos os medios da equipa
+	 * @return Overall dos Medios
+	 */
 	public double getOverallMedios(){
     	double sum = 0;
     	int count = 0;
@@ -441,6 +460,10 @@ public class EquipaFutebol extends Equipa {
     	return sum/count;
 	}
 
+	/**
+	 * getOverallAvancados, Calcula o overall de todos os avancados da equipa
+	 * @return Overall dos Avancados
+	 */
 	public double getOverallAvancados(){
 		double sum = 0;
 		int count = 0;
@@ -454,6 +477,10 @@ public class EquipaFutebol extends Equipa {
 		return sum/count;
 	}
 
+	/**
+	 * getOverallDefesas, Calcula o overall de todos os defesas da equipa
+	 * @return Overall dos Defesas
+	 */
 	public double getOverallDefesas(){
 		double sum = 0;
 		int count = 0;
@@ -467,6 +494,10 @@ public class EquipaFutebol extends Equipa {
 		return sum/count;
 	}
 
+	/**
+	 * getRandomMedio,
+	 * @return
+	 */
 	public String getRandomMedio(){
     	ArrayList<String> medios = new ArrayList<>();
 
@@ -478,6 +509,10 @@ public class EquipaFutebol extends Equipa {
 		return medios.get((ThreadLocalRandom.current().nextInt(0, medios.size())));
 	}
 
+	/**
+	 * getRandomAvancado,
+	 * @return
+	 */
 	public String getRandomAvancado(){
 		ArrayList<String> Avancados = new ArrayList<>();
 
@@ -489,9 +524,13 @@ public class EquipaFutebol extends Equipa {
 		return Avancados.get((ThreadLocalRandom.current().nextInt(0, Avancados.size())));
 	}
 
+	/**
+	 * getRandomDefesa,
+	 * @return
+	 */
 	public String getRandomDefesa(){
-		ArrayList<String> Defesas = new ArrayList<>();
 
+		ArrayList<String> Defesas = new ArrayList<>();
 		for(Map.Entry<String, JogadorFutebol> entrada : this.getJogadoresTitulares().entrySet()){
 			if(entrada.getValue().getPosicaoCampo() == PosicaoCampo.D){
 				Defesas.add(entrada.getKey());
@@ -500,21 +539,16 @@ public class EquipaFutebol extends Equipa {
 		return Defesas.get((ThreadLocalRandom.current().nextInt(0, Defesas.size())));
 	}
 
-	public JogadorFutebol getJogadorByName(String s){
-		for(Map.Entry<String, JogadorFutebol> entrada : this.getJogadoresTitulares().entrySet()){
-			if(entrada.getKey().equals(s)){
-				return entrada.getValue();
-			}
-		}
-		return null;
-	}
-
+	/**
+	 * getGoalKeeper, Devolve o guarda redes da equipa
+	 * @return Guarda Redes
+	 */
 	public JogadorFutebol getGoalKeeper(){
 		for(Map.Entry<String, JogadorFutebol> entrada : this.getJogadoresTitulares().entrySet()){
 			if(entrada.getValue().getPosicaoCampo() == PosicaoCampo.GR){
 				return entrada.getValue();
 			}
 		}
-		return null;
+		return new JogadorFutebol();
 	}
 }
