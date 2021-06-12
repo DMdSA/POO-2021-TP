@@ -153,7 +153,7 @@ public class Defesa extends JogadorFutebol{
     public double getHabilidade(){
 
         double habilidade = 0;
-        habilidade += this.getVelocidade() + this.getImpulsao() + this.getResistencia() + this.getDestreza() + this.getJogoCabeca() + this.getRemate() + this.getPasse() + this.getCapacidadeBloquearBolas();
+        habilidade += this.getVelocidade() + this.getImpulsao() + this.getResistencia() + this.getDestreza()*1.5 + this.getJogoCabeca()/2 + this.getRemate()/2 + this.getPasse() + this.getCapacidadeBloquearBolas()*1.5;
         //Ilustrativo, defini 1 para todas as habilidades "comuns"
         return habilidade/8;
     }

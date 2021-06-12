@@ -173,7 +173,7 @@ public class GuardaRedes extends JogadorFutebol{
     public double getHabilidade(){
 
         double habilidade = 0;
-        habilidade += this.getVelocidade() + this.getImpulsao() + this.getResistencia() + this.getDestreza() + this.getJogoCabeca() + this.getRemate() + this.getPasse() + this.getElasticidade();
+        habilidade += this.getVelocidade()/2 + this.getImpulsao() + this.getResistencia()/2 + this.getDestreza() + this.getJogoCabeca()/2 + this.getRemate() + this.getPasse() + this.getElasticidade()*2.5;
         //Ilustrativo, defini 1 para todas as habilidades "comuns"
         return habilidade/8;
     }

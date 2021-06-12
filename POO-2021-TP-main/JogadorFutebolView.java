@@ -1,3 +1,4 @@
+import Equipa.Equipa;
 import Equipa.EquipaFutebol;
 import Jogadores.JogadorFutebol;
 import Jogadores.PosicaoCampo;
@@ -297,6 +298,29 @@ public class JogadorFutebolView {
             String nome = ClientView.get_String("Nome da equipa");
             if (eqs.containsKey(nome)) {
                 System.out.println(eqs.get(nome).toString());
+                ClientView.pause();
+            } else {
+                ClientView.warning("Essa equipa nao esta guardada!");
+            }
+        }
+        return opcao;
+    }
+
+    public static int consultar_equipa_jogo(EquipaFutebol equipa1, EquipaFutebol equipa2){
+
+        int opcao;
+        boolean flag;
+        ClientView.SimNao("Queres consultar a informacao de alguma equipa?");
+
+        do {
+            opcao = ClientView.get_Int("Opcao");
+            flag = ClientView.not_an_option(opcao, 1, 2);
+        } while(!flag);
+
+        if(opcao == 1) {
+            String nome = ClientView.get_String("Nome da equipa");
+            if (equipa1.getNome().equals(nome)) {
+                System.out.println(equipa1.toString());
                 ClientView.pause();
             } else {
                 ClientView.warning("Essa equipa nao esta guardada!");

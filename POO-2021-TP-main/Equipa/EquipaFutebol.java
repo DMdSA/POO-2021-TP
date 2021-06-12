@@ -1,8 +1,10 @@
 package Equipa;
 import Jogadores.GuardaRedes;
 import Jogadores.JogadorFutebol;
+import Jogadores.PosicaoCampo;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 /**
@@ -106,7 +108,7 @@ public class EquipaFutebol extends Equipa {
 		this.substituicoes = ef.getSubstituicoes();
 		this.jogadoresTitulares = ef.getJogadoresTitulares().entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, e->e.getValue().clone()));
 		this.jogadoresSuplentes = ef.getJogadoresSuplentes().entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, e->e.getValue().clone()));
-		this.overall = ef.getOverall();
+		this.overall = ef.getHabilidade();
 		this.corPrimaria = ef.getCorPrimaria();
 		this.corSecundaria = ef.getCorSecundaria();
 		this.golos = ef.getGolos();
@@ -149,7 +151,7 @@ public class EquipaFutebol extends Equipa {
 		double habilidade = 0;
 		for(Map.Entry<String, JogadorFutebol> jf : this.jogadoresTitulares.entrySet())
 			habilidade += jf.getValue().getHabilidade();
-		return habilidade;
+		return habilidade/11;
 	}
 
 	public JogadorFutebol getJogador(int numero){
@@ -358,6 +360,8 @@ public class EquipaFutebol extends Equipa {
 		this.golos++;
 	}
 
+	public void reinicia_golos(){ this.golos = 0;}
+
 	/**
 	 * hasJogador Verifica se um jogador está presente na equipa
 	 * @param j Nome do jogador
@@ -422,5 +426,95 @@ public class EquipaFutebol extends Equipa {
 			return true;
 		}
 		return false;
+	}
+
+	public double getOverallMedios(){
+    	double sum = 0;
+    	int count = 0;
+
+    	for(Map.Entry<String, JogadorFutebol> entrada : this.getJogadoresTitulares().entrySet()){
+    		if(entrada.getValue().getPosicaoCampo() == PosicaoCampo.M){
+    			sum += entrada.getValue().getHabilidade();
+    			count++;
+			}
+		}
+    	return sum/count;
+	}
+
+	public double getOverallAvancados(){
+		double sum = 0;
+		int count = 0;
+
+		for(Map.Entry<String, JogadorFutebol> entrada : this.getJogadoresTitulares().entrySet()){
+			if(entrada.getValue().getPosicaoCampo() == PosicaoCampo.A || entrada.getValue().getPosicaoCampo() == PosicaoCampo.L){
+				sum += entrada.getValue().getHabilidade();
+				count++;
+			}
+		}
+		return sum/count;
+	}
+
+	public double getOverallDefesas(){
+		double sum = 0;
+		int count = 0;
+
+		for(Map.Entry<String, JogadorFutebol> entrada : this.getJogadoresTitulares().entrySet()){
+			if(entrada.getValue().getPosicaoCampo() == PosicaoCampo.D){
+				sum += entrada.getValue().getHabilidade();
+				count++;
+			}
+		}
+		return sum/count;
+	}
+
+	public String getRandomMedio(){
+    	ArrayList<String> medios = new ArrayList<>();
+
+		for(Map.Entry<String, JogadorFutebol> entrada : this.getJogadoresTitulares().entrySet()){
+			if(entrada.getValue().getPosicaoCampo() == PosicaoCampo.M){
+				medios.add(entrada.getKey());
+			}
+		}
+		return medios.get((ThreadLocalRandom.current().nextInt(0, medios.size())));
+	}
+
+	public String getRandomAvancado(){
+		ArrayList<String> Avancados = new ArrayList<>();
+
+		for(Map.Entry<String, JogadorFutebol> entrada : this.getJogadoresTitulares().entrySet()){
+			if(entrada.getValue().getPosicaoCampo() == PosicaoCampo.A || entrada.getValue().getPosicaoCampo() == PosicaoCampo.L){
+				Avancados.add(entrada.getKey());
+			}
+		}
+		return Avancados.get((ThreadLocalRandom.current().nextInt(0, Avancados.size())));
+	}
+
+	public String getRandomDefesa(){
+		ArrayList<String> Defesas = new ArrayList<>();
+
+		for(Map.Entry<String, JogadorFutebol> entrada : this.getJogadoresTitulares().entrySet()){
+			if(entrada.getValue().getPosicaoCampo() == PosicaoCampo.D){
+				Defesas.add(entrada.getKey());
+			}
+		}
+		return Defesas.get((ThreadLocalRandom.current().nextInt(0, Defesas.size())));
+	}
+
+	public JogadorFutebol getJogadorByName(String s){
+		for(Map.Entry<String, JogadorFutebol> entrada : this.getJogadoresTitulares().entrySet()){
+			if(entrada.getKey().equals(s)){
+				return entrada.getValue();
+			}
+		}
+		return null;
+	}
+
+	public JogadorFutebol getGoalKeeper(){
+		for(Map.Entry<String, JogadorFutebol> entrada : this.getJogadoresTitulares().entrySet()){
+			if(entrada.getValue().getPosicaoCampo() == PosicaoCampo.GR){
+				return entrada.getValue();
+			}
+		}
+		return null;
 	}
 }

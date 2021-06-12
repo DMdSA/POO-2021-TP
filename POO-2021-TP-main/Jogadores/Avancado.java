@@ -149,7 +149,7 @@ public class Avancado extends JogadorFutebol{
     public double getHabilidade(){
 
         double habilidade = 0;
-        habilidade += this.getVelocidade() + this.getImpulsao() + this.getResistencia() + this.getDestreza() + this.getJogoCabeca() + this.getRemate() + this.getPasse() + this.getFinalizacao();
+        habilidade += this.getVelocidade()*1.5 + this.getImpulsao() + this.getResistencia()/2 + this.getDestreza()/2 + this.getJogoCabeca() + this.getRemate() + this.getPasse() + this.getFinalizacao()*1.5;
         //Ilustrativo, defini 1 para todas as habilidades "comuns"
         return habilidade/8;
     }

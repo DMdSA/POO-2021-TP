@@ -152,7 +152,7 @@ public class Lateral extends JogadorFutebol{
     public double getHabilidade(){
 
         double habilidade = 0;
-        habilidade += this.getVelocidade() + this.getImpulsao() + this.getResistencia() + this.getDestreza() + this.getJogoCabeca() + this.getRemate() + this.getPasse() + this.getCapacidadeCruzamentos();
+        habilidade += this.getVelocidade()*1.5 + this.getImpulsao()*1.5 + this.getResistencia() + this.getDestreza()/2 + this.getJogoCabeca()/2 + this.getRemate() + this.getPasse()/2 + this.getCapacidadeCruzamentos()*1.5;
         //Ilustrativo, defini 1 para todas as habilidades "comuns"
         return habilidade/8;
     }

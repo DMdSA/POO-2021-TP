@@ -362,4 +362,6 @@ public class JogadorFutebol extends Jogador {
     public void adiciona_equipa(String nome_equipa){
         this.historico.add(nome_equipa);
     }
+
+
 }

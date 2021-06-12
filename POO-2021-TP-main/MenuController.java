@@ -20,7 +20,7 @@ public class MenuController {
 
 
 
-    public void run() throws IOException, ClassNotFoundException {
+    public void run() throws IOException, ClassNotFoundException, InterruptedException {
 
         int user_option = -1;
         do {
@@ -167,8 +167,10 @@ public class MenuController {
                         else confirm = true;
                     } while(!confirm);
 
-                    this.cm.addJogo(new JogoFutebol(casa, fora, data_do_jogo)); //Aqui devia haver controlo de true/false!!!
+                    JogoFutebol jogo_atual = new JogoFutebol(casa, fora, data_do_jogo, 0, 0);
+                    this.cm.addJogo(jogo_atual); //Aqui devia haver controlo de true/false!!!
                     ClientView.warning("Jogo criado com sucesso!");
+                    this.cm.executaJogo(jogo_atual);
                     ClientView.pause();
                     break;
 

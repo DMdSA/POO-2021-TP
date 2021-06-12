@@ -17,7 +17,7 @@ public class JogoFutebol extends Jogo{
         this.data = LocalDate.now();
     }
 
-    public JogoFutebol(EquipaFutebol eq1, EquipaFutebol eq2, LocalDate date){
+    public JogoFutebol(EquipaFutebol eq1, EquipaFutebol eq2, LocalDate date, int n_golos_casa, int n_golos_fora){
         super(2,90,2);
         this.equipaCasa = eq1;
         this.equipaFora = eq2;
